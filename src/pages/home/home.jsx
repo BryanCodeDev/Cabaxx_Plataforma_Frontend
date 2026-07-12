@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { ArrowRight, Play, Music, X } from 'lucide-react';
@@ -51,6 +51,7 @@ const particles = Array.from({ length: 24 }, (_, i) => ({
 function Hero({ artist }) {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -59,19 +60,28 @@ function Hero({ artist }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleVideoEnded = () => {
+    const v = videoRef.current;
+    if (v) {
+      v.currentTime = 0;
+      v.play();
+    }
+  };
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-primary">
       <div
         className="absolute inset-0 bg-cover bg-center will-change-transform"
         style={{
-          backgroundImage: artist?.cover_url
-            ? `url(${artist.cover_url})`
+          backgroundImage: artist?.banner_url
+            ? `url(${artist.banner_url})`
             : 'radial-gradient(circle at 50% 20%, #2A2430, #121016 70%)',
           transform: `translateY(${scrollY * 0.35}px) scale(1.08)`,
         }}
       />
-      {!artist?.cover_url && (
+      {!artist?.banner_url && (
         <video
+          ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover will-change-transform"
           style={{ transform: `translateY(${scrollY * 0.35}px) scale(1.08)` }}
           autoPlay
@@ -79,6 +89,7 @@ function Hero({ artist }) {
           loop
           playsInline
           poster={heroPoster}
+          onEnded={handleVideoEnded}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>

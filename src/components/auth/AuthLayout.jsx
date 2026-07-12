@@ -16,8 +16,8 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: artist?.cover_url
-                ? `url(${artist.cover_url})`
+              backgroundImage: artist?.banner_url
+                ? `url(${artist.banner_url})`
                 : `url(${heroPoster})`,
             }}
           />
