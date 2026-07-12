@@ -36,8 +36,8 @@ export default function RegisterPage() {
   return (
     <AuthLayout
       eyebrow="Únete"
-      title="Crear cuenta"
-      subtitle="Regístrate para no perderte nada de Cabaxx."
+       title="Crear cuenta"
+       subtitle="Únete a Cabaxx y accede a preventas, contenido y descuentos."
       footer={
         <p className="text-center text-sm text-text-muted">
           ¿Ya tienes cuenta?{' '}

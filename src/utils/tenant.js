@@ -1,4 +1,4 @@
-const VITE_ARTIST_SLUG = import.meta.env.VITE_ARTIST_SLUG || 'cabitaxx';
+const VITE_ARTIST_SLUG = import.meta.env.VITE_ARTIST_SLUG || 'cabaxx';
 
 function getSubdomain() {
   if (typeof window === 'undefined') return null;

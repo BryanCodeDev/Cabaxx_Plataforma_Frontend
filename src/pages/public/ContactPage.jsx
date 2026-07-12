@@ -91,7 +91,7 @@ export default function ContactPage() {
           </Button>
         </form>
       </Card>
-      <SEOHead title="Contacto" description="Contacta a Cabitaxx para colaboraciones y prensa." />
+      <SEOHead title="Contacto" description="Contacta a Cabaxx para colaboraciones, booking y prensa." />
     </div>
   );
 }

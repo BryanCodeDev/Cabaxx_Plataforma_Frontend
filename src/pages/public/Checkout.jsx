@@ -101,7 +101,7 @@ export default function CheckoutPage() {
         currency: 'COP',
         provider: 'stripe',
       });
-      setOrderNumber(data?.payment?.order_number || 'MAP-' + orderId);
+       setOrderNumber(data?.payment?.order_number || 'CAB-' + orderId);
       clearCart();
       setStep(4);
       toast.success('Pago simulado exitosamente');
@@ -231,7 +231,7 @@ export default function CheckoutPage() {
           </Card>
         </div>
       </div>
-      <SEOHead title="Checkout" description="Finaliza tu compra en la tienda de Cabitaxx." noIndex />
+      <SEOHead title="Checkout" description="Finaliza tu compra en la tienda de Cabaxx." noIndex />
     </div>
   );
 }

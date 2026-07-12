@@ -133,7 +133,7 @@ export default function Navbar() {
               }
               items={[
                 ...(isSuperadmin()
-                  ? [{ label: 'Panel MasterCode', onClick: () => navigate(ROUTES.SUPERADMIN) }]
+                  ? [{ label: 'Panel de Control', onClick: () => navigate(ROUTES.SUPERADMIN) }]
                   : isArtistAdmin()
                   ? [{ label: 'Mi Panel', onClick: () => navigate(ROUTES.ADMIN) }]
                   : []),
@@ -194,7 +194,7 @@ export default function Navbar() {
                       isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary'
                     }`
                   }>
-                    Panel MasterCode
+                    Panel de Control
                   </NavLink>
                 )}
                 {isArtistAdmin() && !isSuperadmin() && (

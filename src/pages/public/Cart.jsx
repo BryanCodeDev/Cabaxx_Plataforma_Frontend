@@ -127,7 +127,7 @@ export default function CartPage() {
           </Card>
         </div>
       </div>
-      <SEOHead title="Carrito" description="Tu carrito de compras en la tienda de Cabitaxx." noIndex />
+      <SEOHead title="Carrito" description="Tu carrito de compras en la tienda de Cabaxx." noIndex />
     </div>
   );
 }

@@ -71,7 +71,7 @@ export default function SEOHead({ title, description, image, url, type, data }) 
   const { artist } = useArtist();
   const siteName = artist ? artist.stage_name || artist.name : APP_NAME;
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
-  const desc = description || artist?.bio || artist?.short_bio || 'Master Artist Platform';
+  const desc = description || artist?.bio || artist?.short_bio || 'Plataforma oficial de Cabaxx. Música, eventos, tienda y comunidad en un solo lugar.';
   const ogImage = image || artist?.seo?.og_image_url || artist?.banner_url || '';
   const canonicalUrl = url || (typeof window !== 'undefined' ? window.location.href : '');
   const jsonLd = buildJsonLd(artist, type, data);

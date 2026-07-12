@@ -1,7 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 
 /**
- * Wrapper de react-hot-toast con estilos del sistema de diseño MAP.
+ * Wrapper de react-hot-toast con estilos del sistema de diseño Cabaxx.
  */
 export default function Toast() {
   return (

@@ -85,7 +85,7 @@ export default function AlbumsPage() {
           <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} total={total} limit={PAGINATION.DEFAULT_LIMIT} />
         </div>
       )}
-      <SEOHead title="Álbumes" description="Álbumes y sencillos de Cabitaxx." />
+      <SEOHead title="Álbumes" description={`Álbumes y sencillos de ${artist?.stage_name || 'Cabaxx'}.`} />
       </div>
   );
 }

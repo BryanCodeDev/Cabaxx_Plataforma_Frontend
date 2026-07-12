@@ -22,7 +22,7 @@ const SpinnerMini = () => (
 );
 
 /**
- * Botón reutilizable del sistema de diseño MAP.
+ * Botón reutilizable del sistema de diseño Cabaxx.
  * @param {string} variant - 'primary'|'secondary'|'ghost'|'danger'|'outline'
  * @param {string} size - 'sm'|'md'|'lg'
  * @param {boolean} loading - muestra spinner y deshabilita click

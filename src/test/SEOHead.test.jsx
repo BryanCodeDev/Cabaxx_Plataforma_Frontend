@@ -15,7 +15,7 @@ const renderWithProviders = (ui) => render(
 describe('SEOHead', () => {
   it('sets the page title', () => {
     renderWithProviders(<SEOHead title="Canciones" description="Test" />);
-    expect(document.title).toBe('Canciones | MAP');
+    expect(document.title).toBe('Canciones | Cabaxx');
   });
 
   it('renders meta description', () => {
@@ -26,9 +26,9 @@ describe('SEOHead', () => {
   });
 
   it('renders canonical link', () => {
-    renderWithProviders(<SEOHead title="Test" url="https://map.mastercode.co/canciones" />);
+    renderWithProviders(<SEOHead title="Test" url="https://cabaxx.com/canciones" />);
     const canonical = document.querySelector('link[rel="canonical"]');
     expect(canonical).toBeTruthy();
-    expect(canonical.getAttribute('href')).toBe('https://map.mastercode.co/canciones');
+    expect(canonical.getAttribute('href')).toBe('https://cabaxx.com/canciones');
   });
 });

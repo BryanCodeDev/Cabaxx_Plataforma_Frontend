@@ -10,8 +10,8 @@ import SEOHead from '@/components/seo/SEOHead';
 const FOCUS = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
 
 const MOCK_ORDERS = [
-  { id: 'MAP-1001', date: '2026-06-20', total: 85000, status: 'Entregado', items: [{ name: 'Camiseta Oficial', qty: 1, price: 85000 }] },
-  { id: 'MAP-1023', date: '2026-07-01', total: 150000, status: 'Enviado', items: [{ name: 'Vinilo Firmado', qty: 1, price: 150000 }] },
+  { id: 'CAB-1001', date: '2026-06-20', total: 85000, status: 'Entregado', items: [{ name: 'Camiseta Oficial', qty: 1, price: 85000 }] },
+  { id: 'CAB-1023', date: '2026-07-01', total: 150000, status: 'Enviado', items: [{ name: 'Vinilo Firmado', qty: 1, price: 150000 }] },
 ];
 
 export default function MyOrders() {
@@ -20,7 +20,7 @@ export default function MyOrders() {
 
   return (
     <>
-      <SEOHead title="Mis pedidos" description="Historial de pedidos en la tienda de Cabitaxx." noIndex />
+      <SEOHead title="Mis pedidos" description="Historial de pedidos en la tienda de Cabaxx." noIndex />
       <div className="mx-auto max-w-5xl px-4 py-12">
       <SectionHeading eyebrow="Historial" title="Mis pedidos" />
       <div className="mt-8 space-y-4">

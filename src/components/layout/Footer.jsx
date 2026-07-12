@@ -119,7 +119,7 @@ export default function Footer() {
         )}
 
         <div className="mt-10 border-t border-border pt-6 text-center text-xs text-text-muted">
-          © {new Date().getFullYear()} {name} · MasterCode Company. Todos los derechos reservados.
+          © {new Date().getFullYear()} {name} · Cabaxx. Todos los derechos reservados.
         </div>
       </div>
     </footer>

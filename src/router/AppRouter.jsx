@@ -162,11 +162,13 @@ export const router = createBrowserRouter([
       { path: 'configuracion', element: withProviders(withSuspense(AdminSettings)) },
       { path: 'albumes', element: withProviders(withSuspense(AdminAlbums)) },
       { path: 'videos', element: withProviders(withSuspense(AdminVideos)) },
+      { path: 'panel', element: withProviders(withSuspense(SuperAdminDashboard)) },
+      { path: 'onboarding', element: withProviders(withSuspense(ArtistOnboarding)) },
     ],
   },
   {
     path: '/superadmin',
-    element: withProviders(<SuperAdminRoute><Page><SuperAdminDashboard /></Page></SuperAdminRoute>),
+    element: withProviders(<SuperAdminRoute><AdminRoute><DashboardLayout /></AdminRoute></SuperAdminRoute>),
     children: [
       { index: true, element: withProviders(withSuspense(SuperAdminDashboard)) },
       { path: 'artistas', element: withProviders(withSuspense(SuperAdminDashboard)) },

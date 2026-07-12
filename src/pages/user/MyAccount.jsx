@@ -68,7 +68,7 @@ export default function MyAccount() {
           </div>
         </Card>
       </form>
-      <SEOHead title="Mi cuenta" description="Gestiona tu perfil y preferencias en MAP." noIndex />
+      <SEOHead title="Mi cuenta" description="Gestiona tu perfil y preferencias en Cabaxx." noIndex />
     </div>
   );
 }

@@ -10,9 +10,9 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
-        name: 'MAP — Master Artist Platform',
-        short_name: 'MAP',
-        description: 'Plataforma multi-tenant para artistas musicales',
+        name: 'Cabaxx',
+        short_name: 'Cabaxx',
+        description: 'Plataforma oficial de Cabaxx: música, eventos, tienda y comunidad.',
         theme_color: '#0D0D0D',
         background_color: '#0D0D0D',
         display: 'standalone',

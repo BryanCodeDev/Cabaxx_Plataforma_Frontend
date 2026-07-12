@@ -13,7 +13,7 @@ import SEOHead from '@/components/seo/SEOHead';
 
 export default function ProductPage() {
   const { slug } = useParams();
-  const { data, loading } = useFetch('/artists/' + (slug || 'cabitaxx') + '/products', {
+  const { data, loading } = useFetch('/artists/' + (slug || 'cabaxx') + '/products', {
     params: { slug },
   });
   const { addItem } = useCart();
@@ -74,7 +74,7 @@ export default function ProductPage() {
           </Button>
         </div>
       </div>
-      <SEOHead title={product?.name || 'Producto'} description={product?.description || 'Producto de Cabitaxx'} />
+      <SEOHead title={product?.name || 'Producto'} description={product?.description || 'Producto de Cabaxx'} />
     </div>
   );
 }

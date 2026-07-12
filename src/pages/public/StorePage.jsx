@@ -14,7 +14,7 @@ export default function StorePage() {
 
   return (
     <>
-      <SEOHead title="Tienda" description="Tienda oficial de Cabitaxx. Merch, música y más." />
+      <SEOHead title="Tienda" description={`Tienda oficial de Cabaxx. Merch, música y más.`} />
       <div className="mx-auto max-w-6xl px-4 py-12">
         <SectionHeading eyebrow="Merch oficial" title="Tienda" />
 

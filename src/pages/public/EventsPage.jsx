@@ -10,7 +10,7 @@ import SEOHead from '@/components/seo/SEOHead';
 export default function EventsPage() {
   return (
     <>
-      <SEOHead title="Eventos" description="Próximos eventos y conciertos de Cabitaxx." />
+      <SEOHead title="Eventos" description={`Próximos eventos y conciertos de ${artist?.stage_name || 'Cabaxx'}.`} />
       <ListingPage
         title="Eventos"
         service={eventService.getEvents}

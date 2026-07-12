@@ -21,9 +21,7 @@ export default function LoginPage() {
       await login(form);
       toast.success('¡Bienvenido!');
       let target = ROUTES.HOME;
-      if (isSuperadmin()) {
-        target = ROUTES.SUPERADMIN;
-      } else if (isArtistAdmin()) {
+      if (isSuperadmin() || isArtistAdmin()) {
         target = ROUTES.ADMIN;
       }
       startTransition(() => {

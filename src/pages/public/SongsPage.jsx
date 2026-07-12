@@ -9,7 +9,7 @@ import SEOHead from '@/components/seo/SEOHead';
 export default function SongsPage() {
   return (
     <>
-      <SEOHead title="Canciones" description="Discografía completa de Cabitaxx. Escucha todos sus temas." />
+      <SEOHead title="Canciones" description={`Canciones y discografía de ${artist?.stage_name || 'Cabaxx'}. Escucha todos sus temas.`} />
       <ListingPage
         title="Canciones"
         service={songService.getSongs}

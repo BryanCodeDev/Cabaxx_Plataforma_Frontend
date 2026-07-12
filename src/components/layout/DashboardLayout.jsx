@@ -106,7 +106,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             }
           >
             <Shield className="h-5 w-5 shrink-0" />
-            {!iconOnly && !collapsed && <span>Panel MasterCode</span>}
+            {!iconOnly && !collapsed && <span>Panel de Control</span>}
           </NavLink>
         </>
       )}
@@ -165,7 +165,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             </button>
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-gold">
-                {isSuperadmin() ? 'Panel MasterCode' : 'Panel'}
+                {isSuperadmin() ? 'Panel de Control' : 'Panel'}
               </p>
               <h1 className="text-sm font-medium text-text-primary">
                 {activeLabel || breadcrumb}

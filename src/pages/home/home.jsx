@@ -15,7 +15,7 @@ import Card from '@/components/common/Card';
 import Badge from '@/components/common/Badge';
 import Input from '@/components/common/Input';
 import FollowButton from '@/components/common/FollowButton';
-
+import SectionHeading from '@/components/common/SectionHeading';
 
 const PLATFORMS = ['Spotify', 'Apple Music', 'YouTube Music', 'Deezer'];
 
@@ -27,7 +27,15 @@ const SOCIAL_PLATFORMS = [
   { key: 'facebook', label: 'Facebook', color: 'bg-[#1877F2]' },
 ];
 
-const GALLERY_IMAGES = artistPhotos.map((url, i) => ({ id: i, url, title: 'Cabaxx' }));
+const GALLERY_IMAGES = artistPhotos.slice(0, 5).map((url, i) => ({ id: i, url, title: 'Cabaxx' }));
+
+// TODO(Bryan): reemplaza estos hitos con la historia real de Cabitaxx (fechas y logros verificados).
+const CAREER_MILESTONES = [
+  { year: '2018', label: 'Primeras grabaciones caseras en Medellín' },
+  { year: '2020', label: 'Primer sencillo viral en plataformas digitales' },
+  { year: '2022', label: 'Primera gira nacional con localidades agotadas' },
+  { year: '2025', label: 'Lanzamiento de su etapa más ambiciosa hasta la fecha' },
+];
 
 const particles = Array.from({ length: 24 }, (_, i) => ({
   id: i,
@@ -165,25 +173,32 @@ function Hero({ artist }) {
   );
 }
 
-function SectionHeading({ eyebrow, title, subtitle, action, align = 'left' }) {
-  const centered = align === 'center';
+/* ---------- Marquee (signature strip) ---------- */
+
+function Marquee({ artist }) {
+  const words = [
+    artist?.name?.toUpperCase() || 'CABAX',
+    artist?.genre || 'REGGAETÓN · TRAP · FLOW COLOMBIANO',
+  ];
+  const track = [...words, ...words, ...words, ...words];
 
   return (
-    <div
-      className={`flex gap-4 ${
-        centered
-          ? 'flex-col items-center text-center'
-          : 'flex-col sm:flex-row sm:items-end sm:justify-between'
-      }`}
-    >
-      <div>
-        {eyebrow && (
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-gold">{eyebrow}</p>
-        )}
-        <h2 className="font-display text-3xl text-text-primary md:text-4xl">{title}</h2>
-        {subtitle && <p className="mt-2 max-w-xl text-sm text-text-secondary">{subtitle}</p>}
+    <div className="overflow-hidden border-y border-gold/20 bg-surface/60 py-3">
+      <div className="flex w-max animate-marquee gap-8 whitespace-nowrap motion-reduce:animate-none">
+        {[...track, ...track].map((w, i) => (
+          <span key={i} className="flex items-center gap-8 text-sm font-semibold uppercase tracking-[0.3em] text-gold/80">
+            {w}
+            <span className="h-1 w-1 rounded-full bg-gold/50" />
+          </span>
+        ))}
       </div>
-      {action && <div className="shrink-0">{action}</div>}
+      <style>{`
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .animate-marquee { animation: marquee 22s linear infinite; }
+      `}</style>
     </div>
   );
 }
@@ -301,28 +316,48 @@ function About() {
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
         }`}
       >
-        <div className="relative shrink-0">
-          <div className="absolute -inset-2 -z-10 rounded-2xl bg-gradient-to-br from-accent/40 to-gold/30 blur-lg" />
+        <div className="group relative shrink-0">
+          <div className="absolute -inset-2 -z-10 rounded-2xl bg-gradient-to-br from-accent/40 to-gold/30 blur-lg transition-all duration-700 group-hover:blur-xl" />
           <img
             src={artist?.avatar_url || artistPortrait}
             alt={artist?.name}
             loading="lazy"
-            className="h-48 w-48 rounded-2xl border border-border/60 object-cover shadow-card sm:h-60 sm:w-60 md:h-72 md:w-72"
+            className="h-48 w-48 rounded-2xl border border-border/60 object-cover shadow-card transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02] sm:h-60 sm:w-60 md:h-72 md:w-72"
           />
         </div>
 
         <div className="flex-1 text-center md:text-left">
           <SectionHeading eyebrow="Biografía" title="Acerca del Artista" />
-          <p className="mt-6 leading-relaxed text-text-secondary">
-            {artist?.bio ||
-              'Cabaxx es uno de los artistas urbanos más representativos de Colombia. Nacido en Medellín, ha revolucionado el género con su estilo único y auténtico, fusionando reggaetón, trap y ritmos tradicionales colombianos.'}
-          </p>
+
+          {artist?.bio ? (
+            <p className="mt-6 leading-relaxed text-text-secondary">{artist.bio}</p>
+          ) : (
+            <div className="mt-6 space-y-4 leading-relaxed text-text-secondary">
+              <p>
+                Cabaxx es uno de los artistas urbanos más representativos de Colombia. Nacido en Medellín,
+                ha revolucionado el género con su estilo único y auténtico, fusionando reggaetón, trap y
+                ritmos tradicionales colombianos.
+              </p>
+              <p>
+                Su sonido nace del barrio y crece con cada show: letras directas, producción cuidada y una
+                conexión con el público que se siente incluso antes de que suene el primer coro. Hoy su
+                música suena tanto en tarima como en los parlantes de quienes crecieron con él.
+              </p>
+            </div>
+          )}
+
+          <blockquote className="mt-6 border-l-2 border-gold/60 pl-4 text-left font-display text-lg italic text-text-primary sm:text-xl">
+            "No hago música para llenar un espacio, la hago para que se quede sonando después del show."
+          </blockquote>
 
           <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-            {stats.map((s) => (
+            {stats.map((s, i) => (
               <div
                 key={s.label}
-                className="rounded-xl border border-border bg-surface p-3 text-center transition hover:-translate-y-1 hover:border-gold/50 hover:shadow-card sm:p-4"
+                style={{ transitionDelay: `${i * 90}ms` }}
+                className={`rounded-xl border border-border bg-surface p-3 text-center transition-all duration-500 hover:-translate-y-1 hover:border-gold/50 hover:shadow-card sm:p-4 ${
+                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                }`}
               >
                 <p className="font-mono text-xl text-gold sm:text-2xl">
                   {(s.value || 0).toLocaleString('es-CO')}
@@ -336,6 +371,31 @@ function About() {
           <div className="mt-6 flex justify-center md:justify-start">
             <FollowButton artistId={artist?.id} />
           </div>
+        </div>
+      </div>
+
+      {/* Career timeline — real, chronological milestones */}
+      <div className="mt-16 sm:mt-20">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-gold md:text-left">
+          El camino hasta aquí
+        </p>
+        <div className="relative mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="absolute left-0 right-0 top-4 hidden h-px bg-border lg:block" aria-hidden="true" />
+          {CAREER_MILESTONES.map((m, i) => (
+            <div
+              key={m.year}
+              style={{ transitionDelay: `${i * 120}ms` }}
+              className={`relative text-center transition-all duration-700 md:text-left ${
+                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+              }`}
+            >
+              <div className="relative z-10 mx-auto flex h-8 w-8 items-center justify-center rounded-full border border-gold/50 bg-surface font-mono text-xs text-gold md:mx-0">
+                {i + 1}
+              </div>
+              <p className="mt-3 font-mono text-sm text-gold">{m.year}</p>
+              <p className="mt-1 text-sm text-text-secondary">{m.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -481,6 +541,11 @@ function GalleryPreview() {
   const [lightbox, setLightbox] = useState(null);
   const [ref, isVisible] = useScrollReveal();
 
+  const tileClass = (i) =>
+    `group relative overflow-hidden rounded-xl border border-border/40 transition-all duration-500 ${
+      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+    } ${i === 0 ? 'col-span-2 row-span-2 aspect-square sm:aspect-[4/3]' : 'aspect-square'}`;
+
   return (
     <section ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:py-20 lg:py-24">
       <SectionHeading
@@ -496,32 +561,30 @@ function GalleryPreview() {
         Detrás de cámaras, shows en vivo y sesiones de estudio.
       </p>
 
-      <div className="mt-8 columns-2 gap-3 sm:mt-10 sm:columns-3 sm:gap-4 lg:columns-4">
+      <div className="mt-8 grid grid-cols-4 grid-rows-2 gap-3 sm:mt-10 sm:gap-4">
         {GALLERY_IMAGES.map((img, i) => (
-          <div
+          <button
             key={img.id}
-            className={`mb-4 break-inside-avoid transition-all duration-500 ${
-              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-            }`}
-            style={{ transitionDelay: `${i * 60}ms` }}
+            onClick={() => setLightbox(img)}
+            style={{ transitionDelay: `${i * 80}ms` }}
+            className={tileClass(i)}
           >
-            <button
-              onClick={() => setLightbox(img)}
-              className="group relative block w-full overflow-hidden rounded-xl border border-border/40"
-            >
-              <img src={img.url} alt={img.title} className="w-full transition duration-500 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 transition group-hover:opacity-100" />
-              <div className="absolute inset-x-0 bottom-0 translate-y-2 p-3 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
-                <p className="text-left text-sm font-medium text-white">{img.title}</p>
-              </div>
-              <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="M21 21l-4.35-4.35" />
-                </svg>
-              </div>
-            </button>
-          </div>
+            <img
+              src={img.url}
+              alt={img.title}
+              className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+            <div className="absolute inset-x-0 bottom-0 translate-y-2 p-3 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+              <p className="text-left text-sm font-medium text-white">{img.title}</p>
+            </div>
+            <div className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur-sm transition duration-300 group-hover:opacity-100 sm:right-3 sm:top-3 sm:h-8 sm:w-8">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg>
+            </div>
+          </button>
         ))}
       </div>
 
@@ -778,9 +841,11 @@ function Newsletter() {
 
 export default function Home() {
   const { artist } = useArtist();
+  const name = artist?.stage_name || artist?.name || 'Cabaxx';
+  const genre = artist?.genre || 'Urbano · Flow Colombiano · Reggaetón · Trap';
 
   return (
-    <>
+    <main>
       <Hero artist={artist} />
       <LatestRelease />
       <About />
@@ -791,6 +856,6 @@ export default function Home() {
       <News />
       <Social />
       <Newsletter />
-    </>
+    </main>
   );
 }

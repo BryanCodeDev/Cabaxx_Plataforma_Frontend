@@ -9,7 +9,7 @@ import SEOHead from '@/components/seo/SEOHead';
 export default function NewsPage() {
   return (
     <>
-      <SEOHead title="Noticias" description="Últimas noticias y novedades de Cabitaxx." />
+      <SEOHead title="Noticias" description={`Últimas noticias y novedades de ${artist?.stage_name || 'Cabaxx'}.`} />
       <ListingPage
       title="Noticias"
       eyebrow="Al día"

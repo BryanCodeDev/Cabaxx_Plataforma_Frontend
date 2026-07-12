@@ -9,7 +9,7 @@ import SEOHead from '@/components/seo/SEOHead';
 export default function BlogPage() {
   return (
     <>
-      <SEOHead title="Blog" description="Historias, entrevistas y detrás de cámaras de Cabitaxx." />
+      <SEOHead title="Blog" description={`Historias, entrevistas y detrás de cámaras de ${artist?.stage_name || 'Cabaxx'}.`} />
       <ListingPage
       title="Blog"
       eyebrow="Historias"

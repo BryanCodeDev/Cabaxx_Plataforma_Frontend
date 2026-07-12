@@ -88,7 +88,7 @@ export default function VideosPage() {
           <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} total={total} limit={PAGINATION.DEFAULT_LIMIT} />
         </div>
       )}
-      <SEOHead title="Videos" description="Videos musicales y detrás de cámaras de Cabitaxx." />
+      <SEOHead title="Videos" description={`Videos musicales y detrás de cámaras de ${artist?.stage_name || 'Cabaxx'}.`} />
       </div>
   );
 }

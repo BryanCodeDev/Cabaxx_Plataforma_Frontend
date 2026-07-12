@@ -137,7 +137,7 @@ export default function SuperAdminDashboard() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-12">
       <SectionHeading
-        eyebrow="MasterCode"
+        eyebrow="Panel de Control"
         title="Panel de Artistas"
         action={
           <Button

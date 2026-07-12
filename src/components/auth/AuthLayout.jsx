@@ -28,21 +28,21 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
           <div className="inline-flex -rotate-3 items-center rounded-xl border-2 border-primary bg-accent px-4 py-2 font-display text-2xl text-white shadow-glow">
             CABAX
           </div>
-          <h2 className="mt-8 max-w-sm font-display text-4xl leading-[1.05] text-text-primary">
-            Tu comunidad, un paso más cerca.
-          </h2>
-          <ul className="mt-8 space-y-3">
-            {FEATURES.map((f) => (
-              <li key={f} className="flex items-center gap-3 text-text-secondary">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M20 6L9 17l-5-5" />
-                  </svg>
-                </span>
-                {f}
-              </li>
-            ))}
-          </ul>
+      <h2 className="mt-8 max-w-sm font-display text-4xl leading-[1.05] text-text-primary">
+        Gestiona tu música, eventos y comunidad.
+      </h2>
+      <ul className="mt-8 space-y-3">
+        {FEATURES.map((f) => (
+          <li key={f} className="flex items-center gap-3 text-text-secondary">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20 6L9 17l-5-5" />
+              </svg>
+            </span>
+            {f}
+          </li>
+        ))}
+      </ul>
         </div>
       </div>
 

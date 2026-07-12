@@ -19,7 +19,7 @@ export default function GalleryPage() {
 
   return (
     <>
-      <SEOHead title="Galería" description="Galería de fotos y videos de Cabitaxx." />
+      <SEOHead title="Galería" description={`Galería de fotos y videos de ${artist?.stage_name || 'Cabaxx'}.`} />
       <div className="mx-auto max-w-6xl px-4 py-12">
         <SectionHeading eyebrow="Visuales" title="Galería" />
 

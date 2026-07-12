@@ -64,6 +64,7 @@ export default function SongPage() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold">Canción</p>
           <h1 className="font-display text-4xl text-text-primary md:text-5xl">{song.title}</h1>
           <p className="mt-3 font-mono text-text-secondary">{formatDuration(song.duration_seconds)}</p>
+          <SEOHead title={song.title} description={`${song.title} - ${song.album_title || 'Cabaxx'}. Escucha y letra oficial.`} />
           <p className="mt-4 text-text-secondary">{song.description}</p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Button onClick={play}><Play className="mr-2 h-4 w-4" /> Reproducir</Button>

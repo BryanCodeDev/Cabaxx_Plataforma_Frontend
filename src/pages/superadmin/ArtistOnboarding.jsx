@@ -72,7 +72,7 @@ export default function ArtistOnboarding() {
         {step === 1 && (
           <div className="space-y-4">
             <Input label="Nombre artístico" name="stage_name" required value={form.stage_name} onChange={update('stage_name')} placeholder="Cabaxx" />
-            <Input label="Slug" name="slug" required value={form.slug} onChange={update('slug')} placeholder="cabitaxx" hint="Identificador único en la URL" />
+             <Input label="Slug" name="slug" required value={form.slug} onChange={update('slug')} placeholder="cabaxx" hint="Identificador único en la URL" />
             <Input label="Género" name="genre" value={form.genre} onChange={update('genre')} placeholder="Reggaetón" />
             <Input label="País" name="country" value={form.country} onChange={update('country')} placeholder="Colombia" />
           </div>
