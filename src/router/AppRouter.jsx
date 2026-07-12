@@ -33,7 +33,7 @@ const withSuspense = (Component) => (
 );
 
 // Páginas públicas
-const HomePage = lazy(() => import('@/pages/public/HomePage'));
+const HomePage = lazy(() => import('@/pages/home/home'));
 const SongsPage = lazy(() => import('@/pages/public/SongsPage'));
 const SongPage = lazy(() => import('@/pages/public/SongPage'));
 const EventsPage = lazy(() => import('@/pages/public/EventsPage'));
