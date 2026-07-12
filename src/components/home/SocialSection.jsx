@@ -14,11 +14,11 @@ export default function SocialSection() {
 
   return (
     <section className="border-y border-border bg-surface/50">
-      <div className="mx-auto max-w-6xl px-4 py-16">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-gold">Conecta</p>
-        <h2 className="mt-2 text-center font-display text-3xl text-text-primary">Sígueme</h2>
+        <h2 className="mt-2 text-center font-display text-2xl text-text-primary sm:text-3xl">Sígueme</h2>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-8">
+        <div className="mt-8 flex flex-wrap justify-center gap-5 sm:mt-10 sm:gap-8">
           {PLATFORMS.map((p) => {
             const link = socials.find((s) => s.platform?.toLowerCase() === p.key);
             if (!link) return null;
@@ -31,7 +31,7 @@ export default function SocialSection() {
                 className="group flex flex-col items-center gap-2 transition"
               >
                 <div
-                  className={`flex h-16 w-16 items-center justify-center rounded-2xl ${p.color} text-white shadow-lg transition group-hover:scale-110 group-hover:shadow-glow`}
+                  className={`flex h-14 w-14 items-center justify-center rounded-2xl ${p.color} text-white shadow-lg transition group-hover:scale-110 group-hover:shadow-glow sm:h-16 sm:w-16`}
                 >
                   <span className="font-display text-xl">{p.label[0]}</span>
                 </div>

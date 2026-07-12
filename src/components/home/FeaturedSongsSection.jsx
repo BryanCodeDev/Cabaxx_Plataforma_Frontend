@@ -13,7 +13,7 @@ export default function FeaturedSongsSection() {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <section ref={ref} className="mx-auto max-w-6xl px-4 py-24">
+    <section ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:py-20 lg:py-24">
       <SectionHeading
         eyebrow="Discografía"
         title="Canciones"
@@ -27,7 +27,7 @@ export default function FeaturedSongsSection() {
       {songs.length === 0 ? (
         <p className="mt-10 text-text-muted">Muy pronto encontrarás aquí las canciones destacadas.</p>
       ) : (
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-5 lg:grid-cols-4">
           {songs.map((song, i) => (
             <Link
               key={song.id}

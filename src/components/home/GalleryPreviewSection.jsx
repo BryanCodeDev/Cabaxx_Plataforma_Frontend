@@ -14,7 +14,7 @@ export default function GalleryPreviewSection() {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <section ref={ref} className="mx-auto max-w-6xl px-4 py-24">
+    <section ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:py-20 lg:py-24">
       <SectionHeading
         eyebrow="Momentos"
         title="Galería"
@@ -25,7 +25,7 @@ export default function GalleryPreviewSection() {
         }
       />
 
-      <div className="mt-10 columns-2 gap-4 md:columns-3">
+      <div className="mt-8 columns-2 gap-3 sm:mt-10 sm:columns-3 sm:gap-4 lg:columns-4">
         {IMAGES.map((img, i) => (
           <div
             key={img.id}

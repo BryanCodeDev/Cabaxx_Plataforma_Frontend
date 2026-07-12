@@ -66,7 +66,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-5 md:flex lg:gap-7">
           {NAV_LINKS.map((l) => (
             <NavLink key={l.to} to={l.to} className={linkClass}>
               {({ isActive }) => (

@@ -27,14 +27,14 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-accent via-accent to-accent-hover py-24">
+    <section className="relative overflow-hidden bg-gradient-to-br from-accent via-accent to-accent-hover py-16 sm:py-20 lg:py-24">
       <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:repeating-linear-gradient(45deg,#fff_0,#fff_1px,transparent_1px,transparent_6px)]" />
       <div className="absolute -left-16 -top-16 h-64 w-64 rounded-full bg-gold/20 blur-3xl" />
       <div className="absolute -bottom-20 -right-10 h-72 w-72 rounded-full bg-black/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-2xl px-4 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/80">Newsletter</p>
-        <h2 className="mt-3 font-display text-4xl text-white md:text-5xl">Sé el Primero en Saberlo</h2>
+        <h2 className="mt-3 font-display text-3xl text-white sm:text-4xl md:text-5xl">Sé el Primero en Saberlo</h2>
         <p className="mt-3 text-white/80">
           Recibe lanzamientos exclusivos, noticias y acceso prioritario a eventos.
         </p>

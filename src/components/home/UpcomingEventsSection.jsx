@@ -14,7 +14,7 @@ export default function UpcomingEventsSection() {
 
   if (!events.length) {
     return (
-      <section id="events" className="mx-auto max-w-6xl px-4 py-24">
+      <section id="events" className="mx-auto max-w-6xl px-4 py-16 sm:py-20 lg:py-24">
         <SectionHeading eyebrow="Agenda" title="Próximos Eventos" />
         <p className="mt-6 text-text-muted">Pronto anunciaremos fechas. ¡Mantente atento!</p>
       </section>
@@ -22,7 +22,7 @@ export default function UpcomingEventsSection() {
   }
 
   return (
-    <section id="events" ref={ref} className="mx-auto max-w-6xl px-4 py-24">
+    <section id="events" ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:py-20 lg:py-24">
       <SectionHeading
         eyebrow="Agenda"
         title="Próximos Eventos"
@@ -33,7 +33,7 @@ export default function UpcomingEventsSection() {
         }
       />
 
-      <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
         {events.map((ev, i) => (
           <Link
             key={ev.id}

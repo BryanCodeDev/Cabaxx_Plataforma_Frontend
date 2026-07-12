@@ -80,19 +80,20 @@ export default function HeroSection({ artist }) {
           </p>
           <span className="h-px w-8 bg-gold" />
         </div>
-        <h1 className="font-display text-7xl leading-[0.95] tracking-tight text-text-primary drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)] md:text-9xl">
+        <h1 className="font-display text-[15vw] leading-[0.92] tracking-tight text-text-primary drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)] sm:text-7xl md:text-8xl lg:text-9xl">
           {artist?.name?.toUpperCase() || 'CABAX'}
         </h1>
-        <p className="mt-4 text-lg text-text-secondary md:text-xl">
+        <p className="mt-4 text-base text-text-secondary sm:text-lg md:text-xl">
           {artist?.genre || 'Reggaetón · Trap · Flow Colombiano'}
         </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <Button size="lg" onClick={() => {}}>
+        <div className="mx-auto mt-8 flex max-w-xs flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
+          <Button size="lg" className="w-full sm:w-auto" onClick={() => {}}>
             <Play className="mr-2 h-5 w-5" /> Escuchar Ahora
           </Button>
           <Button
             variant="secondary"
             size="lg"
+            className="w-full sm:w-auto"
             onClick={() => document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Ver Eventos
@@ -100,6 +101,7 @@ export default function HeroSection({ artist }) {
           <Button
             variant="ghost"
             size="lg"
+            className="w-full sm:w-auto"
             onClick={() => document.getElementById('latest')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <Music className="mr-2 h-5 w-5" /> Últimos Lanzamientos

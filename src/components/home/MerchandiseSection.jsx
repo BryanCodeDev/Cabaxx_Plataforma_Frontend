@@ -15,7 +15,7 @@ export default function MerchandiseSection() {
 
   return (
     <section ref={ref} className="border-y border-border bg-surface/50">
-      <div className="mx-auto max-w-6xl px-4 py-24">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20 lg:py-24">
         <SectionHeading
           eyebrow="Merch oficial"
           title="Tienda"
@@ -29,7 +29,7 @@ export default function MerchandiseSection() {
         {products.length === 0 ? (
           <p className="mt-10 text-text-muted">La tienda abre pronto. Vuelve en unos días.</p>
         ) : (
-          <div className="mt-10 grid grid-cols-2 gap-5 md:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-5 md:grid-cols-4">
             {products.map((p, i) => (
               <Link
                 key={p.id}

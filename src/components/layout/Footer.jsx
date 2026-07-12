@@ -64,7 +64,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
       <div className="mx-auto max-w-6xl px-4 py-12">
-        <div className="grid gap-10 md:grid-cols-6">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-6 md:gap-10">
           <div className="md:col-span-2">
             <span className="font-display text-2xl tracking-wide text-accent">{name}</span>
             <p className="mt-3 max-w-xs text-sm text-text-muted">

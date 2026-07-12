@@ -14,7 +14,7 @@ export default function NewsSection() {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <section ref={ref} className="mx-auto max-w-6xl px-4 py-24">
+    <section ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:py-20 lg:py-24">
       <SectionHeading
         eyebrow="Al día"
         title="Noticias"
@@ -28,7 +28,7 @@ export default function NewsSection() {
       {posts.length === 0 ? (
         <p className="mt-10 text-text-muted">Aún no hay noticias publicadas.</p>
       ) : (
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
           {posts.map((post, i) => (
             <Link
               key={post.id}
