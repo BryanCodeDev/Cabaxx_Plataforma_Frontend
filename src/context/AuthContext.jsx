@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useRef, startTransition } from 'react';
+import { createContext, useContext, useState, useEffect, startTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '@/services/authService';
 import { STORAGE_KEYS, ROLES, ROUTES } from '@/constants';
@@ -10,12 +10,8 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const hasLoaded = useRef(false);
 
   useEffect(() => {
-    if (hasLoaded.current) return;
-    hasLoaded.current = true;
-
     let isCancelled = false;
 
     const loadMe = async () => {
@@ -33,7 +29,9 @@ export function AuthProvider({ children }) {
           localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
         }
       } finally {
-        if (!isCancelled) setIsLoading(false);
+        // Siempre liberamos el estado de carga, incluso si esta
+        // ejecución fue cancelada (p.ej. StrictMode en desarrollo).
+        setIsLoading(false);
       }
     };
 
