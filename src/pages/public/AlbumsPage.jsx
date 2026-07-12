@@ -12,13 +12,16 @@ import Badge from '@/components/common/Badge';
 import Pagination from '@/components/common/Pagination';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import SEOHead from '@/components/seo/SEOHead';
+import { useArtist } from '@/hooks/useArtist';
 
 export default function AlbumsPage() {
+  const { artist } = useArtist();
   const [page, setPage] = useState(1);
   const [albums, setAlbums] = useState([]);
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [ref, isVisible] = useScrollReveal();
 
   useEffect(() => {
     let isMounted = true;

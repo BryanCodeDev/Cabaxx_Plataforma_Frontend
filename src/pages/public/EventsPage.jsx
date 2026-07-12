@@ -6,8 +6,10 @@ import { formatDate } from '@/utils/format';
 import Badge from '@/components/common/Badge';
 import { ROUTES } from '@/constants';
 import SEOHead from '@/components/seo/SEOHead';
+import { useArtist } from '@/hooks/useArtist';
 
 export default function EventsPage() {
+  const { artist } = useArtist();
   return (
     <>
       <SEOHead title="Eventos" description={`Próximos eventos y conciertos de ${artist?.stage_name || 'Cabaxx'}.`} />

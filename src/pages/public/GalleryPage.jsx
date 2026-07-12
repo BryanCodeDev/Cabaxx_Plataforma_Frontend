@@ -5,6 +5,7 @@ import SectionHeading from '@/components/common/SectionHeading';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import SEOHead from '@/components/seo/SEOHead';
 import { artistPhotos, videos } from '@/assets';
+import { useArtist } from '@/hooks/useArtist';
 
 const localItems = [
   ...artistPhotos.map((url, i) => ({ id: `local-img-${i}`, file_url: url, title: 'Cabaxx', type: 'image' })),
@@ -12,6 +13,7 @@ const localItems = [
 ];
 
 export default function GalleryPage() {
+  const { artist } = useArtist();
   const { data, loading } = useFetch(`/artists/${ARTIST_SLUG}/gallery`, { params: { limit: 24 } });
   const apiItems = data?.gallery?.rows || [];
   const items = apiItems.length ? apiItems : localItems;

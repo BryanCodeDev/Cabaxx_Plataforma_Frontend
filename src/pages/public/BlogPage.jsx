@@ -5,8 +5,10 @@ import Badge from '@/components/common/Badge';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/constants';
 import SEOHead from '@/components/seo/SEOHead';
+import { useArtist } from '@/hooks/useArtist';
 
 export default function BlogPage() {
+  const { artist } = useArtist();
   return (
     <>
       <SEOHead title="Blog" description={`Historias, entrevistas y detrás de cámaras de ${artist?.stage_name || 'Cabaxx'}.`} />

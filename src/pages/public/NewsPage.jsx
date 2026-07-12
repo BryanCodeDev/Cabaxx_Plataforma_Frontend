@@ -5,8 +5,10 @@ import Badge from '@/components/common/Badge';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/constants';
 import SEOHead from '@/components/seo/SEOHead';
+import { useArtist } from '@/hooks/useArtist';
 
 export default function NewsPage() {
+  const { artist } = useArtist();
   return (
     <>
       <SEOHead title="Noticias" description={`Últimas noticias y novedades de ${artist?.stage_name || 'Cabaxx'}.`} />

@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 import { formatDuration } from '@/utils/format';
 import { ROUTES } from '@/constants';
 import SEOHead from '@/components/seo/SEOHead';
+import { useArtist } from '@/hooks/useArtist';
 
 export default function SongsPage() {
+  const { artist } = useArtist();
   return (
     <>
       <SEOHead title="Canciones" description={`Canciones y discografía de ${artist?.stage_name || 'Cabaxx'}. Escucha todos sus temas.`} />

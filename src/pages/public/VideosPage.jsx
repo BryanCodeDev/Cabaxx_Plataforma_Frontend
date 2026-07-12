@@ -12,8 +12,10 @@ import Pagination from '@/components/common/Pagination';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Play } from 'lucide-react';
 import SEOHead from '@/components/seo/SEOHead';
+import { useArtist } from '@/hooks/useArtist';
 
 export default function VideosPage() {
+  const { artist } = useArtist();
   const [page, setPage] = useState(1);
   const [videos, setVideos] = useState([]);
   const [total, setTotal] = useState(0);

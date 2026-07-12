@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback, startTransition } from 'react';
+import { createContext, useContext, useState, useEffect, useRef, startTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '@/services/authService';
 import { STORAGE_KEYS, ROLES, ROUTES } from '@/constants';
@@ -10,27 +10,39 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
-  const loadMe = useCallback(async () => {
-    const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
-    if (!token) {
-      setIsLoading(false);
-      return;
-    }
-    try {
-      const { data } = await authService.getMe();
-      setUser(data.data.user);
-    } catch {
-      localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
-      localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const hasLoaded = useRef(false);
 
   useEffect(() => {
+    if (hasLoaded.current) return;
+    hasLoaded.current = true;
+
+    let isCancelled = false;
+
+    const loadMe = async () => {
+      const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+      try {
+        const { data } = await authService.getMe();
+        if (!isCancelled) setUser(data.data.user);
+      } catch {
+        if (!isCancelled) {
+          localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
+          localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
+        }
+      } finally {
+        if (!isCancelled) setIsLoading(false);
+      }
+    };
+
     loadMe();
-  }, [loadMe]);
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   const login = async (credentials) => {
     const { data } = await authService.login(credentials);
