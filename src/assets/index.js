@@ -18,7 +18,8 @@ import img13 from './gallery/cabaxx-13.webp';
 import img14 from './gallery/cabaxx-14.webp';
 
 import video1 from './videos/cabaxx-showreel.mp4';
-import video2 from './videos/cabaxx-llamada.mp4';
+
+
 
 // Fotos del artista (usadas en galería, hero, about, auth).
 export const artistPhotos = [
@@ -27,7 +28,7 @@ export const artistPhotos = [
 ];
 
 // Videoclips oficiales.
-export const videos = [video1, video2];
+export const videos = [video1];
 
 // Alias convenientes para módulos concretos.
 export const heroVideo = video1;
