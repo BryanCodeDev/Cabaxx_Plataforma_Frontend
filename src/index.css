@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-surface-2: #252525;
+  --color-accent: #ff3b5c;
+  --color-accent-hover: #e0203f;
+  --color-gold: #ffd700;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #606060;
+  --color-border: #2e2e2e;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+}
+
+@layer base {
+  body {
+    @apply bg-primary text-text-primary font-body antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-wide;
+  }
+
+  /* Scrollbar custom (dark, delgado) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d0d0d;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2e2e2e;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+  }
+}
+
+@layer components {
+  /* Texto con gradiente accent */
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent to-gold bg-clip-text text-transparent;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-surface/70 backdrop-blur-lg border border-border;
+  }
+
+  /* Hover de tarjeta: escala + sombra */
+  .card-hover {
+    @apply transition duration-300 hover:scale-[1.02] hover:shadow-card hover:border-accent/40;
+  }
+
+  .input-base {
+    @apply w-full rounded-lg bg-surface-2 border border-border px-3 py-2.5 text-sm text-text-primary
+      placeholder:text-text-muted outline-none transition
+      focus:border-accent focus:ring-1 focus:ring-accent;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.35s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
