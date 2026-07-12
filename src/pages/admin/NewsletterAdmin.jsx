@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { Send } from 'lucide-react';
 import { newsletterSubscribersApi, newsletterCampaignsApi } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import FormModal from '@/components/admin/FormModal';
 import Card from '@/components/common/Card';
@@ -62,9 +61,8 @@ export default function NewsletterAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Newsletter">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Newsletter" subtitle="Suscriptores y campañas" />
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Newsletter" subtitle="Suscriptores y campañas" />
 
         <Card padding="lg">
           <div className="mb-4 flex items-center justify-between">
@@ -109,7 +107,6 @@ export default function NewsletterAdmin() {
             </div>
           )}
         </Card>
-      </div>
 
       <FormModal isOpen={open} onClose={() => setOpen(false)} title="Nueva campaña" onSubmit={async (e) => {
         e.preventDefault();
@@ -144,6 +141,6 @@ export default function NewsletterAdmin() {
           </div>
         </div>
       </FormModal>
-    </DashboardLayout>
+    </div>
   );
 }

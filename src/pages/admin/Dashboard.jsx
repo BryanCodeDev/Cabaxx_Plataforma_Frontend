@@ -5,9 +5,8 @@ import {
 import { ARTIST_SLUG } from '@/constants';
 import {
   songService, albumService, eventService, productService,
-  orderAdminApi, galleryAdminApi, postService, newsletterSubscribersApi, videoService,
+  orderAdminApi, galleryAdminApi, postService, newsletterSubscribersApi,   videoService,
 } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import Card from '@/components/common/Card';
 
 function Kpi({ icon: Icon, label, value, accent }) {
@@ -66,21 +65,19 @@ export default function AdminDashboard() {
   ] : [];
 
   return (
-    <DashboardLayout breadcrumb="Inicio">
-      <div className="space-y-8">
-        <div>
-          <h2 className="font-display text-2xl text-text-primary">Panel de control</h2>
-          <p className="text-sm text-text-muted">Resumen general de la plataforma</p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {kpis.map((k) => (
-            <Kpi key={k.label} {...k} />
-          ))}
-          {!stats && (
-            <Card padding="md" className="sm:col-span-2 lg:col-span-3">Cargando métricas...</Card>
-          )}
-        </div>
+    <div className="space-y-8">
+      <div>
+        <h2 className="font-display text-2xl text-text-primary">Panel de control</h2>
+        <p className="text-sm text-text-muted">Resumen general de la plataforma</p>
       </div>
-    </DashboardLayout>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {kpis.map((k) => (
+          <Kpi key={k.label} {...k} />
+        ))}
+        {!stats && (
+          <Card padding="md" className="sm:col-span-2 lg:col-span-3">Cargando métricas...</Card>
+        )}
+      </div>
+    </div>
   );
 }

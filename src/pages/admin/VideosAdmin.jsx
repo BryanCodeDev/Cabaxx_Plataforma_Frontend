@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { videoService } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -47,24 +46,22 @@ export default function VideosAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Videos">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Videos" subtitle="Clips y videoclips" />
-        <Card padding="lg">
-          <DataTable
-            columns={columns}
-            data={items}
-            loading={loading}
-            searchable
-            emptyMessage="Sin videos"
-            fields={fields}
-            onAdd={async (v) => { await videoService.create(v); toast.success('Video creado'); }}
-            onEdit={async (row, v) => { await videoService.update(row.id, v); toast.success('Video actualizado'); }}
-            onDelete={async (row) => { await videoService.remove(row.id); toast.success('Video eliminado'); }}
-            onChanged={load}
-          />
-        </Card>
-      </div>
-    </DashboardLayout>
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Videos" subtitle="Clips y videoclips" />
+      <Card padding="lg">
+        <DataTable
+          columns={columns}
+          data={items}
+          loading={loading}
+          searchable
+          emptyMessage="Sin videos"
+          fields={fields}
+          onAdd={async (v) => { await videoService.create(v); toast.success('Video creado'); }}
+          onEdit={async (row, v) => { await videoService.update(row.id, v); toast.success('Video actualizado'); }}
+          onDelete={async (row) => { await videoService.remove(row.id); toast.success('Video eliminado'); }}
+          onChanged={load}
+        />
+      </Card>
+    </div>
   );
 }

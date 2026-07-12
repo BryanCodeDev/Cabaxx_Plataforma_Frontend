@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { orderAdminApi } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -65,24 +64,22 @@ export default function OrdersAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Pedidos">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Pedidos" subtitle="Gestiona los pedidos de la tienda" />
-        <Card padding="lg">
-          <DataTable
-            columns={columns}
-            data={data}
-            loading={loading}
-            searchable
-            emptyMessage="Sin pedidos"
-            fields={fields}
-            addLabel=""
-            onEdit={async (row, v) => { await orderAdminApi.updateStatus(row.id, v.status); toast.success('Estado actualizado'); }}
-            onDelete={async (row) => { await orderAdminApi.remove(row.id); toast.success('Pedido eliminado'); }}
-            onChanged={load}
-          />
-        </Card>
-      </div>
-    </DashboardLayout>
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Pedidos" subtitle="Gestiona los pedidos de la tienda" />
+      <Card padding="lg">
+        <DataTable
+          columns={columns}
+          data={data}
+          loading={loading}
+          searchable
+          emptyMessage="Sin pedidos"
+          fields={fields}
+          addLabel=""
+          onEdit={async (row, v) => { await orderAdminApi.updateStatus(row.id, v.status); toast.success('Estado actualizado'); }}
+          onDelete={async (row) => { await orderAdminApi.remove(row.id); toast.success('Pedido eliminado'); }}
+          onChanged={load}
+        />
+      </Card>
+    </div>
   );
 }

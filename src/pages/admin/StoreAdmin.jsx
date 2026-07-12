@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { productService, categoryService, couponService } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -98,9 +97,8 @@ export default function StoreAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Tienda">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Tienda" subtitle="Catálogo, categorías y cupones" />
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Tienda" subtitle="Catálogo, categorías y cupones" />
         <Tabs tabs={TABS.map((t) => ({ ...t, onClick: () => setTab(t.key) }))} active={tab} />
 
         {tab === 'products' && (
@@ -156,6 +154,5 @@ export default function StoreAdmin() {
           </Card>
         )}
       </div>
-    </DashboardLayout>
   );
 }

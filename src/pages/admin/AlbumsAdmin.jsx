@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { albumService } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -54,25 +53,23 @@ export default function AlbumsAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Álbumes">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Álbumes" subtitle="Lanzamientos discográficos" />
-        <Card padding="lg">
-          <DataTable
-            columns={columns}
-            data={items}
-            loading={loading}
-            searchable
-            emptyMessage="Sin álbumes"
-            fields={fields}
-            toFormValues={(row, base) => ({ ...base, cover: row.cover_url || null })}
-            onAdd={async (v) => { await albumService.create(v); toast.success('Álbum creado'); }}
-            onEdit={async (row, v) => { await albumService.update(row.id, v); toast.success('Álbum actualizado'); }}
-            onDelete={async (row) => { await albumService.remove(row.id); toast.success('Álbum eliminado'); }}
-            onChanged={load}
-          />
-        </Card>
-      </div>
-    </DashboardLayout>
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Álbumes" subtitle="Lanzamientos discográficos" />
+      <Card padding="lg">
+        <DataTable
+          columns={columns}
+          data={items}
+          loading={loading}
+          searchable
+          emptyMessage="Sin álbumes"
+          fields={fields}
+          toFormValues={(row, base) => ({ ...base, cover: row.cover_url || null })}
+          onAdd={async (v) => { await albumService.create(v); toast.success('Álbum creado'); }}
+          onEdit={async (row, v) => { await albumService.update(row.id, v); toast.success('Álbum actualizado'); }}
+          onDelete={async (row) => { await albumService.remove(row.id); toast.success('Álbum eliminado'); }}
+          onChanged={load}
+        />
+      </Card>
+    </div>
   );
 }

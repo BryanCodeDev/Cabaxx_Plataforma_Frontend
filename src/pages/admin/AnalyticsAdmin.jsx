@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { ARTIST_SLUG } from '@/constants';
 import {
   songService, albumService, eventService, productService,
-  orderAdminApi, galleryAdminApi, postService, videoService,
+  orderAdminApi, galleryAdminApi, postService,   videoService,
 } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
 
@@ -58,25 +57,23 @@ export default function AnalyticsAdmin() {
   }, []);
 
   return (
-    <DashboardLayout breadcrumb="Analíticas">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Analíticas" subtitle="Distribución de contenido y pedidos" />
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Analíticas" subtitle="Distribución de contenido y pedidos" />
 
-        {!stats ? (
-          <Card padding="lg">Cargando métricas...</Card>
-        ) : (
-          <div className="grid gap-4 lg:grid-cols-2">
-            <Card padding="lg">
-              <h3 className="mb-4 font-display text-xl text-text-primary">Catálogo de contenido</h3>
-              <Bars data={stats.content} />
-            </Card>
-            <Card padding="lg">
-              <h3 className="mb-4 font-display text-xl text-text-primary">Pedidos por estado</h3>
-              {stats.orders.length ? <Bars data={stats.orders} /> : <p className="text-sm text-text-muted">Sin pedidos registrados.</p>}
-            </Card>
-          </div>
-        )}
-      </div>
-    </DashboardLayout>
+      {!stats ? (
+        <Card padding="lg">Cargando métricas...</Card>
+      ) : (
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Card padding="lg">
+            <h3 className="mb-4 font-display text-xl text-text-primary">Catálogo de contenido</h3>
+            <Bars data={stats.content} />
+          </Card>
+          <Card padding="lg">
+            <h3 className="mb-4 font-display text-xl text-text-primary">Pedidos por estado</h3>
+            {stats.orders.length ? <Bars data={stats.orders} /> : <p className="text-sm text-text-muted">Sin pedidos registrados.</p>}
+          </Card>
+        </div>
+      )}
+    </div>
   );
 }

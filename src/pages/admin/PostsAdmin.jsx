@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { postService } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -54,25 +53,23 @@ export default function PostsAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Noticias / Blog">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Noticias / Blog" subtitle="Publicaciones y novedades" />
-        <Card padding="lg">
-          <DataTable
-            columns={columns}
-            data={items}
-            loading={loading}
-            searchable
-            emptyMessage="Sin publicaciones"
-            fields={fields}
-            toFormValues={(row, base) => ({ ...base, cover: row.cover_url || null })}
-            onAdd={async (v) => { await postService.create(v); toast.success('Publicación creada'); }}
-            onEdit={async (row, v) => { await postService.update(row.id, v); toast.success('Publicación actualizada'); }}
-            onDelete={async (row) => { await postService.remove(row.id); toast.success('Publicación eliminada'); }}
-            onChanged={load}
-          />
-        </Card>
-      </div>
-    </DashboardLayout>
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Noticias / Blog" subtitle="Publicaciones y novedades" />
+      <Card padding="lg">
+        <DataTable
+          columns={columns}
+          data={items}
+          loading={loading}
+          searchable
+          emptyMessage="Sin publicaciones"
+          fields={fields}
+          toFormValues={(row, base) => ({ ...base, cover: row.cover_url || null })}
+          onAdd={async (v) => { await postService.create(v); toast.success('Publicación creada'); }}
+          onEdit={async (row, v) => { await postService.update(row.id, v); toast.success('Publicación actualizada'); }}
+          onDelete={async (row) => { await postService.remove(row.id); toast.success('Publicación eliminada'); }}
+          onChanged={load}
+        />
+      </Card>
+    </div>
   );
 }

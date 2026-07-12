@@ -2,35 +2,35 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { Plus, Trash2 } from 'lucide-react';
 import api from '@/services/api';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
 import SectionHeading from '@/components/common/SectionHeading';
+import { useAuth } from '@/context/AuthContext';
+import { ARTIST_SLUG } from '@/constants';
 
 export default function AdminSettings() {
+  const { isSuperadmin } = useAuth();
   const [settings, setSettings] = useState({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
+  const isSuperAdmin = isSuperadmin();
+
   useEffect(() => {
-    api.get('/settings')
+    api.get('/settings', {
+      headers: isSuperAdmin ? { 'x-artist-slug': ARTIST_SLUG } : {}
+    })
       .then((res) => setSettings(res.data?.data?.settings || {}))
       .catch(() => toast.error('Error al cargar configuración'))
       .finally(() => setLoading(false));
-  }, []);
-
-  const updateValue = (key, value) => setSettings((prev) => ({ ...prev, [key]: value }));
-  const removeKey = (key) => setSettings((prev) => {
-    const next = { ...prev };
-    delete next[key];
-    return next;
-  });
-  const addKey = () => setSettings((prev) => ({ ...prev, [`clave_${Object.keys(prev).length + 1}`]: '' }));
+  }, [isSuperAdmin]);
 
   const save = async () => {
     try {
       setSaving(true);
-      await api.put('/settings', settings);
+      await api.put('/settings', settings, {
+        headers: isSuperAdmin ? { 'x-artist-slug': ARTIST_SLUG } : {}
+      });
       toast.success('Configuración guardada');
     } catch {
       toast.error('No se pudo guardar');
@@ -39,14 +39,17 @@ export default function AdminSettings() {
     }
   };
 
+  const updateValue = (key, value) => setSettings((prev) => ({ ...prev, [key]: value }));
+  const removeKey = (key) => setSettings((prev) => { const next = { ...prev }; delete next[key]; return next; });
+  const addKey = () => setSettings((prev) => ({ ...prev, [`clave_${Object.keys(prev).length + 1}`]: '' }));
+
   const entries = Object.entries(settings);
 
   return (
-    <DashboardLayout breadcrumb="Configuración">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Configuración" subtitle="Ajustes generales del artista" />
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Configuración" subtitle="Ajustes generales del artista" />
 
-        <Card padding="lg">
+      <Card padding="lg">
           {loading ? (
             <p className="text-sm text-text-muted">Cargando...</p>
           ) : (
@@ -93,6 +96,5 @@ export default function AdminSettings() {
           </div>
         </Card>
       </div>
-    </DashboardLayout>
   );
 }

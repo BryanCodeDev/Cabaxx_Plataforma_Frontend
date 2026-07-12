@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, Outlet } from 'react-router-dom';
 import {
   Home, Music, Disc3, Calendar, ShoppingBag, Package, Film,
   FileText, Image, Mail, BarChart3, Settings, Shield,
@@ -190,7 +190,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             </Button>
           </div>
         </header>
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <main className="flex-1 p-4 md:p-6">{children}<Outlet /></main>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { galleryAdminApi } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -54,24 +53,22 @@ export default function GalleryAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Galería">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Galería" subtitle="Imágenes y videos promocionales" />
-        <Card padding="lg">
-          <DataTable
-            columns={columns}
-            data={data}
-            loading={loading}
-            searchable
-            emptyMessage="Sin elementos en la galería"
-            fields={fields}
-            addLabel="Subir media"
-            onAdd={async (v) => { await galleryAdminApi.create(v); toast.success('Elemento subido'); }}
-            onDelete={async (row) => { await galleryAdminApi.remove(row.id); toast.success('Elemento eliminado'); }}
-            onChanged={load}
-          />
-        </Card>
-      </div>
-    </DashboardLayout>
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Galería" subtitle="Imágenes y videos promocionales" />
+      <Card padding="lg">
+        <DataTable
+          columns={columns}
+          data={data}
+          loading={loading}
+          searchable
+          emptyMessage="Sin elementos en la galería"
+          fields={fields}
+          addLabel="Subir media"
+          onAdd={async (v) => { await galleryAdminApi.create(v); toast.success('Elemento subido'); }}
+          onDelete={async (row) => { await galleryAdminApi.remove(row.id); toast.success('Elemento eliminado'); }}
+          onChanged={load}
+        />
+      </Card>
+    </div>
   );
 }

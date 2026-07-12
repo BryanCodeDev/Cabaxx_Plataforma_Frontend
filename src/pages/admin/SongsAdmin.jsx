@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { songService } from '@/services/songService';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -61,9 +60,8 @@ export default function SongsAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Canciones">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Canciones" subtitle="Gestiona el catálogo musical del artista" />
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Canciones" subtitle="Gestiona el catálogo musical del artista" />
         <Card padding="lg">
           <DataTable
             columns={columns}
@@ -89,6 +87,5 @@ export default function SongsAdmin() {
           />
         </Card>
       </div>
-    </DashboardLayout>
   );
 }

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { eventService } from '@/services/modules';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -63,9 +62,8 @@ export default function EventsAdmin() {
   ];
 
   return (
-    <DashboardLayout breadcrumb="Eventos">
-      <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Eventos" subtitle="Conciertos y presentaciones" />
+    <div className="space-y-6">
+      <SectionHeading eyebrow="Panel" title="Eventos" subtitle="Conciertos y presentaciones" />
         <Card padding="lg">
           <DataTable
             columns={columns}
@@ -87,6 +85,5 @@ export default function EventsAdmin() {
           />
         </Card>
       </div>
-    </DashboardLayout>
   );
 }
