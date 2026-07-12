@@ -5,56 +5,66 @@ import { videoService } from '@/services/modules';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
-import Modal from '@/components/common/Modal';
-import Input from '@/components/common/Input';
-import Button from '@/components/common/Button';
 import SectionHeading from '@/components/common/SectionHeading';
+import Badge from '@/components/common/Badge';
 
-const columns = [
-  { key: 'thumbnail_url', label: 'Miniatura', render: (row) => <img src={row.thumbnail_url} alt="" className="h-10 w-10 rounded object-cover" /> },
-  { key: 'title', label: 'Título' },
-  { key: 'youtube_id', label: 'YouTube', render: (row) => <span className="font-mono text-sm">{row.youtube_id ? `YouTube: ${row.youtube_id}` : '—'}</span> },
-  { key: 'views', label: 'Vistas', render: (row) => <span className="font-mono text-sm">{row.views?.toLocaleString('es-CO') ?? '0'}</span> },
-  { key: 'status', label: 'Estado' },
-];
+const STATUS_VARIANT = { published: 'success', draft: 'warning' };
 
 export default function VideosAdmin() {
-  const [open, setOpen] = useState(false);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    videoService.getVideos(ARTIST_SLUG, { params: { limit: 50 } })
+  const load = () => {
+    setLoading(true);
+    videoService
+      .getVideos(ARTIST_SLUG, { params: { limit: 100 } })
       .then((res) => setData(res.data))
       .catch(() => toast.error('Error al cargar videos'))
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const items = data?.videos?.rows || [];
+  const items = data?.data || [];
+
+  const columns = [
+    { key: 'thumbnail_url', label: 'Miniatura', render: (r) => r.thumbnail_url ? <img src={r.thumbnail_url} alt="" className="h-10 w-10 rounded object-cover" /> : <div className="h-10 w-10 rounded bg-surface-2" /> },
+    { key: 'title', label: 'Título' },
+    { key: 'youtube_id', label: 'YouTube', render: (r) => r.youtube_id ? <span className="font-mono text-sm">{r.youtube_id}</span> : '—' },
+    { key: 'views', label: 'Vistas', render: (r) => (r.views || 0).toLocaleString('es-CO') },
+    { key: 'status', label: 'Estado', render: (r) => <Badge variant={STATUS_VARIANT[r.status] || 'default'} size="sm">{r.status}</Badge> },
+  ];
+
+  const fields = [
+    { name: 'title', label: 'Título', type: 'text', required: true, fullWidth: true },
+    { name: 'youtube_id', label: 'ID de YouTube', type: 'text', placeholder: 'dQw4w9WgXcQ' },
+    { name: 'video_url', label: 'URL del video', type: 'url', placeholder: 'https://youtube.com/watch?v=...' },
+    { name: 'status', label: 'Estado', type: 'select', options: [{ value: 'draft', label: 'Borrador' }, { value: 'published', label: 'Publicado' }] },
+    { name: 'description', label: 'Descripción', type: 'textarea', fullWidth: true },
+  ];
 
   return (
     <DashboardLayout breadcrumb="Videos">
       <div className="space-y-6">
-        <SectionHeading eyebrow="Panel" title="Videos" />
-        <Card padding="lg" className="overflow-x-auto">
+        <SectionHeading eyebrow="Panel" title="Videos" subtitle="Clips y videoclips" />
+        <Card padding="lg">
           <DataTable
             columns={columns}
             data={items}
             loading={loading}
             searchable
             emptyMessage="Sin videos"
-            onAdd={() => setOpen(true)}
-            onEdit={() => toast.info('Editar video (demo)')}
-            onDelete={() => toast.info('Eliminar video (demo)')}
+            fields={fields}
+            onAdd={async (v) => { await videoService.create(v); toast.success('Video creado'); }}
+            onEdit={async (row, v) => { await videoService.update(row.id, v); toast.success('Video actualizado'); }}
+            onDelete={async (row) => { await videoService.remove(row.id); toast.success('Video eliminado'); }}
+            onChanged={load}
           />
         </Card>
       </div>
-      <Modal isOpen={open} onClose={() => setOpen(false)} title="Nuevo video" onSubmit={(e) => { e.preventDefault(); toast.success('Video guardado (demo)'); setOpen(false); }}>
-        <Input label="Título" name="title" placeholder="Título del video" />
-        <Input label="YouTube ID" name="youtube_id" placeholder="ID de YouTube" />
-        <Input label="Descripción" name="description" placeholder="Descripción del video" />
-        <Input label="URL" name="url" placeholder="https://youtube.com/watch?v=..." />
-      </Modal>
     </DashboardLayout>
   );
 }
