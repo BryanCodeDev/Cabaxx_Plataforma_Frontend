@@ -1,5 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 import { HelmetProvider } from 'react-helmet-async';
+import { RouterProvider } from 'react-router-dom';
 import AppRouter from '@/router/AppRouter';
 import ErrorBoundary from '@/components/common/ErrorBoundary';
 
@@ -21,7 +22,7 @@ export default function App() {
             error: { iconTheme: { primary: '#EF4444', secondary: '#1A1A1A' } },
           }}
         />
-        <AppRouter />
+        <RouterProvider router={AppRouter} />
       </ErrorBoundary>
     </HelmetProvider>
   );
