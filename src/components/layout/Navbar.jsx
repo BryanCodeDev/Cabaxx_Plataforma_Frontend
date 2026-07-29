@@ -101,7 +101,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
         <Link to={ROUTES.HOME} className={`shrink-0 rounded-md ${FOCUS}`} aria-label="Inicio">
-          <span className="font-display text-xl tracking-wide text-accent transition-transform hover:scale-105 sm:text-2xl">
+          <span className="font-display text-xl tracking-wide text-accent transition-transform duration-300 hover:scale-105 inline-block sm:text-2xl">
             {artistName}
           </span>
         </Link>
@@ -172,7 +172,7 @@ export default function Navbar() {
         <div className="flex items-center gap-1.5 sm:gap-3">
           <Link
             to={ROUTES.CART}
-            className={`hidden rounded-md p-1.5 text-text-secondary transition hover:text-text-primary sm:block ${FOCUS}`}
+            className={`hidden rounded-md p-1.5 text-text-secondary transition-all duration-200 hover:-translate-y-0.5 hover:text-text-primary sm:block ${FOCUS}`}
             aria-label="Carrito"
           >
             <ShoppingCart className="h-5 w-5" />
@@ -190,36 +190,39 @@ export default function Navbar() {
             />
           ) : (
             <>
-              <Button variant="ghost" size="sm" className="hidden lg:inline-flex" onClick={() => navigate(ROUTES.LOGIN)}>
+              <Button variant="ghost" size="sm" className="hidden transition-transform active:scale-95 lg:inline-flex" onClick={() => navigate(ROUTES.LOGIN)}>
                 Login
               </Button>
-              <Button size="sm" onClick={() => navigate(ROUTES.REGISTER)}>
+              <Button size="sm" className="transition-transform active:scale-95" onClick={() => navigate(ROUTES.REGISTER)}>
                 Unirse
               </Button>
             </>
           )}
 
           <button
-            className={`rounded-md p-1.5 text-text-primary lg:hidden ${FOCUS}`}
+            className={`rounded-md p-1.5 text-text-primary transition-transform duration-200 lg:hidden ${FOCUS}`}
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <span className="block transition-transform duration-200" style={{ transform: menuOpen ? 'rotate(90deg)' : 'rotate(0deg)' }}>
+              {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </span>
           </button>
         </div>
       </div>
 
       {/* Menú móvil: panel en flujo, igual mecanismo que la versión original */}
       {menuOpen && (
-        <div className="border-t border-border bg-primary lg:hidden">
+        <div className="animate-in fade-in slide-in-from-top-2 border-t border-border bg-primary duration-200 lg:hidden">
           <nav className="flex flex-col gap-1 p-4" aria-label="Navegación móvil">
-            {NAV_LINKS.map((l) => (
+            {NAV_LINKS.map((l, i) => (
               <NavLink
                 key={l.to}
                 to={l.to}
+                style={{ animationDelay: `${i * 40}ms`, animationFillMode: 'backwards' }}
                 className={({ isActive }) =>
-                  `rounded-lg px-3 py-2.5 text-sm font-medium transition ${FOCUS} ${
+                  `animate-in fade-in slide-in-from-left-1 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-300 ${FOCUS} ${
                     isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary'
                   }`
                 }

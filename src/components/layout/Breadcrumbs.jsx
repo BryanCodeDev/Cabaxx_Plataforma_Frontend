@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { Home, ChevronRight } from 'lucide-react';
 import { ROUTES } from '@/constants';
 
 const AUTH_PREFIXES = ['/login', '/register', '/forgot-password', '/reset-password'];
@@ -49,20 +50,36 @@ export default function Breadcrumbs() {
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="mx-auto max-w-6xl px-4 pt-6">
-      <ol className="flex flex-wrap items-center gap-1.5 text-sm text-text-muted">
+    <nav
+      aria-label="Breadcrumb"
+      className="mx-auto max-w-6xl animate-in fade-in slide-in-from-top-1 px-4 pt-6 duration-500"
+    >
+      <ol className="flex flex-nowrap items-center gap-1 overflow-x-auto whitespace-nowrap text-sm text-text-muted [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap">
         {crumbs.map((c, i) => {
           const last = i === crumbs.length - 1;
+          const isFirst = i === 0;
           return (
-            <li key={i} className="flex items-center gap-1.5">
+            <li key={i} className="flex shrink-0 items-center gap-1">
               {c.to && !last ? (
-                <Link to={c.to} className="rounded transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary">
-                  {c.label}
+                <Link
+                  to={c.to}
+                  className="group flex items-center gap-1 rounded transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                >
+                  {isFirst && <Home className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />}
+                  <span className="relative">
+                    {c.label}
+                    <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+                  </span>
                 </Link>
               ) : (
-                <span className={last ? 'font-medium text-text-secondary' : ''}>{c.label}</span>
+                <span className={`flex items-center gap-1 ${last ? 'font-medium text-text-secondary' : ''}`}>
+                  {isFirst && <Home className="h-3.5 w-3.5 shrink-0" />}
+                  {c.label}
+                </span>
               )}
-              {!last && <span aria-hidden="true">/</span>}
+              {!last && (
+                <ChevronRight className="h-3.5 w-3.5 shrink-0 text-text-muted/50" aria-hidden="true" />
+              )}
             </li>
           );
         })}

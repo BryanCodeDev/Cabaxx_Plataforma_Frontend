@@ -60,14 +60,14 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             onClick={() => setMobileOpen(false)}
             className={({ isActive }) =>
               classNames(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
+                'group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
                 iconOnly ? 'justify-center' : '',
-                isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
+                isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:translate-x-0.5 hover:bg-surface-2 hover:text-text-primary',
                 FOCUS_SURFACE
               )
             }
           >
-            <Icon className="h-5 w-5 shrink-0" />
+            <Icon className="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
             {!iconOnly && !collapsed && <span>{l.label}</span>}
           </NavLink>
         );
@@ -83,14 +83,14 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
                   classNames(
-                    'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
+                    'group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
                     iconOnly ? 'justify-center' : '',
-                    isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
+                    isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:translate-x-0.5 hover:bg-surface-2 hover:text-text-primary',
                     FOCUS_SURFACE
                   )
                 }
               >
-                <Icon className="h-5 w-5 shrink-0" />
+                <Icon className="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
                 {!iconOnly && !collapsed && <span>{l.label}</span>}
               </NavLink>
             );
@@ -100,14 +100,14 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             onClick={() => setMobileOpen(false)}
             className={({ isActive }) =>
               classNames(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
+                'group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
                 iconOnly ? 'justify-center' : '',
-                isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
+                isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:translate-x-0.5 hover:bg-surface-2 hover:text-text-primary',
                 FOCUS_SURFACE
               )
             }
           >
-            <Shield className="h-5 w-5 shrink-0" />
+            <Shield className="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
             {!iconOnly && !collapsed && <span>Panel de Control</span>}
           </NavLink>
         </>
@@ -118,14 +118,14 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
           onClick={() => setMobileOpen(false)}
           className={({ isActive }) =>
             classNames(
-              'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
+              'group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
               iconOnly ? 'justify-center' : '',
-              isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
+              isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:translate-x-0.5 hover:bg-surface-2 hover:text-text-primary',
               FOCUS_SURFACE
             )
           }
         >
-          <ExternalLink className="h-5 w-5 shrink-0" />
+          <ExternalLink className="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
           {!iconOnly && !collapsed && <span>Ver sitio</span>}
         </NavLink>
       </div>
@@ -148,7 +148,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
           </Link>
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className={`text-text-muted transition hover:text-text-primary ${FOCUS_SURFACE} rounded`}
+            className={`rounded p-1 text-text-muted transition-all duration-200 hover:bg-surface-2 hover:text-text-primary ${FOCUS_SURFACE}`}
             aria-label="Colapsar menú"
           >
             {collapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
@@ -159,13 +159,16 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
 
       {mobileOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
-          <aside className="absolute left-0 top-0 flex h-full w-64 flex-col border-r border-border bg-surface p-3 overflow-hidden">
+          <div
+            className="animate-in fade-in absolute inset-0 bg-black/60 duration-200"
+            onClick={() => setMobileOpen(false)}
+          />
+          <aside className="animate-in slide-in-from-left duration-300 absolute left-0 top-0 flex h-full w-64 flex-col border-r border-border bg-surface p-3 shadow-2xl overflow-hidden">
             <div className="mb-4 flex h-12 shrink-0 items-center justify-between px-1">
-              <Link to={ROUTES.HOME} className="font-display text-xl tracking-wide text-accent hover:text-accent/80 transition">{siteName}</Link>
+              <Link to={ROUTES.HOME} className="font-display text-xl tracking-wide text-accent transition-transform duration-300 hover:scale-105 inline-block">{siteName}</Link>
               <button
                 onClick={() => setMobileOpen(false)}
-                className={`text-text-muted transition hover:text-text-primary ${FOCUS_SURFACE} rounded`}
+                className={`text-text-muted transition hover:rotate-90 hover:text-text-primary ${FOCUS_SURFACE} rounded duration-200`}
                 aria-label="Cerrar menú"
               >
                 <X className="h-5 w-5" />
@@ -181,12 +184,12 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileOpen(true)}
-              className={`text-xl text-text-primary md:hidden ${FOCUS_SURFACE} rounded`}
+              className={`rounded-md p-1 text-xl text-text-primary transition-colors hover:bg-surface-2 md:hidden ${FOCUS_SURFACE}`}
                aria-label="Abrir menú"
               >
                 <Menu className="h-5 w-5" />
             </button>
-            <NavLink to={ROUTES.HOME} className={classNames('hidden items-center gap-1 text-text-muted hover:text-accent transition sm:flex', FOCUS_SURFACE)}>
+            <NavLink to={ROUTES.HOME} className={classNames('hidden items-center gap-1 text-text-muted transition-all duration-200 hover:-translate-y-0.5 hover:text-accent sm:flex', FOCUS_SURFACE)}>
               <ExternalLink className="h-4 w-4" />
               <span className="text-xs">Volver al sitio</span>
             </NavLink>
@@ -217,7 +220,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             </Button>
           </div>
         </header>
-        <main className="flex-1 p-4 md:p-6">{children}<Outlet /></main>
+        <main key={pathname} className="animate-in fade-in flex-1 p-4 duration-300 md:p-6">{children}<Outlet /></main>
       </div>
     </div>
   );
