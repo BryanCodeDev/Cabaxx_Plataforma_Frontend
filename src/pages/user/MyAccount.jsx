@@ -6,6 +6,7 @@ import Input from '@/components/common/Input';
 import { SectionHeading } from '@/components/common';
 import { toast } from 'react-hot-toast';
 import SEOHead from '@/components/seo/SEOHead';
+import { FOCUS } from '@/constants';
 export default function MyAccount() {
   const { user, updateUser } = useAuth();
   const [name, setName] = useState(user?.name || '');
