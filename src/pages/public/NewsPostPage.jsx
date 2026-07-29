@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { postService } from '@/services/modules';
 import { ARTIST_SLUG, ROUTES } from '@/constants';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
+import { EmptyState } from '@/components/common';
 import LikeButton from '@/components/common/LikeButton';
 import CommentSection from '@/components/common/CommentSection';
 import { toast } from 'react-hot-toast';

@@ -1,7 +1,7 @@
 import { postService } from '@/services/modules';
 import ListingPage from '@/components/common/ListingPage';
 import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
+import { Badge } from '@/components/common';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/constants';
 import SEOHead from '@/components/seo/SEOHead';

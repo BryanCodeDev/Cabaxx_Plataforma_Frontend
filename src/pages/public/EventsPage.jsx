@@ -3,7 +3,7 @@ import ListingPage from '@/components/common/ListingPage';
 import Card from '@/components/common/Card';
 import { Link } from 'react-router-dom';
 import { formatDate } from '@/utils/format';
-import Badge from '@/components/common/Badge';
+import { Badge } from '@/components/common';
 import { ROUTES } from '@/constants';
 import SEOHead from '@/components/seo/SEOHead';
 import { useArtist } from '@/hooks/useArtist';

@@ -10,7 +10,7 @@ import { useArtist } from '@/hooks/useArtist';
 import { ROUTES } from '@/constants';
 import { classNames } from '@/utils/classNames';
 import Button from '@/components/common/Button';
-import Avatar from '@/components/common/Avatar';
+import { Avatar } from '@/components/common';
 
 const SIDEBAR_LINKS = [
   { to: ROUTES.ADMIN, label: 'Inicio', icon: Home, end: true },

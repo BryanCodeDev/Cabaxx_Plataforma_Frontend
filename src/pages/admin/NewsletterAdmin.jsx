@@ -1,3 +1,4 @@
+import { SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { Send } from 'lucide-react';
@@ -6,8 +7,6 @@ import DataTable from '@/components/admin/DataTable';
 import FormModal from '@/components/admin/FormModal';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
-import SectionHeading from '@/components/common/SectionHeading';
-import Badge from '@/components/common/Badge';
 
 const STATUS_VARIANT = { subscribed: 'success', unsubscribed: 'default', bounced: 'error' };
 

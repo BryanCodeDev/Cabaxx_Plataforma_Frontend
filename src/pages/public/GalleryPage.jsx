@@ -1,7 +1,7 @@
 import { ARTIST_SLUG } from '@/constants';
 import { useFetch } from '@/hooks/useFetch';
 import Spinner from '@/components/common/Spinner';
-import SectionHeading from '@/components/common/SectionHeading';
+import { SectionHeading } from '@/components/common';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import SEOHead from '@/components/seo/SEOHead';
 import { artistPhotos, videos } from '@/assets';

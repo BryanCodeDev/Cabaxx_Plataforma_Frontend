@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useArtist } from '@/hooks/useArtist';
 import { ROUTES } from '@/constants';
 import Button from '@/components/common/Button';
-import Avatar from '@/components/common/Avatar';
+import { Avatar } from '@/components/common';
 import Dropdown from '@/components/common/Dropdown';
 import {
   ShoppingCart, Menu, X, ChevronDown, Disc3, Film, Image,

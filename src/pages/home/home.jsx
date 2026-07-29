@@ -1,3 +1,4 @@
+import { Badge, SectionHeading } from '@/components/common'
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -12,10 +13,8 @@ import { artistPortrait, artistPhotos, heroVideo, heroPoster } from '@/assets';
 import { formatDate } from '@/utils/format';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
 import Input from '@/components/common/Input';
 import FollowButton from '@/components/common/FollowButton';
-import SectionHeading from '@/components/common/SectionHeading';
 
 const PLATFORMS = [
   { label: 'Spotify', href: '#' },
@@ -42,154 +41,14 @@ const CAREER_MILESTONES = [
   { year: '2025', label: 'Lanzamiento oficial con ecosistema digital propio' },
 ];
 
-const NAV_LINKS = [
-  { id: 'home',    label: 'Inicio' },
-  { id: 'latest',  label: 'Música' },
-  { id: 'about',   label: 'Sobre mí' },
-  { id: 'events',  label: 'Eventos' },
-  { id: 'gallery', label: 'Galería' },
-  { id: 'store',   label: 'Tienda' },
-  { id: 'news',    label: 'Noticias' },
-];
-
-const particles = Array.from({ length: 20 }, (_, i) => ({
+const particles = Array.from({ length: 12 }, (_, i) => ({
   id: i,
   left: Math.random() * 100,
-  delay: Math.random() * 6,
-  duration: 5 + Math.random() * 5,
-  size: 1 + Math.random() * 2.5,
-  gold: i % 4 === 0,
+  delay: Math.random() * 7,
+  duration: 7 + Math.random() * 6,
+  size: 1 + Math.random() * 1.75,
+  gold: i % 3 === 0,
 }));
-
-/* ─────────────────────────────────────────
-   QuickNav
-───────────────────────────────────────── */
-function QuickNav({ artist }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState('home');
-  const [menuOpen, setMenuOpen] = useState(false);
-  const name = artist?.stage_name || artist?.name || 'Cabaxx';
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 64);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = NAV_LINKS.map((l) => document.getElementById(l.id)).filter(Boolean);
-    if (!sections.length) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target?.id) setActive(visible.target.id);
-      },
-      { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
-
-  const goTo = (id) => {
-    setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-border/60 bg-primary/85 backdrop-blur-xl shadow-[0_4px_32px_rgba(0,0,0,0.3)]'
-          : 'border-b border-transparent bg-transparent'
-      }`}
-    >
-      <nav
-        className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4"
-        aria-label="Navegación principal"
-      >
-        {/* Logo */}
-        <button
-          onClick={() => goTo('home')}
-          className="group flex items-center gap-2.5 font-display text-lg tracking-widest text-text-primary transition sm:text-xl"
-        >
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/40 bg-gold/10 text-xs font-bold text-gold transition group-hover:bg-gold/20 sm:h-9 sm:w-9">
-            {name.charAt(0).toUpperCase()}
-          </span>
-          <span className="bg-gradient-to-r from-text-primary to-gold/80 bg-clip-text text-transparent">
-            {name.toUpperCase()}
-          </span>
-        </button>
-
-        {/* Links desktop */}
-        <ul className="hidden items-center gap-0.5 lg:flex">
-          {NAV_LINKS.map((link) => (
-            <li key={link.id}>
-              <button
-                onClick={() => goTo(link.id)}
-                aria-current={active === link.id ? 'page' : undefined}
-                className={`relative rounded-md px-3.5 py-2 text-sm font-medium transition xl:px-4 ${
-                  active === link.id
-                    ? 'text-gold'
-                    : 'text-text-secondary hover:text-text-primary'
-                }`}
-              >
-                {link.label}
-                {active === link.id && (
-                  <span className="absolute inset-x-3 -bottom-0.5 h-px rounded-full bg-gold" />
-                )}
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA + hamburger */}
-        <div className="flex items-center gap-3">
-          <div className="hidden lg:block">
-            <FollowButton artistId={artist?.id} />
-          </div>
-          <button
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            aria-expanded={menuOpen}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 text-text-primary transition hover:border-gold/40 hover:bg-gold/5 lg:hidden"
-          >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        className={`overflow-hidden border-t border-border/40 bg-primary/96 backdrop-blur-xl transition-all duration-300 lg:hidden ${
-          menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <ul className="mx-auto flex max-w-6xl flex-col gap-0.5 px-4 py-3">
-          {NAV_LINKS.map((link) => (
-            <li key={link.id}>
-              <button
-                onClick={() => goTo(link.id)}
-                className={`block w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium transition ${
-                  active === link.id
-                    ? 'bg-gold/10 text-gold'
-                    : 'text-text-secondary hover:bg-surface hover:text-text-primary'
-                }`}
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
-          <li className="mt-2 border-t border-border/40 pt-3">
-            <FollowButton artistId={artist?.id} className="w-full" />
-          </li>
-        </ul>
-      </div>
-    </header>
-  );
-}
 
 /* ─────────────────────────────────────────
    Hero
@@ -249,7 +108,7 @@ function Hero({ artist }) {
         {particles.map((p) => (
           <span
             key={p.id}
-            className={`absolute rounded-full ${p.gold ? 'bg-gold/60' : 'bg-accent/30'}`}
+            className={`absolute rounded-full ${p.gold ? 'bg-gold/40' : 'bg-accent/20'}`}
             style={{
               left: `${p.left}%`,
               bottom: '-10px',
@@ -268,55 +127,42 @@ function Hero({ artist }) {
         }`}
       >
         {/* Badge superior */}
-        <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-gold/30 bg-gold/8 px-5 py-2 backdrop-blur-sm">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-          </span>
-          <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-gold sm:text-xs">
-            Artista Urbano · Colombia
+        <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-gold/25 bg-gold/[0.06] px-5 py-2 backdrop-blur-sm">
+          <span className="h-1 w-1 rounded-full bg-gold" />
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-gold sm:text-xs">
+            {artist?.genre || 'Artista · Colombia'}
           </p>
         </div>
 
         {/* Nombre */}
-        <h1 className="font-display leading-[0.88] tracking-tight drop-shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
-            style={{ fontSize: 'clamp(3.5rem,16vw,8rem)' }}>
+        <h1 className="font-display leading-[0.9] tracking-tight drop-shadow-[0_8px_32px_rgba(0,0,0,0.45)]"
+            style={{ fontSize: 'clamp(3.25rem,14vw,7.25rem)' }}>
           <span className="bg-gradient-to-br from-white via-white to-gold/70 bg-clip-text text-transparent">
             {artist?.stage_name?.toUpperCase() || artist?.name?.toUpperCase() || 'CABAXX'}
           </span>
         </h1>
 
-        {/* Género */}
-        <p className="mx-auto mt-5 max-w-md text-base font-light tracking-widest text-text-secondary sm:text-lg">
-          {artist?.genre || 'Reggaetón · Trap · Flow Colombiano'}
-        </p>
+        {/* Separador */}
+        <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
 
         {/* Tagline */}
-        <p className="mx-auto mt-3 max-w-sm text-sm text-text-muted/80">
-          Sonido que viene del barrio y llega a donde sea.
+        <p className="mx-auto mt-6 max-w-md text-base font-light leading-relaxed text-text-secondary sm:text-lg">
+          {artist?.tagline || 'Música que se siente antes de escucharse.'}
         </p>
 
         {/* CTAs */}
-        <div className="mx-auto mt-10 flex max-w-xs flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
+        <div className="mx-auto mt-11 flex max-w-xs flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
           <Button
             size="lg"
-            className="w-full sm:w-auto shadow-[0_0_24px_rgba(230,57,70,0.4)] hover:shadow-[0_0_32px_rgba(230,57,70,0.6)] transition-shadow"
+            className="w-full sm:w-auto shadow-[0_8px_30px_rgba(0,0,0,0.35)] hover:shadow-[0_8px_36px_rgba(0,0,0,0.45)] transition-shadow"
             onClick={() => document.getElementById('latest')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <Play className="mr-2 h-5 w-5" /> Escuchar Ahora
           </Button>
           <Button
-            variant="secondary"
-            size="lg"
-            className="w-full sm:w-auto"
-            onClick={() => document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Ver Eventos
-          </Button>
-          <Button
             variant="ghost"
             size="lg"
-            className="w-full sm:w-auto border border-border/60 hover:border-gold/40"
+            className="w-full sm:w-auto border border-white/15 text-white hover:border-gold/50 hover:bg-white/5"
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <Music className="mr-2 h-4 w-4" /> Conocer al Artista
@@ -328,13 +174,13 @@ function Hero({ artist }) {
       <button
         onClick={() => document.getElementById('latest')?.scrollIntoView({ behavior: 'smooth' })}
         aria-label="Ir a la música"
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-1.5 text-text-muted transition hover:text-gold"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-1.5 text-text-muted/70 transition hover:text-gold"
       >
         <span className="text-[10px] uppercase tracking-[0.3em]">Explorar</span>
         <svg
           className="animate-bounce"
-          width="20" height="20" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" strokeWidth="2"
+          width="16" height="16" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" strokeWidth="1.75"
           strokeLinecap="round" strokeLinejoin="round"
         >
           <path d="M19 9l-7 7-7-7" />
@@ -1105,19 +951,17 @@ function Newsletter() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-accent via-accent to-[#c62b38] py-18 sm:py-24">
-      {/* Textura */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:repeating-linear-gradient(45deg,#fff_0,#fff_1px,transparent_1px,transparent_8px)]" />
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#1a0a12] via-accent/90 to-[#150810] py-18 sm:py-24">
       {/* Luces de fondo */}
-      <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
-      <div className="absolute -bottom-24 -right-12 h-80 w-80 rounded-full bg-black/20 blur-3xl" />
+      <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
+      <div className="absolute -bottom-24 -right-12 h-80 w-80 rounded-full bg-black/25 blur-3xl" />
 
       <div className="relative mx-auto max-w-2xl px-4 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/70">Newsletter</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold/90">Newsletter</p>
         <h2 className="mt-3 font-display text-4xl text-white sm:text-5xl">
           Sé el Primero en Saberlo
         </h2>
-        <p className="mt-4 text-base text-white/75 leading-relaxed">
+        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/70">
           Lanzamientos exclusivos, fechas antes que nadie y contenido que no existe en redes sociales.
         </p>
 
@@ -1127,18 +971,18 @@ function Newsletter() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="tu@email.com"
-            className="flex-1 border-white/20 bg-white/10 text-white placeholder:text-white/50 focus:border-white/60"
+            className="flex-1 border-white/15 bg-white/[0.07] text-white placeholder:text-white/40 focus:border-gold/50"
             required
           />
           <Button
             type="submit"
             disabled={loading}
-            className="whitespace-nowrap bg-white text-accent font-bold hover:bg-white/92 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+            className="whitespace-nowrap bg-gold text-primary font-bold hover:bg-gold/90 shadow-[0_4px_20px_rgba(0,0,0,0.25)]"
           >
             {loading ? 'Enviando…' : 'Suscribirme'}
           </Button>
         </form>
-        <p className="mt-4 text-xs text-white/50">Sin spam. Te puedes dar de baja cuando quieras.</p>
+        <p className="mt-4 text-xs text-white/40">Sin spam. Te puedes dar de baja cuando quieras.</p>
       </div>
     </section>
   );
@@ -1152,7 +996,6 @@ export default function Home() {
 
   return (
     <main>
-      <QuickNav artist={artist} />
       <Hero artist={artist} />
       <Marquee artist={artist} />
       <LatestRelease />

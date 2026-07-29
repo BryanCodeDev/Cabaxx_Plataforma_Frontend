@@ -1,5 +1,5 @@
 import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
+import { Badge } from '@/components/common';
 import { formatCurrency } from '@/utils/format';
 
 export default function ProductCard({ product, onClick }) {

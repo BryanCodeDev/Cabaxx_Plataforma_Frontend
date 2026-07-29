@@ -1,12 +1,10 @@
+import { SectionHeading, Tabs, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { productService, categoryService, couponService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
-import SectionHeading from '@/components/common/SectionHeading';
-import Tabs from '@/components/common/Tabs';
-import Badge from '@/components/common/Badge';
 
 const STATUS_VARIANT = { active: 'success', inactive: 'default', expired: 'error', published: 'success', draft: 'warning' };
 

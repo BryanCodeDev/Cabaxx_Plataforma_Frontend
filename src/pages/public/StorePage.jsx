@@ -1,9 +1,8 @@
+import { EmptyState, SectionHeading } from '@/components/common'
 import { ARTIST_SLUG } from '@/constants';
 import { useFetch } from '@/hooks/useFetch';
 import ProductCard from '@/components/ui/ProductCard';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
-import SectionHeading from '@/components/common/SectionHeading';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import SEOHead from '@/components/seo/SEOHead';
 

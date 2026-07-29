@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { songService } from '@/services/modules';
 import { ARTIST_SLUG, ROUTES } from '@/constants';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
+import { EmptyState } from '@/components/common';
 import Button from '@/components/common/Button';
 import LikeButton from '@/components/common/LikeButton';
 import CommentSection from '@/components/common/CommentSection';

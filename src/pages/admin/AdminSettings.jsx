@@ -4,7 +4,7 @@ import { Plus, Trash2 } from 'lucide-react';
 import api from '@/services/api';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
-import SectionHeading from '@/components/common/SectionHeading';
+import { SectionHeading } from '@/components/common';
 import { useAuth } from '@/context/AuthContext';
 import { ARTIST_SLUG } from '@/constants';
 

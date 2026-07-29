@@ -1,3 +1,4 @@
+import { EmptyState, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
@@ -5,9 +6,7 @@ import { albumService } from '@/services/modules';
 import { ARTIST_SLUG, ROUTES } from '@/constants';
 import { formatDate, formatDuration } from '@/utils/format';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
 import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
 import SEOHead from '@/components/seo/SEOHead';
 
 export default function AlbumDetailPage() {

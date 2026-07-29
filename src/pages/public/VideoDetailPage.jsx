@@ -5,7 +5,7 @@ import { videoService } from '@/services/modules';
 import { ARTIST_SLUG, ROUTES } from '@/constants';
 import { formatDate, formatNumber } from '@/utils/format';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
+import { EmptyState } from '@/components/common';
 import Card from '@/components/common/Card';
 import LikeButton from '@/components/common/LikeButton';
 import CommentSection from '@/components/common/CommentSection';

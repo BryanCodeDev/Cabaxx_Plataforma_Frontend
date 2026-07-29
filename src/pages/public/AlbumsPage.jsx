@@ -1,3 +1,4 @@
+import { EmptyState, SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { albumService } from '@/services/modules';
@@ -5,10 +6,7 @@ import { ARTIST_SLUG, PAGINATION, ROUTES } from '@/constants';
 import { artistPhotos } from '@/assets';
 import { formatDate } from '@/utils/format';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
-import SectionHeading from '@/components/common/SectionHeading';
 import Card from '@/components/common/Card';
-import Badge from '@/components/common/Badge';
 import Pagination from '@/components/common/Pagination';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import SEOHead from '@/components/seo/SEOHead';

@@ -1,3 +1,4 @@
+import { SectionHeading, Badge, EmptyState } from '@/components/common'
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -6,12 +7,9 @@ import { artistService } from '@/services/modules';
 import { ROUTES } from '@/constants';
 import { artistPhotos } from '@/assets';
 
-import SectionHeading from '@/components/common/SectionHeading';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
-import Badge from '@/components/common/Badge';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
 import Table from '@/components/common/Table';
 
 const FOCUS =

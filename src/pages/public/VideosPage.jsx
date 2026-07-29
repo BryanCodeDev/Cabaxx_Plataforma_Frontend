@@ -1,3 +1,4 @@
+import { EmptyState, SectionHeading } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { videoService } from '@/services/modules';
@@ -5,8 +6,6 @@ import { ARTIST_SLUG, PAGINATION, ROUTES } from '@/constants';
 import { artistPhotos } from '@/assets';
 import { formatDate, formatNumber } from '@/utils/format';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
-import SectionHeading from '@/components/common/SectionHeading';
 import Card from '@/components/common/Card';
 import Pagination from '@/components/common/Pagination';
 import { useScrollReveal } from '@/hooks/useScrollReveal';

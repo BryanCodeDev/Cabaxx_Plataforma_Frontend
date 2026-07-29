@@ -3,7 +3,7 @@ import { useAuth } from '@/hooks/useAuth';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import SectionHeading from '@/components/common/SectionHeading';
+import { SectionHeading } from '@/components/common';
 import { toast } from 'react-hot-toast';
 import SEOHead from '@/components/seo/SEOHead';
 

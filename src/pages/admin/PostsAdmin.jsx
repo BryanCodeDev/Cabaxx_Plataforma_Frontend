@@ -1,11 +1,10 @@
+import { SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { postService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
-import SectionHeading from '@/components/common/SectionHeading';
-import Badge from '@/components/common/Badge';
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'Noticia' },

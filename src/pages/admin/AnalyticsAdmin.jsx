@@ -5,7 +5,7 @@ import {
   orderAdminApi, galleryAdminApi, postService,   videoService,
 } from '@/services/modules';
 import Card from '@/components/common/Card';
-import SectionHeading from '@/components/common/SectionHeading';
+import { SectionHeading } from '@/components/common';
 
 function Bars({ data }) {
   const max = Math.max(1, ...data.map((d) => d.value));

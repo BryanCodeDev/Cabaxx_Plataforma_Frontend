@@ -1,3 +1,4 @@
+import { SectionHeading, EmptyState } from '@/components/common'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
@@ -7,8 +8,6 @@ import { paymentService } from '@/services/modules';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Card from '@/components/common/Card';
-import SectionHeading from '@/components/common/SectionHeading';
-import EmptyState from '@/components/common/EmptyState';
 import { ROUTES } from '@/constants';
 import { Check } from 'lucide-react';
 import { formatCurrency } from '@/utils/format';

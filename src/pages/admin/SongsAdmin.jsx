@@ -1,11 +1,10 @@
+import { SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { ARTIST_SLUG } from '@/constants';
 import { songService } from '@/services/songService';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
-import SectionHeading from '@/components/common/SectionHeading';
-import Badge from '@/components/common/Badge';
 
 const STATUS_OPTIONS = [
   { value: 'draft', label: 'Borrador' },

@@ -1,9 +1,8 @@
+import { SectionHeading, EmptyState } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { ARTIST_SLUG } from '@/constants';
 import Spinner from '@/components/common/Spinner';
 import Pagination from '@/components/common/Pagination';
-import SectionHeading from '@/components/common/SectionHeading';
-import EmptyState from '@/components/common/EmptyState';
 import { PAGINATION } from '@/constants';
 
 export default function ListingPage({

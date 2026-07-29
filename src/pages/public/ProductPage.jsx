@@ -6,7 +6,7 @@ import { ROUTES } from '@/constants';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
+import { EmptyState } from '@/components/common';
 import Card from '@/components/common/Card';
 import { formatCurrency } from '@/utils/format';
 import SEOHead from '@/components/seo/SEOHead';

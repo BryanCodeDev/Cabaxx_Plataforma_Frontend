@@ -1,12 +1,11 @@
+import { Textarea, EmptyState } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { communityService } from '@/services/modules';
 import { ARTIST_SLUG } from '@/constants';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import Textarea from '@/components/common/Textarea';
 import Spinner from '@/components/common/Spinner';
-import EmptyState from '@/components/common/EmptyState';
 import { toast } from 'react-hot-toast';
 
 export default function CommentSection({ referenceType, referenceId, title = 'Comentarios' }) {

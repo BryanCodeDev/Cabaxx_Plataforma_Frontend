@@ -1,10 +1,9 @@
+import { SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { galleryAdminApi } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
-import SectionHeading from '@/components/common/SectionHeading';
-import Badge from '@/components/common/Badge';
 
 const CATEGORY_OPTIONS = [
   { value: 'general', label: 'General' },

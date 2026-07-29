@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
-import SectionHeading from '@/components/common/SectionHeading';
+import { SectionHeading } from '@/components/common';
 import SEOHead from '@/components/seo/SEOHead';
 import { Music, Newspaper, Handshake } from 'lucide-react';
 

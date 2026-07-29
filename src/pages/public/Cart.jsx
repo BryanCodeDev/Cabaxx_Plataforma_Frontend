@@ -1,3 +1,4 @@
+import { SectionHeading, EmptyState } from '@/components/common'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
@@ -5,8 +6,6 @@ import { useAuth } from '@/hooks/useAuth';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
-import SectionHeading from '@/components/common/SectionHeading';
-import EmptyState from '@/components/common/EmptyState';
 import { ROUTES } from '@/constants';
 import { formatCurrency } from '@/utils/format';
 import { toast } from 'react-hot-toast';
