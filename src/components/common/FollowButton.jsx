@@ -1,56 +1,35 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { communityService } from '@/services/modules';
-import Button from '@/components/common/Button';
-import { toast } from 'react-hot-toast';
+import { classNames } from '@/utils/classNames';
 
-export default function FollowButton({ artistId, className = '' }) {
-  const { user } = useAuth();
-  const [following, setFollowing] = useState(false);
-  const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (!artistId) return;
-    communityService.countFollows(artistId).then((res) => {
-      setCount(res.data?.data?.total ?? 0);
-    });
-  }, [artistId]);
-
-  useEffect(() => {
-    if (!user || !artistId) return;
-    communityService.checkFollow().then((res) => {
-      const data = res.data?.data || res.data;
-      setFollowing(!!data.following);
-    }).catch(() => {});
-  }, [user, artistId]);
-
-  const toggle = async () => {
-    if (!user) {
-      toast.error('Inicia sesión para seguir');
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await communityService.toggleFollow();
-      const data = res.data?.data || res.data;
-      setFollowing(data.following);
-      setCount(data.count ?? count);
-    } catch (err) {
-      toast.error('No se pudo actualizar el seguimiento');
-    } finally {
-      setLoading(false);
-    }
-  };
+/**
+ * Estado vacío reutilizable.
+ * @param {string}  title
+ * @param {string}  description
+ * @param {node}    action    — botón u otro CTA
+ * @param {node}    icon      — ícono de Lucide o SVG
+ * @param {'sm'|'md'|'lg'} size
+ * @param {string}  className
+ */
+export default function EmptyState({ title, description, action, icon, size = 'md', className = '' }) {
+  const paddings = { sm: 'py-10 px-4', md: 'py-16 px-6', lg: 'py-24 px-8' };
 
   return (
-    <Button
-      variant={following ? 'secondary' : 'primary'}
-      onClick={toggle}
-      loading={loading}
-      className={className}
+    <div
+      className={classNames(
+        'flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/60 bg-surface/30 text-center',
+        paddings[size],
+        className
+      )}
     >
-      {following ? 'Siguiendo' : 'Seguir'}
-    </Button>
+      {icon && (
+        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-2 text-text-muted">
+          {icon}
+        </div>
+      )}
+      <p className="font-display text-xl text-text-primary">{title}</p>
+      {description && (
+        <p className="mt-2 max-w-sm text-sm leading-relaxed text-text-muted">{description}</p>
+      )}
+      {action && <div className="mt-6">{action}</div>}
+    </div>
   );
 }
