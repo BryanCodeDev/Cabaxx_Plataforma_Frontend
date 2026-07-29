@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useArtist } from '@/hooks/useArtist';
-import { ROUTES } from '@/constants';
+import { ROUTES, FOCUS_SURFACE } from '@/constants';
 import { classNames } from '@/utils/classNames';
 import Button from '@/components/common/Button';
 import { Avatar } from '@/components/common';
@@ -30,7 +30,7 @@ const SUPERADMIN_ONLY_LINKS = [
   { to: ROUTES.ADMIN_SETTINGS, label: 'Configuración', icon: Settings },
 ];
 
-const FOCUS = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface';
+
 
 export default function DashboardLayout({ children, breadcrumb = '' }) {
   const { user, logout, isSuperadmin, isArtistAdmin } = useAuth();
@@ -63,7 +63,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
                 'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
                 iconOnly ? 'justify-center' : '',
                 isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
-                FOCUS
+                FOCUS_SURFACE
               )
             }
           >
@@ -86,7 +86,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
                     iconOnly ? 'justify-center' : '',
                     isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
-                    FOCUS
+                    FOCUS_SURFACE
                   )
                 }
               >
@@ -103,7 +103,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
                 'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
                 iconOnly ? 'justify-center' : '',
                 isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
-                FOCUS
+                FOCUS_SURFACE
               )
             }
           >
@@ -121,7 +121,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
               'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
               iconOnly ? 'justify-center' : '',
               isActive ? 'bg-accent/10 text-accent' : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
-              FOCUS
+              FOCUS_SURFACE
             )
           }
         >
@@ -148,7 +148,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
           </Link>
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className={`text-text-muted transition hover:text-text-primary ${FOCUS} rounded`}
+            className={`text-text-muted transition hover:text-text-primary ${FOCUS_SURFACE} rounded`}
             aria-label="Colapsar menú"
           >
             {collapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
@@ -165,7 +165,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
               <Link to={ROUTES.HOME} className="font-display text-xl tracking-wide text-accent hover:text-accent/80 transition">{siteName}</Link>
               <button
                 onClick={() => setMobileOpen(false)}
-                className={`text-text-muted transition hover:text-text-primary ${FOCUS} rounded`}
+                className={`text-text-muted transition hover:text-text-primary ${FOCUS_SURFACE} rounded`}
                 aria-label="Cerrar menú"
               >
                 <X className="h-5 w-5" />
@@ -181,12 +181,12 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileOpen(true)}
-              className={`text-xl text-text-primary md:hidden ${FOCUS} rounded`}
+              className={`text-xl text-text-primary md:hidden ${FOCUS_SURFACE} rounded`}
                aria-label="Abrir menú"
               >
                 <Menu className="h-5 w-5" />
             </button>
-            <NavLink to={ROUTES.HOME} className={classNames('hidden items-center gap-1 text-text-muted hover:text-accent transition sm:flex', FOCUS)}>
+            <NavLink to={ROUTES.HOME} className={classNames('hidden items-center gap-1 text-text-muted hover:text-accent transition sm:flex', FOCUS_SURFACE)}>
               <ExternalLink className="h-4 w-4" />
               <span className="text-xs">Volver al sitio</span>
             </NavLink>

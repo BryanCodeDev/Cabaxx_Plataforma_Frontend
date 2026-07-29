@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { artistService } from '@/services/artistService';
+import { artistService } from '@/services/modules';
 import { detectArtistSlug } from '@/utils/tenant';
 
 const ArtistContext = createContext(null);

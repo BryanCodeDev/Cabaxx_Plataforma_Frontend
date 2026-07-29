@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, startTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authService } from '@/services/authService';
+import { authService } from '@/services/modules';
 import { STORAGE_KEYS, ROLES, ROUTES } from '@/constants';
 
 const AuthContext = createContext(null);

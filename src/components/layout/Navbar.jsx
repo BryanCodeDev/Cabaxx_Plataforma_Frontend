@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useArtist } from '@/hooks/useArtist';
-import { ROUTES } from '@/constants';
+import { ROUTES, FOCUS } from '@/constants';
 import Button from '@/components/common/Button';
 import { Avatar } from '@/components/common';
 import Dropdown from '@/components/common/Dropdown';
@@ -39,9 +39,6 @@ const MORE_GROUPS = [
   },
 ];
 const MORE_LINKS = MORE_GROUPS.flatMap((g) => g.links);
-
-const FOCUS = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
-
 const linkClass = ({ isActive }) =>
   `relative text-sm font-medium transition-colors ${FOCUS} rounded-sm ${
     isActive ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'

@@ -6,9 +6,6 @@ import Modal from '@/components/common/Modal';
 import { SectionHeading } from '@/components/common';
 import { formatCurrency, formatDate } from '@/utils/format';
 import SEOHead from '@/components/seo/SEOHead';
-
-const FOCUS = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
-
 const MOCK_ORDERS = [
   { id: 'CAB-1001', date: '2026-06-20', total: 85000, status: 'Entregado', items: [{ name: 'Camiseta Oficial', qty: 1, price: 85000 }] },
   { id: 'CAB-1023', date: '2026-07-01', total: 150000, status: 'Enviado', items: [{ name: 'Vinilo Firmado', qty: 1, price: 150000 }] },

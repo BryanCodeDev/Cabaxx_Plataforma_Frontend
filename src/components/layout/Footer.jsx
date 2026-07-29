@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useArtist } from '@/hooks/useArtist';
-import { ROUTES } from '@/constants';
+import { ROUTES, FOCUS_SURFACE } from '@/constants';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 
@@ -48,7 +48,7 @@ const PLATFORM_LABELS = {
   facebook:  'Facebook',
 };
 
-const FOCUS = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface';
+
 
 export default function Footer() {
   const { artist } = useArtist();
@@ -85,7 +85,7 @@ export default function Footer() {
 
           {/* Columna marca + newsletter */}
           <div className="md:col-span-2">
-            <Link to={ROUTES.HOME} className={`inline-block rounded-sm ${FOCUS}`}>
+            <Link to={ROUTES.HOME} className={`inline-block rounded-sm ${FOCUS_SURFACE}`}>
               <span className="font-display text-2xl tracking-widest text-accent transition hover:text-accent/80">
                 {name.toUpperCase()}
               </span>
@@ -130,7 +130,7 @@ export default function Footer() {
                   <li key={l.to}>
                     <Link
                       to={l.to}
-                      className={`rounded text-sm text-text-muted transition-colors hover:text-accent ${FOCUS}`}
+                      className={`rounded text-sm text-text-muted transition-colors hover:text-accent ${FOCUS_SURFACE}`}
                     >
                       {l.label}
                     </Link>
@@ -150,7 +150,7 @@ export default function Footer() {
                 href={s.url}
                 target="_blank"
                 rel="noreferrer"
-                className={`rounded-full border border-border/60 px-4 py-1.5 text-xs font-medium text-text-secondary transition hover:border-accent/60 hover:text-accent ${FOCUS}`}
+                className={`rounded-full border border-border/60 px-4 py-1.5 text-xs font-medium text-text-secondary transition hover:border-accent/60 hover:text-accent ${FOCUS_SURFACE}`}
               >
                 {PLATFORM_LABELS[s.platform] || s.platform}
               </a>
@@ -169,7 +169,7 @@ export default function Footer() {
               href="https://mastercode.com.co"
               target="_blank"
               rel="noreferrer"
-              className={`text-text-muted/70 transition hover:text-accent ${FOCUS}`}
+              className={`text-text-muted/70 transition hover:text-accent ${FOCUS_SURFACE}`}
             >
               MasterCode Company
             </a>

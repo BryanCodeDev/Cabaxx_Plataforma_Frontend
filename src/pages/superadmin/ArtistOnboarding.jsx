@@ -2,16 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
-import { ROUTES } from '@/constants';
+import { ROUTES, FOCUS } from '@/constants';
 
 import { SectionHeading } from '@/components/common';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-
-const FOCUS =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
-
 const STEPS = ['Info básica', 'Multimedia', 'Redes', 'Tema'];
 
 const PROGRESS_FILLED = (step) => `${((step - 1) / (STEPS.length - 1)) * 100}%`;

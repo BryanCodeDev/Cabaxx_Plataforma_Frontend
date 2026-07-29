@@ -8,14 +8,11 @@ import { paymentService } from '@/services/modules';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Card from '@/components/common/Card';
-import { ROUTES } from '@/constants';
+import { ROUTES, FOCUS } from '@/constants';
 import { Check } from 'lucide-react';
 import { formatCurrency } from '@/utils/format';
 import { toast } from 'react-hot-toast';
 import SEOHead from '@/components/seo/SEOHead';
-
-const FOCUS = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
-
 const STEPS = [
   { label: 'Envío', step: 1 },
   { label: 'Resumen', step: 2 },

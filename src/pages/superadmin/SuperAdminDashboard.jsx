@@ -4,17 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 import { artistService } from '@/services/modules';
-import { ROUTES } from '@/constants';
+import { ROUTES, FOCUS } from '@/constants';
 import { artistPhotos } from '@/assets';
 
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
 import Table from '@/components/common/Table';
-
-const FOCUS =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
-
 const KpiCard = ({ label, value }) => (
   <Card padding="md">
     <p className="text-sm text-text-secondary">{label}</p>

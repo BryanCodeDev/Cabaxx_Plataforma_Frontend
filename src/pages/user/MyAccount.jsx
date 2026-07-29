@@ -6,9 +6,6 @@ import Input from '@/components/common/Input';
 import { SectionHeading } from '@/components/common';
 import { toast } from 'react-hot-toast';
 import SEOHead from '@/components/seo/SEOHead';
-
-const FOCUS = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
-
 export default function MyAccount() {
   const { user, updateUser } = useAuth();
   const [name, setName] = useState(user?.name || '');

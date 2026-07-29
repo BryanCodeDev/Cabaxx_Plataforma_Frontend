@@ -1,3 +1,4 @@
+export { FOCUS, FOCUS_SURFACE } from './ui';
 export const API_URL = import.meta.env.VITE_API_URL || '';export const APP_NAME = 'Cabaxx';
 export const ARTIST_SLUG = 'cabaxx'; // primer artista del sistema
 
