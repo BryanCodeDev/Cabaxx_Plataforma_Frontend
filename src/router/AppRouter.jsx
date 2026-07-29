@@ -95,14 +95,12 @@ function Page({ children }) {
   );
 }
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: withProviders(<Page><Outlet /></Page>),
-    future: {
-      v7_startTransition: true,
-    },
-    children: [
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: withProviders(<Page><Outlet /></Page>),
+      children: [
       { index: true, element: withSuspense(HomePage) },
       { path: 'canciones', element: withSuspense(SongsPage) },
       { path: 'canciones/:slug', element: withSuspense(SongPage) },
@@ -176,6 +174,10 @@ export const router = createBrowserRouter([
     ],
   },
   { path: '*', element: withProviders(<Page><NotFoundPage /></Page>) },
-]);
+], {
+  future: {
+    v7_startTransition: true,
+  },
+});
 
 export default router;
