@@ -1,51 +1,25 @@
 import { classNames } from '@/utils/classNames';
 
 const VARIANTS = {
-  default:  'bg-surface-2 text-text-secondary border border-border/60',
-  accent:   'bg-accent/12 text-accent border border-accent/20',
-  success:  'bg-success/12 text-success border border-success/20',
-  warning:  'bg-warning/12 text-warning border border-warning/20',
-  error:    'bg-error/12 text-error border border-error/20',
-  gold:     'bg-gold/12 text-gold border border-gold/20',
-  outline:  'bg-transparent border border-border text-text-secondary',
+  default: 'bg-surface-2 text-text-secondary',
+  accent: 'bg-accent/15 text-accent',
+  success: 'bg-success/15 text-success',
+  warning: 'bg-warning/15 text-warning',
+  error: 'bg-error/15 text-error',
+  gold: 'bg-gold/15 text-gold',
 };
 
-const SIZES = {
-  xs: 'text-[10px] px-1.5 py-0.5',
-  sm: 'text-xs px-2 py-0.5',
-  md: 'text-sm px-2.5 py-1',
-};
+const SIZES = { sm: 'text-xs px-2 py-0.5', md: 'text-sm px-2.5 py-1' };
 
 /**
  * Badge / etiqueta.
- * @param {'default'|'accent'|'success'|'warning'|'error'|'gold'|'outline'} variant
- * @param {'xs'|'sm'|'md'} size
- * @param {boolean} dot  — muestra punto de estado a la izquierda
+ * @param {string} variant - 'default'|'accent'|'success'|'warning'|'error'|'gold'
+ * @param {string} size - 'sm'|'md'
+ * @param {node} children
  */
-export default function Badge({ variant = 'default', size = 'sm', dot = false, children, className = '' }) {
+export default function Badge({ variant = 'default', size = 'md', children }) {
   return (
-    <span
-      className={classNames(
-        'inline-flex items-center gap-1.5 rounded-full font-semibold tracking-wide',
-        VARIANTS[variant],
-        SIZES[size],
-        className
-      )}
-    >
-      {dot && (
-        <span
-          className={classNames(
-            'h-1.5 w-1.5 rounded-full',
-            variant === 'accent'  && 'bg-accent',
-            variant === 'success' && 'bg-success',
-            variant === 'warning' && 'bg-warning',
-            variant === 'error'   && 'bg-error',
-            variant === 'gold'    && 'bg-gold',
-            variant === 'default' && 'bg-text-muted',
-            variant === 'outline' && 'bg-text-muted',
-          )}
-        />
-      )}
+    <span className={classNames('inline-flex items-center rounded-full font-medium', VARIANTS[variant], SIZES[size])}>
       {children}
     </span>
   );
