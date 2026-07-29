@@ -1,6 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 import { HelmetProvider } from 'react-helmet-async';
-import AppRouter from '@/router';
+import AppRouter from '@/router/AppRouter';
 
 export default function App() {
   return (
