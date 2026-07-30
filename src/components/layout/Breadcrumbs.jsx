@@ -16,8 +16,6 @@ const ROUTE_LABELS = [
   { pattern: /^\/videos\/[^/]+$/, parent: ROUTES.VIDEOS, parentLabel: 'Videos', dynamic: !0 },
   { pattern: /^\/videos$/, to: ROUTES.VIDEOS, label: 'Videos' },
   { pattern: /^\/contacto$/, to: ROUTES.CONTACT, label: 'Contacto' },
-  { pattern: /^\/superadmin\/onboarding$/, parent: ROUTES.SUPERADMIN, parentLabel: 'Panel de Artistas', dynamic: !0 },
-  { pattern: /^\/superadmin$/, to: ROUTES.SUPERADMIN, label: 'Panel de Artistas' },
   { pattern: /^\/blog\/[^/]+$/, parent: ROUTES.BLOG, parentLabel: 'Blog', dynamic: true },
   { pattern: /^\/blog$/, to: ROUTES.BLOG, label: 'Blog' },
   { pattern: /^\/tienda\/[^/]+$/, parent: ROUTES.STORE, parentLabel: 'Tienda', dynamic: true },

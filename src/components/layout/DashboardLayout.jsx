@@ -38,7 +38,7 @@ const linkStyle = (isActive, iconOnly, collapsed) =>
   );
 
 export default function DashboardLayout({ children, breadcrumb = '' }) {
-  const { user, logout, isArtistAdmin, isSuperadmin } = useAuth();
+  const { user, logout, isArtistAdmin } = useAuth();
   const { artist } = useArtist();
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
@@ -151,7 +151,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             </NavLink>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent">
-                {isSuperadmin() ? 'Panel de Control' : 'Panel'}
+                Panel
               </p>
               <h1 className="text-sm font-semibold text-white">
                 {activeLabel || breadcrumb}
@@ -159,12 +159,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            {isSuperadmin() && (
-              <span className="hidden rounded-full bg-accent/15 px-2.5 py-0.5 text-xs font-semibold text-accent sm:inline">
-                Superadmin
-              </span>
-            )}
-            {isArtistAdmin() && !isSuperadmin() && (
+            {isArtistAdmin() && (
               <span className="hidden rounded-full bg-accent/15 px-2.5 py-0.5 text-xs font-semibold text-accent sm:inline">
                 Artista
               </span>

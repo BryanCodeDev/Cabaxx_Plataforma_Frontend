@@ -71,7 +71,7 @@ function PulseMark({ className = '' }) {
 }
 
 export default function Navbar() {
-  const { user, isAuthenticated, logout, isSuperadmin, isArtistAdmin } = useAuth();
+  const { user, isAuthenticated, logout, isArtistAdmin } = useAuth();
   const { artist } = useArtist();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -111,9 +111,7 @@ export default function Navbar() {
   const artistName = artist?.name || 'Cabaxx';
 
   const dropdownItems = [
-    ...(isSuperadmin()
-      ? [{ label: 'Panel de Control', icon: LayoutDashboard, onClick: () => navigate(ROUTES.SUPERADMIN) }]
-      : isArtistAdmin()
+    ...(isArtistAdmin()
       ? [{ label: 'Mi Panel', icon: LayoutDashboard, onClick: () => navigate(ROUTES.ADMIN) }]
       : []),
     { label: 'Mi cuenta', icon: User, onClick: () => navigate(ROUTES.ACCOUNT) },
@@ -321,9 +319,9 @@ export default function Navbar() {
                 Carrito
               </Link>
 
-              {isAuthenticated && (isSuperadmin() || isArtistAdmin()) && (
+              {isAuthenticated && isArtistAdmin() && (
                 <NavLink
-                  to={isSuperadmin() ? ROUTES.SUPERADMIN : ROUTES.ADMIN}
+                  to={ROUTES.ADMIN}
                   className={({ isActive }) =>
                     `flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition ${FOCUS} ${
                       isActive ? 'bg-accent/10 text-accent' : 'text-white/70 hover:bg-white/5 hover:text-white'
@@ -331,7 +329,7 @@ export default function Navbar() {
                   }
                 >
                   <LayoutDashboard className="h-4 w-4 shrink-0" />
-                  {isSuperadmin() ? 'Panel de Control' : 'Mi Panel'}
+                  Mi Panel
                 </NavLink>
               )}
 
