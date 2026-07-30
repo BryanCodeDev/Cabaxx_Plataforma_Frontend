@@ -8,7 +8,7 @@ import Input from '@/components/common/Input';
 
 const LINK_GROUPS = [
   {
-    title: 'Música',
+    title: 'Sonido',
     links: [
       { label: 'Canciones', to: ROUTES.SONGS },
       { label: 'Álbumes',   to: ROUTES.ALBUMS },
@@ -17,7 +17,7 @@ const LINK_GROUPS = [
     ],
   },
   {
-    title: 'Agenda',
+    title: 'En vivo',
     links: [
       { label: 'Eventos', to: ROUTES.EVENTS },
     ],
@@ -54,8 +54,8 @@ function PulseMark() {
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="w-[3px] rounded-full bg-accent"
-          style={{ height: '12px', animation: `pulseBarFooter 1.1s ease-in-out ${i * 0.15}s infinite` }}
+          className="w-[3px] rounded-full bg-accent shadow-[0_0_6px_rgba(229,9,20,0.8)]"
+          style={{ height: '13px', animation: `pulseBarFooter 1.1s ease-in-out ${i * 0.15}s infinite` }}
         />
       ))}
       <style>{`
@@ -83,7 +83,7 @@ export default function Footer() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-      toast.success('¡Suscrito! Serás el primero en enterarte.');
+      toast.success('Listo. Serás de los primeros en enterarte.');
       setEmail('');
     } catch {
       toast.error('No se pudo suscribir. Intenta de nuevo.');
@@ -97,32 +97,42 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-black">
       {/* Resplandor decorativo rojo, sutil */}
-      <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-accent/[0.06] blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-accent/[0.04] blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-accent/[0.07] blur-[100px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-accent/[0.05] blur-[100px]" aria-hidden="true" />
       {/* Línea de firma superior */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-8 sm:py-20">
+      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-8 sm:py-24">
+
+        {/* ── Titular editorial ── */}
+        <div className="animate-in fade-in slide-in-from-bottom-2 duration-700">
+          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-accent">Directo al oyente</p>
+          <h2 className="mt-4 max-w-2xl font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl">
+            Nada de intermediarios.
+            <br />
+            Solo el sonido.
+          </h2>
+        </div>
 
         {/* ── Grid principal ── */}
-        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-6 md:gap-12">
+        <div className="mt-16 grid gap-10 sm:grid-cols-2 md:grid-cols-6 md:gap-12">
 
           {/* Columna marca + newsletter */}
-          <div className="animate-in fade-in slide-in-from-bottom-2 duration-700 md:col-span-2">
+          <div className="md:col-span-2">
             <Link to={ROUTES.HOME} className={`inline-flex items-center gap-2.5 rounded-sm ${FOCUS_SURFACE}`}>
               <PulseMark />
-              <span className="font-display text-2xl uppercase tracking-[0.06em] text-white transition-transform duration-300 hover:scale-[1.02] inline-block">
+              <span className="font-display text-2xl font-black uppercase tracking-[0.02em] text-white transition-transform duration-300 hover:scale-[1.02] inline-block">
                 {name}
               </span>
             </Link>
 
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/45">
-              Música directa, sin intermediarios. Todo lo que rodea a {name} en un solo lugar.
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/40">
+              Todo lo que rodea a {name} — música, fechas y noticias — en un solo lugar, sin filtros.
             </p>
 
             {/* Newsletter inline */}
-            <p className="mt-8 text-[11px] font-bold uppercase tracking-[0.25em] text-white/70">
-              Newsletter
+            <p className="mt-9 text-[11px] font-bold uppercase tracking-[0.28em] text-white/70">
+              Lista de acceso
             </p>
             <p className="mt-1 text-xs text-white/40">
               Lanzamientos y fechas antes que nadie.
@@ -143,9 +153,9 @@ export default function Footer() {
                 type="submit"
                 size="sm"
                 disabled={loading}
-                className="shrink-0 bg-accent font-bold text-white transition-transform hover:bg-accent/90 active:scale-95"
+                className="shrink-0"
               >
-                {loading ? '…' : 'Ir'}
+                {loading ? '···' : 'Entrar'}
               </Button>
             </form>
           </div>
@@ -157,7 +167,7 @@ export default function Footer() {
               className="animate-in fade-in slide-in-from-bottom-2 duration-700"
               style={{ animationDelay: `${gi * 75}ms`, animationFillMode: 'backwards' }}
             >
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.25em] text-white/70">
+              <h4 className="text-[11px] font-bold uppercase tracking-[0.28em] text-white/50">
                 {group.title}
               </h4>
               <ul className="mt-4 space-y-2.5">
@@ -165,7 +175,7 @@ export default function Footer() {
                   <li key={l.to}>
                     <Link
                       to={l.to}
-                      className={`group inline-flex items-center gap-1 rounded text-sm text-white/45 transition-colors hover:text-accent ${FOCUS_SURFACE}`}
+                      className={`group inline-flex items-center gap-1 rounded text-[15px] text-white/55 transition-colors hover:text-white ${FOCUS_SURFACE}`}
                     >
                       <span className="relative">
                         {l.label}
@@ -181,14 +191,14 @@ export default function Footer() {
 
         {/* ── Redes sociales ── */}
         {artist?.social_links?.length > 0 && (
-          <div className="mt-14 flex flex-wrap gap-3">
+          <div className="mt-16 flex flex-wrap gap-3">
             {artist.social_links.map((s) => (
               <a
                 key={s.platform}
                 href={s.url}
                 target="_blank"
                 rel="noreferrer"
-                className={`rounded-full border border-white/15 px-5 py-2 text-xs font-semibold uppercase tracking-wide text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:text-accent hover:shadow-[0_4px_20px_rgba(229,9,20,0.2)] ${FOCUS_SURFACE}`}
+                className={`rounded-full border border-white/15 px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:text-white hover:shadow-[0_8px_24px_rgba(229,9,20,0.25)] ${FOCUS_SURFACE}`}
               >
                 {PLATFORM_LABELS[s.platform] || s.platform}
               </a>
@@ -197,7 +207,7 @@ export default function Footer() {
         )}
 
         {/* ── Copyright ── */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row">
           <p className="text-xs text-white/35">
             © {new Date().getFullYear()} {name}. Todos los derechos reservados.
           </p>

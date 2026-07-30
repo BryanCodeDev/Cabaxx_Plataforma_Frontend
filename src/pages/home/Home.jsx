@@ -42,7 +42,7 @@ const CAREER_MILESTONES = [
   { year: '2025', label: 'Lanzamiento oficial con ecosistema digital propio' },
 ];
 
-const particles = Array.from({ length: 16 }, (_, i) => ({
+const particles = Array.from({ length: 18 }, (_, i) => ({
   id: i,
   left: Math.random() * 100,
   delay: Math.random() * 7,
@@ -59,7 +59,7 @@ function PulseBars({ count = 5, className = '' }) {
       {Array.from({ length: count }).map((_, i) => (
         <span
           key={i}
-          className="w-[3px] rounded-full bg-accent"
+          className="w-[3px] rounded-full bg-accent shadow-[0_0_6px_rgba(229,9,20,0.8)]"
           style={{ height: '14px', animation: `homePulse 1.2s ease-in-out ${i * 0.12}s infinite` }}
         />
       ))}
@@ -104,10 +104,12 @@ function Hero({ artist }) {
     if (v) { v.currentTime = 0; v.play(); }
   };
 
+  const displayName = artist?.stage_name || artist?.name || 'Cabaxx';
+
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] scroll-mt-16 items-center justify-center overflow-hidden bg-black"
+      className="relative flex min-h-[100svh] scroll-mt-16 items-end overflow-hidden bg-black sm:items-center"
     >
       {/* Fondo: banner o video cinematográfico */}
       <div
@@ -117,14 +119,14 @@ function Hero({ artist }) {
             ? `url(${artist.banner_url})`
             : 'radial-gradient(ellipse at 30% 20%, #1a0505, #050505 70%)',
           transform: `translateY(${scrollY * 0.3}px) scale(1.08)`,
-          filter: 'grayscale(0.35) contrast(1.1)',
+          filter: 'grayscale(0.4) contrast(1.15)',
         }}
       />
       {!artist?.banner_url && (
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover will-change-transform"
-          style={{ transform: `translateY(${scrollY * 0.3}px) scale(1.08)`, filter: 'grayscale(0.35) contrast(1.1)' }}
+          style={{ transform: `translateY(${scrollY * 0.3}px) scale(1.08)`, filter: 'grayscale(0.4) contrast(1.15)' }}
           autoPlay muted loop playsInline
           poster={heroPoster}
           onEnded={handleVideoEnded}
@@ -134,9 +136,9 @@ function Hero({ artist }) {
       )}
 
       {/* Overlays: negro profundo + iluminación roja */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black" />
-      <div className="absolute inset-0 bg-gradient-to-t from-accent/25 via-transparent to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-accent/30 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:repeating-linear-gradient(0deg,#fff_0,#fff_1px,transparent_1px,transparent_4px)]" />
 
       {/* Partículas */}
@@ -156,64 +158,72 @@ function Hero({ artist }) {
         ))}
       </div>
 
-      {/* Contenido central */}
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 px-4 text-center"
-      >
-        {/* Badge superior */}
-        <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-accent/30 bg-accent/[0.06] px-5 py-2 backdrop-blur-sm">
+      {/* Contenido — composición asimétrica, alineada a la izquierda */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-24 pt-40 sm:px-8 sm:pb-32 sm:pt-32">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-7 flex items-center gap-3"
+        >
           <PulseBars count={3} />
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/80 sm:text-xs">
-            {artist?.genre || 'Bogotá · Colombia'}
+          <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/70 sm:text-xs">
+            {artist?.genre || 'Mosquera · Cundinamarca'}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Titular potente */}
-        <h1 className="font-display leading-[0.88] tracking-tight text-white drop-shadow-[0_8px_40px_rgba(0,0,0,0.6)]"
-            style={{ fontSize: 'clamp(2.75rem,11vw,6.5rem)' }}>
-          NO ES SOLO MÚSICA.
+        <motion.h1
+          initial={{ opacity: 0, y: 36 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl font-display font-black leading-[0.86] tracking-tight text-white drop-shadow-[0_12px_50px_rgba(0,0,0,0.7)]"
+          style={{ fontSize: 'clamp(3rem,10.5vw,7.5rem)' }}
+        >
+          LA CALLE NO SE
           <br />
-          <span className="text-accent">ES UNA IDENTIDAD.</span>
-        </h1>
+          <span className="text-accent">TRADUCE.</span> SE VIVE.
+        </motion.h1>
 
-        {/* Separador */}
-        <div className="mx-auto mt-7 h-px w-20 bg-gradient-to-r from-transparent via-accent to-transparent" />
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 max-w-lg text-base font-light leading-relaxed text-white/60 sm:text-lg"
+        >
+          {artist?.tagline || `${displayName} graba lo que la mayoría calla. Sin traducir, sin filtro — solo flow colombiano llevado al lugar de donde nunca debió salir.`}
+        </motion.p>
 
-        {/* Tagline emocional */}
-        <p className="mx-auto mt-7 max-w-lg text-base font-light leading-relaxed text-white/60 sm:text-lg">
-          {artist?.tagline || `${artist?.stage_name || artist?.name || 'Cabaxx'} no busca encajar. Cada canción es un territorio propio — calle, verdad y flow colombiano sin traducir.`}
-        </p>
-
-        {/* CTAs */}
-        <div className="mx-auto mt-11 flex max-w-xs flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-11 flex max-w-xs flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
+        >
           <Button
             size="lg"
-            className="w-full sm:w-auto bg-accent font-bold uppercase tracking-wide text-white shadow-[0_10px_40px_rgba(229,9,20,0.4)] transition-all hover:shadow-[0_10px_50px_rgba(229,9,20,0.55)] hover:-translate-y-0.5"
+            className="w-full sm:w-auto"
             onClick={() => document.getElementById('latest')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <Play className="mr-2 h-5 w-5" /> Escuchar Ahora
+            <Play className="mr-1 h-4 w-4" /> Escuchar ahora
           </Button>
           <Button
-            variant="ghost"
+            variant="outline"
             size="lg"
-            className="w-full sm:w-auto border border-white/20 font-semibold uppercase tracking-wide text-white hover:border-accent/60 hover:bg-white/5"
+            className="w-full sm:w-auto"
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Explorar Universo <ArrowRight className="ml-2 h-4 w-4" />
+            Conocer la historia <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <button
         onClick={() => document.getElementById('latest')?.scrollIntoView({ behavior: 'smooth' })}
         aria-label="Ir a la música"
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/50 transition hover:text-accent"
+        className="absolute bottom-8 right-6 z-10 hidden flex-col items-center gap-1.5 text-white/50 transition hover:text-accent sm:flex sm:right-8"
       >
-        <span className="text-[10px] uppercase tracking-[0.3em]">Explorar</span>
+        <span className="text-[10px] uppercase tracking-[0.3em]">Bajar</span>
         <svg
           className="animate-bounce"
           width="16" height="16" viewBox="0 0 24 24"
@@ -246,7 +256,7 @@ function Marquee({ artist }) {
     '·',
     artist?.genre?.toUpperCase() || 'REGGAETÓN · TRAP · DRILL · FLOW COLOMBIANO',
     '·',
-    'BOGOTÁ',
+    'SIN TRADUCIR',
     '·',
   ];
   const track = [...words, ...words, ...words, ...words];
@@ -257,7 +267,7 @@ function Marquee({ artist }) {
         {[...track, ...track].map((w, i) => (
           <span
             key={i}
-            className={`flex items-center gap-10 font-display text-sm uppercase tracking-[0.3em] ${
+            className={`flex items-center gap-10 font-display text-sm font-bold uppercase tracking-[0.3em] ${
               w === '·' ? 'text-accent' : 'text-white/30'
             }`}
           >
@@ -301,7 +311,7 @@ function LatestRelease() {
 
   return (
     <section id="latest" ref={ref} className="mx-auto max-w-7xl scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
-      <SectionHeading eyebrow="Recién salido" title="Último Lanzamiento" />
+      <SectionHeading eyebrow="Recién salido del estudio" title="Lo Nuevo" />
 
       <div
         className={`mt-10 transition-all duration-700 ${
@@ -326,7 +336,7 @@ function LatestRelease() {
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-accent">
                 Sencillo · {latest.album_title || 'Nuevo Sencillo'}
               </p>
-              <h3 className="mt-3 font-display text-4xl uppercase text-white sm:text-5xl md:text-6xl">
+              <h3 className="mt-3 font-display text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl md:text-6xl">
                 {latest.title}
               </h3>
               <p className="mt-2 text-sm text-white/40">{latest.release_date || '2025'}</p>
@@ -339,7 +349,7 @@ function LatestRelease() {
                     href={p.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-medium text-white/60 transition hover:border-accent/50 hover:text-white sm:text-sm"
+                    className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-semibold text-white/60 transition hover:border-accent/50 hover:text-white sm:text-sm"
                   >
                     {p.label}
                     <ChevronRight className="h-3 w-3 opacity-60" />
@@ -425,29 +435,29 @@ function About() {
 
           {/* Texto */}
           <div className="flex-1 text-center md:text-left">
-            <SectionHeading eyebrow="Biografía" title="El Artista" />
+            <SectionHeading eyebrow="Origen" title="La Historia" />
 
             {artist?.bio ? (
               <p className="mt-6 leading-loose text-white/55">{artist.bio}</p>
             ) : (
               <div className="mt-6 space-y-4 leading-loose text-white/55">
                 <p>
-                  Cabaxx es un artista urbano nacido en Mosquera, Cundinamarca. Su música fusiona
-                  reggaetón, trap, drill y la identidad sonora colombiana en un estilo directo, sin
-                  filtros y profundamente conectado con quienes lo escuchan.
+                  Cabaxx nació en Mosquera, Cundinamarca, y construyó su sonido lejos de cualquier
+                  fórmula. Reggaetón, trap, drill y la calle colombiana conviven en cada tema, sin
+                  poses y sin traducir nada para nadie.
                 </p>
                 <p>
-                  Desde sus primeras grabaciones hasta hoy, cada canción cuenta algo real. No hay
-                  poses, no hay intermediarios — solo sonido honesto que va directo al oyente.
+                  Desde la primera grabación hasta hoy, la regla no ha cambiado: si no es real,
+                  no se graba. Eso es lo único que separa a un artista de un catálogo de canciones.
                 </p>
               </div>
             )}
 
             {/* Cita */}
-            <blockquote className="mt-7 border-l-2 border-accent pl-5 text-left font-display text-xl uppercase leading-snug text-white sm:text-2xl">
-              "No hago música para llenar un espacio.
+            <blockquote className="mt-7 border-l-2 border-accent pl-5 text-left font-display text-xl font-bold uppercase leading-snug text-white sm:text-2xl">
+              "No grabo para llenar un espacio.
               <br />
-              La hago para que se quede."
+              Grabo para que se quede."
             </blockquote>
 
             {/* Stats */}
@@ -625,7 +635,7 @@ function UpcomingEvents() {
   if (!events.length) {
     return (
       <section id="events" className="mx-auto max-w-7xl scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
-        <SectionHeading eyebrow="Agenda" title="Próximos Eventos" />
+        <SectionHeading eyebrow="Agenda" title="Próximos Shows" />
         <div className="mt-8 rounded-2xl border border-white/10 bg-[#0a0a0a] p-10 text-center">
           <p className="text-white/40">Próximamente fechas en tu ciudad. Activa las notificaciones.</p>
         </div>
@@ -638,7 +648,7 @@ function UpcomingEvents() {
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Agenda"
-          title="Próximos Eventos"
+          title="Próximos Shows"
           action={
             <Link to="/eventos">
               <Button variant="ghost" size="sm" className="text-white/60 hover:text-accent">
@@ -689,7 +699,7 @@ function UpcomingEvents() {
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="font-display text-2xl uppercase text-white transition-colors group-hover:text-accent">
+                  <h3 className="font-display text-2xl font-bold uppercase text-white transition-colors group-hover:text-accent">
                     {ev.title}
                   </h3>
                   <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-white/45">
@@ -709,15 +719,12 @@ function UpcomingEvents() {
                   <span className="mb-3 block text-right text-xs font-semibold uppercase tracking-wide text-white/40">
                     {ev.is_free ? 'Gratis' : 'Con entrada'}
                   </span>
-                  <Button
-                    size="sm"
-                    className="bg-accent font-bold uppercase tracking-wide text-white group-hover:bg-accent/90"
-                  >
+                  <Button size="sm">
                     <Ticket className="mr-1.5 h-4 w-4" /> Entradas
                   </Button>
                 </div>
-                <Button size="sm" className="w-full bg-accent font-bold uppercase tracking-wide text-white sm:hidden">
-                  <Ticket className="mr-1.5 h-4 w-4" /> Conseguir Entradas
+                <Button size="sm" className="w-full sm:hidden">
+                  <Ticket className="mr-1.5 h-4 w-4" /> Conseguir entradas
                 </Button>
               </Link>
             ))}
@@ -743,7 +750,7 @@ function GalleryPreview() {
   return (
     <section id="gallery" ref={ref} className="mx-auto max-w-7xl scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
       <SectionHeading
-        eyebrow="Momentos"
+        eyebrow="Detrás de cámaras"
         title="Galería"
         action={
           <Link to="/galeria">
@@ -754,7 +761,7 @@ function GalleryPreview() {
         }
       />
       <p className="mt-3 max-w-lg text-sm text-white/40">
-        Shows en vivo, estudio y detrás de cámaras.
+        Shows en vivo, estudio y lo que pasa cuando las cámaras siguen grabando.
       </p>
 
       {GALLERY_IMAGES.length > 0 ? (
@@ -943,7 +950,7 @@ function News() {
                   <span className="text-xs font-bold uppercase tracking-wide text-accent">
                     {post.category?.name || 'Noticia'}
                   </span>
-                  <h3 className="mt-2 font-display text-2xl leading-snug text-white">
+                  <h3 className="mt-2 font-display text-2xl font-bold leading-snug text-white">
                     {post.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/45 line-clamp-2">
@@ -971,8 +978,8 @@ function Social() {
     <section className="border-y border-white/10 bg-[#0a0a0a]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-8 sm:py-20">
         <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-accent">Conecta</p>
-        <h2 className="mt-2 text-center font-display text-3xl uppercase text-white sm:text-4xl">
-          Sígueme
+        <h2 className="mt-2 text-center font-display text-3xl font-black uppercase text-white sm:text-4xl">
+          Sígueme de cerca
         </h2>
         <p className="mx-auto mt-2 max-w-sm text-center text-sm text-white/40">
           Contenido exclusivo, adelantos y lo que no publicamos en ningún otro lado.
@@ -1031,7 +1038,7 @@ function Newsletter() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-      toast.success('¡Suscrito! Serás el primero en enterarte.');
+      toast.success('Listo. Serás el primero en enterarte.');
       setEmail('');
     } catch {
       toast.error('No se pudo suscribir. Intenta más tarde.');
@@ -1041,15 +1048,17 @@ function Newsletter() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-black py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-black py-24 sm:py-32">
       <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
       <div className="absolute -bottom-24 -right-12 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:repeating-linear-gradient(0deg,#fff_0,#fff_1px,transparent_1px,transparent_4px)]" />
 
       <div className="relative mx-auto max-w-2xl px-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">Newsletter</p>
-        <h2 className="mt-3 font-display text-4xl uppercase text-white sm:text-5xl">
-          Sé el Primero en Saberlo
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">Lista de acceso</p>
+        <h2 className="mt-3 font-display text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl">
+          Sé el primero
+          <br />
+          en enterarte
         </h2>
         <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/50">
           Lanzamientos exclusivos, fechas antes que nadie y contenido que no existe en redes sociales.
@@ -1064,11 +1073,7 @@ function Newsletter() {
             className="flex-1 border-white/15 bg-white/[0.04] text-white placeholder:text-white/30 focus:border-accent/60"
             required
           />
-          <Button
-            type="submit"
-            disabled={loading}
-            className="whitespace-nowrap bg-accent font-bold uppercase tracking-wide text-white shadow-[0_4px_24px_rgba(229,9,20,0.35)] hover:bg-accent/90"
-          >
+          <Button type="submit" disabled={loading} className="whitespace-nowrap">
             {loading ? 'Enviando…' : 'Suscribirme'}
           </Button>
         </form>
