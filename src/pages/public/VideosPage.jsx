@@ -2,7 +2,7 @@ import { EmptyState, SectionHeading } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { videoService } from '@/services/modules';
-import { ARTIST_SLUG, PAGINATION, ROUTES } from '@/constants';
+import { PAGINATION, ROUTES } from '@/constants';
 import { artistPhotos } from '@/assets';
 import { formatDate, formatNumber } from '@/utils/format';
 import Spinner from '@/components/common/Spinner';
@@ -26,7 +26,7 @@ export default function VideosPage() {
     let isMounted = true;
     setLoading(true);
     videoService
-      .getVideos(ARTIST_SLUG, { page, limit: PAGINATION.DEFAULT_LIMIT })
+      .getVideos({ page, limit: PAGINATION.DEFAULT_LIMIT })
       .then((res) => {
         if (!isMounted) return;
         const d = res.data?.data?.videos || res.data?.videos || {};

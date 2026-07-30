@@ -9,7 +9,7 @@ import Card from '@/components/common/Card';
 import AuthLayout from '@/components/auth/AuthLayout';
 
 export default function LoginPage() {
-  const { login, isSuperadmin, isArtistAdmin } = useAuth();
+  const { login, isArtistAdmin } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,7 @@ export default function LoginPage() {
       await login(form);
       toast.success('¡Bienvenido!');
       let target = ROUTES.HOME;
-      if (isSuperadmin() || isArtistAdmin()) {
+      if (isArtistAdmin()) {
         target = ROUTES.ADMIN;
       }
       startTransition(() => {

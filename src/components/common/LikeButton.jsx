@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { communityService } from '@/services/modules';
-import Button from '@/components/common/Button';
 import { toast } from 'react-hot-toast';
 import { Heart } from 'lucide-react';
 
@@ -51,10 +50,14 @@ export default function LikeButton({ referenceType, referenceId, initialCount = 
       type="button"
       onClick={toggle}
       disabled={loading}
-      className={`inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 transition hover:border-accent ${liked ? 'bg-accent/15 text-accent' : 'text-text-secondary'} ${className}`}
+      className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 transition-all duration-200 active:scale-95 disabled:opacity-50 ${
+        liked
+          ? 'border-accent/50 bg-accent/10 text-accent'
+          : 'border-border text-text-secondary hover:border-accent/40 hover:text-text-primary'
+      } ${className}`}
     >
-      <Heart className={`h-5 w-5 ${liked ? 'fill-accent text-accent' : 'text-text-secondary'}`} />
-      <span className="font-mono text-sm">{count}</span>
+      <Heart className={`h-4 w-4 transition-transform ${liked ? 'scale-110 fill-accent text-accent' : 'text-text-secondary'}`} />
+      <span className="font-mono text-sm">{count.toLocaleString('es-CO')}</span>
     </button>
   );
 }

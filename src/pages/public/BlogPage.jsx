@@ -15,7 +15,7 @@ export default function BlogPage() {
       <ListingPage
       title="Blog"
       eyebrow="Historias"
-      service={(slug, params) => postService.getPosts(slug, { ...params, type: 'blog' })}
+       service={(params) => postService.getPosts({ ...params, type: 'blog' })}
       renderItem={(p) => (
         <Link
           key={p.id}

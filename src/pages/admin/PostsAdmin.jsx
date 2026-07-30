@@ -1,7 +1,6 @@
 import { SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { ARTIST_SLUG } from '@/constants';
 import { postService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
@@ -21,7 +20,7 @@ export default function PostsAdmin() {
   const load = () => {
     setLoading(true);
     postService
-      .getPosts(ARTIST_SLUG, { params: { limit: 100 } })
+      .getPosts({ params: { limit: 100 } })
       .then((res) => setData(res.data))
       .catch(() => toast.error('Error al cargar publicaciones'))
       .finally(() => setLoading(false));

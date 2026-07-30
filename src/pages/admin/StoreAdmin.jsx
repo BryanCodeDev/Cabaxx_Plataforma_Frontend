@@ -1,7 +1,6 @@
 import { SectionHeading, Tabs, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { ARTIST_SLUG } from '@/constants';
 import { productService, categoryService, couponService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
@@ -19,8 +18,8 @@ export default function StoreAdmin() {
   const [loadingCoupons, setLoadingCoupons] = useState(true);
 
   useEffect(() => {
-    categoryService.list(ARTIST_SLUG).then((rows) => setCategories(rows)).catch(() => {});
-    productService.getProducts(ARTIST_SLUG, { params: { limit: 100 } })
+    categoryService.list().then((rows) => setCategories(rows)).catch(() => {});
+    productService.getProducts({ params: { limit: 100 } })
       .then((res) => setProducts(res.data)).catch(() => toast.error('Error al cargar productos'))
       .finally(() => setLoadingProducts(false));
     couponService.list({ params: { limit: 100 } })
@@ -29,9 +28,9 @@ export default function StoreAdmin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const reloadProducts = () => productService.getProducts(ARTIST_SLUG, { params: { limit: 100 } }).then((res) => setProducts(res.data));
+  const reloadProducts = () => productService.getProducts({ params: { limit: 100 } }).then((res) => setProducts(res.data));
   const reloadCoupons = () => couponService.list({ params: { limit: 100 } }).then((rows) => setCoupons(rows));
-  const reloadCategories = () => categoryService.list(ARTIST_SLUG).then((rows) => setCategories(rows));
+  const reloadCategories = () => categoryService.list().then((rows) => setCategories(rows));
 
   const categoryOptions = categories.map((c) => ({ value: String(c.id), label: c.name }));
 

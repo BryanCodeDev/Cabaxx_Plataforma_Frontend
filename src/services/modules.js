@@ -1,4 +1,5 @@
 import api from './api';
+import { ARTIST_SLUG } from '@/constants';
 
 // Convierte un objeto de valores en FormData manejando archivos.
 // Solo se adjunta como archivo si el valor es un File; las cadenas (URLs
@@ -46,23 +47,20 @@ export const authService = {
 };
 
 export const artistService = {
-  getArtists(params) {
-    return api.get('/artists', { params });
+  getArtist() {
+    return api.get(`/artists/${ARTIST_SLUG}`);
   },
-  getArtistBySlug(slug) {
-    return api.get(`/artists/${slug}`);
-  },
-  getArtistStats(id) {
-    return api.get(`/artists/${id}/stats`);
+  getArtistStats() {
+    return api.get(`/artists/${ARTIST_SLUG}/stats`);
   },
 };
 
 export const songService = {
-  getSongs(artistSlug, params) {
-    return api.get(`/artists/${artistSlug}/songs`, { params });
+  getSongs(params) {
+    return api.get(`/artists/${ARTIST_SLUG}/songs`, { params });
   },
-  getSongBySlug(artistSlug, slug) {
-    return api.get(`/artists/${artistSlug}/songs/${slug}`);
+  getSongBySlug(slug) {
+    return api.get(`/artists/${ARTIST_SLUG}/songs/${slug}`);
   },
   registerPlay(songId, data) {
     return api.post(`/songs/${songId}/play`, data);
@@ -79,11 +77,11 @@ export const songService = {
 };
 
 export const eventService = {
-  getEvents(artistSlug, params) {
-    return api.get(`/artists/${artistSlug}/events`, { params });
+  getEvents(params) {
+    return api.get(`/artists/${ARTIST_SLUG}/events`, { params });
   },
-  getEventBySlug(artistSlug, slug) {
-    return api.get(`/artists/${artistSlug}/events/${slug}`);
+  getEventBySlug(slug) {
+    return api.get(`/artists/${ARTIST_SLUG}/events/${slug}`);
   },
   purchaseTicket(ticketId, quantity = 1) {
     return api.post(`/tickets/${ticketId}/purchase`, { quantity });
@@ -100,11 +98,11 @@ export const eventService = {
 };
 
 export const postService = {
-  getPosts(artistSlug, params) {
-    return api.get(`/artists/${artistSlug}/posts`, { params });
+  getPosts(params) {
+    return api.get(`/artists/${ARTIST_SLUG}/posts`, { params });
   },
-  getPostBySlug(artistSlug, slug) {
-    return api.get(`/artists/${artistSlug}/posts/${slug}`);
+  getPostBySlug(slug) {
+    return api.get(`/artists/${ARTIST_SLUG}/posts/${slug}`);
   },
   create(values) {
     return api.post(`/artists/cabaxx/posts`, values).then(wrap('post'));
@@ -118,14 +116,14 @@ export const postService = {
 };
 
 export const productService = {
-  getProducts(artistSlug, params) {
-    return api.get(`/artists/${artistSlug}/products`, { params });
+  getProducts(params) {
+    return api.get(`/artists/${ARTIST_SLUG}/products`, { params });
   },
-  getProductBySlug(artistSlug, slug) {
-    return api.get(`/artists/${artistSlug}/products/${slug}`);
+  getProductBySlug(slug) {
+    return api.get(`/artists/${ARTIST_SLUG}/products/${slug}`);
   },
-  getCategories(artistSlug) {
-    return api.get(`/artists/${artistSlug}/product-categories`);
+  getCategories() {
+    return api.get(`/artists/${ARTIST_SLUG}/product-categories`);
   },
   create(values) {
     return api.post(`/artists/cabaxx/products`, toFormData(values, ['cover'])).then(wrap('product'));
@@ -139,8 +137,8 @@ export const productService = {
 };
 
 export const categoryService = {
-  list(artistSlug) {
-    return api.get(`/artists/${artistSlug}/product-categories`).then((res) => res.data.data?.categories || []);
+  list() {
+    return api.get(`/artists/${ARTIST_SLUG}/product-categories`).then((res) => res.data.data?.categories || []);
   },
   create(values) {
     return api.post(`/artists/cabaxx/product-categories`, values).then(wrap('category'));
@@ -214,11 +212,11 @@ export const newsletterCampaignsApi = {
 };
 
 export const albumService = {
-  getAlbums(artistSlug, params) {
-    return api.get(`/artists/${artistSlug}/albums`, { params });
+  getAlbums(params) {
+    return api.get(`/artists/${ARTIST_SLUG}/albums`, { params });
   },
-  getAlbumBySlug(artistSlug, slug) {
-    return api.get(`/artists/${artistSlug}/albums/${slug}`);
+  getAlbumBySlug(slug) {
+    return api.get(`/artists/${ARTIST_SLUG}/albums/${slug}`);
   },
   create(values) {
     return api.post(`/artists/cabaxx/albums`, values).then(wrap('album'));
@@ -232,11 +230,11 @@ export const albumService = {
 };
 
 export const videoService = {
-  getVideos(artistSlug, params) {
-    return api.get(`/artists/${artistSlug}/videos`, { params });
+  getVideos(params) {
+    return api.get(`/artists/${ARTIST_SLUG}/videos`, { params });
   },
-  getVideoBySlug(artistSlug, slug) {
-    return api.get(`/artists/${artistSlug}/videos/${slug}`);
+  getVideoBySlug(slug) {
+    return api.get(`/artists/${ARTIST_SLUG}/videos/${slug}`);
   },
   create(values) {
     return api.post(`/artists/cabaxx/videos`, values).then(wrap('video'));

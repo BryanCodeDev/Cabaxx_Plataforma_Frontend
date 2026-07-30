@@ -4,7 +4,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { communityService } from '@/services/modules';
 import { ARTIST_SLUG } from '@/constants';
 import Button from '@/components/common/Button';
-import Input from '@/components/common/Input';
 import Spinner from '@/components/common/Spinner';
 import { toast } from 'react-hot-toast';
 
@@ -76,7 +75,9 @@ export default function CommentSection({ referenceType, referenceId, title = 'Co
 
   return (
     <div className="mt-10">
-      <h3 className="font-display text-2xl text-text-primary">{title} ({total})</h3>
+      <h3 className="font-display text-2xl uppercase text-text-primary">
+        {title} <span className="text-accent">({total})</span>
+      </h3>
 
       {user ? (
         <form onSubmit={submit} className="mt-4 grid gap-3">
@@ -102,9 +103,9 @@ export default function CommentSection({ referenceType, referenceId, title = 'Co
           <EmptyState title="Sin comentarios" description="Sé el primero en comentar." />
         )}
         {comments.map((c) => (
-          <div key={c.id} className="rounded-xl border border-border bg-surface p-4">
+          <div key={c.id} className="rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-accent/20">
             <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/20 font-display text-sm text-accent">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 font-display text-sm text-accent">
                 {(c.user_name || 'U')[0]?.toUpperCase()}
               </div>
               <div>
@@ -112,7 +113,7 @@ export default function CommentSection({ referenceType, referenceId, title = 'Co
                 <p className="text-xs text-text-muted">{new Date(c.created_at).toLocaleString('es-CO')}</p>
               </div>
             </div>
-            <p className="mt-2 text-sm text-text-secondary">{c.content}</p>
+            <p className="mt-2 text-sm leading-relaxed text-text-secondary">{c.content}</p>
           </div>
         ))}
       </div>

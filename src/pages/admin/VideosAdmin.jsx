@@ -1,7 +1,6 @@
 import { SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { ARTIST_SLUG } from '@/constants';
 import { videoService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
@@ -15,7 +14,7 @@ export default function VideosAdmin() {
   const load = () => {
     setLoading(true);
     videoService
-      .getVideos(ARTIST_SLUG, { params: { limit: 100 } })
+      .getVideos({ params: { limit: 100 } })
       .then((res) => setData(res.data))
       .catch(() => toast.error('Error al cargar videos'))
       .finally(() => setLoading(false));

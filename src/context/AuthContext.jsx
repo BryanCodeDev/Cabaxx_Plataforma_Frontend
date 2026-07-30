@@ -79,9 +79,9 @@ export function AuthProvider({ children }) {
   const updateUser = (data) => setUser((prev) => ({ ...prev, ...data }));
 
   const hasRole = (role) => user?.roles?.some((r) => r.role === role);
-  const isSuperadmin = () => hasRole(ROLES.SUPERADMIN);
   const isArtistAdmin = () => hasRole(ROLES.ARTIST_ADMIN);
-  const isStaff = () => isSuperadmin() || isArtistAdmin();
+  const isSuperadmin = () => hasRole(ROLES.SUPERADMIN);
+  const isStaff = () => isArtistAdmin() || isSuperadmin();
 
   const value = {
     user,
@@ -92,8 +92,8 @@ export function AuthProvider({ children }) {
     logout,
     updateUser,
     hasRole,
-    isSuperadmin,
     isArtistAdmin,
+    isSuperadmin,
     isStaff,
   };
 

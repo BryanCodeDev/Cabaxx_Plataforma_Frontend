@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useFetch } from '@/hooks/useFetch';
 import { useCart } from '@/context/CartContext';
-import { ROUTES } from '@/constants';
+import { ARTIST_SLUG, ROUTES } from '@/constants';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
@@ -13,7 +13,7 @@ import SEOHead from '@/components/seo/SEOHead';
 
 export default function ProductPage() {
   const { slug } = useParams();
-  const { data, loading } = useFetch('/artists/' + (slug || 'cabaxx') + '/products', {
+  const { data, loading } = useFetch(`/artists/${ARTIST_SLUG}/products`, {
     params: { slug },
   });
   const { addItem } = useCart();

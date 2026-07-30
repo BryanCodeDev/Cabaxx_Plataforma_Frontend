@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import { videoService } from '@/services/modules';
-import { ARTIST_SLUG, ROUTES } from '@/constants';
+import { ROUTES } from '@/constants';
 import { formatDate, formatNumber } from '@/utils/format';
 import Spinner from '@/components/common/Spinner';
 import { EmptyState } from '@/components/common';
@@ -19,7 +19,7 @@ export default function VideoDetailPage() {
     let isMounted = true;
     setLoading(true);
     videoService
-      .getVideoBySlug(ARTIST_SLUG, slug)
+      .getVideoBySlug(slug)
       .then((res) => {
         if (!isMounted) return;
         setVideo(res.data?.data?.video || res.data?.video || null);

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import { eventService } from '@/services/modules';
-import { ARTIST_SLUG, ROUTES } from '@/constants';
+import { ROUTES } from '@/constants';
 import Spinner from '@/components/common/Spinner';
 import { EmptyState } from '@/components/common';
 import Button from '@/components/common/Button';
@@ -20,7 +20,7 @@ export default function EventPage() {
 
   useEffect(() => {
     eventService
-      .getEventBySlug(ARTIST_SLUG, slug)
+      .getEventBySlug(slug)
       .then((res) => setEvent(res.data.data.event))
       .catch(() => toast.error('Evento no encontrado'))
       .finally(() => setLoading(false));

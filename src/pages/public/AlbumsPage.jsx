@@ -2,7 +2,7 @@ import { EmptyState, SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { albumService } from '@/services/modules';
-import { ARTIST_SLUG, PAGINATION, ROUTES } from '@/constants';
+import { PAGINATION, ROUTES } from '@/constants';
 import { artistPhotos } from '@/assets';
 import { formatDate } from '@/utils/format';
 import Spinner from '@/components/common/Spinner';
@@ -25,7 +25,7 @@ export default function AlbumsPage() {
     let isMounted = true;
     setLoading(true);
     albumService
-      .getAlbums(ARTIST_SLUG, { page, limit: PAGINATION.DEFAULT_LIMIT })
+      .getAlbums({ page, limit: PAGINATION.DEFAULT_LIMIT })
       .then((res) => {
         if (!isMounted) return;
         const d = res.data?.data?.albums || res.data?.albums || {};

@@ -5,32 +5,23 @@ import api from '@/services/api';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
 import { SectionHeading } from '@/components/common';
-import { useAuth } from '@/context/AuthContext';
-import { ARTIST_SLUG } from '@/constants';
 
 export default function AdminSettings() {
-  const { isSuperadmin } = useAuth();
   const [settings, setSettings] = useState({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  const isSuperAdmin = isSuperadmin();
-
   useEffect(() => {
-    api.get('/settings', {
-      headers: isSuperAdmin ? { 'x-artist-slug': ARTIST_SLUG } : {}
-    })
+    api.get('/settings')
       .then((res) => setSettings(res.data?.data?.settings || {}))
       .catch(() => toast.error('Error al cargar configuración'))
       .finally(() => setLoading(false));
-  }, [isSuperAdmin]);
+  }, []);
 
   const save = async () => {
     try {
       setSaving(true);
-      await api.put('/settings', settings, {
-        headers: isSuperAdmin ? { 'x-artist-slug': ARTIST_SLUG } : {}
-      });
+      await api.put('/settings', settings);
       toast.success('Configuración guardada');
     } catch {
       toast.error('No se pudo guardar');

@@ -1,7 +1,6 @@
 import { SectionHeading, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { ARTIST_SLUG } from '@/constants';
 import { orderAdminApi } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';

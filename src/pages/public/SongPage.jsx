@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { songService } from '@/services/modules';
-import { ARTIST_SLUG, ROUTES } from '@/constants';
+import { ROUTES } from '@/constants';
 import Spinner from '@/components/common/Spinner';
 import { EmptyState } from '@/components/common';
 import Button from '@/components/common/Button';
@@ -21,7 +21,7 @@ export default function SongPage() {
 
   useEffect(() => {
     songService
-      .getSongBySlug(ARTIST_SLUG, slug)
+      .getSongBySlug(slug)
       .then((res) => setSong(res.data.data.song))
       .catch(() => toast.error('Canción no encontrada'))
       .finally(() => setLoading(false));

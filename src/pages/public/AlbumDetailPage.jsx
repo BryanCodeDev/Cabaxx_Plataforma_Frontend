@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import { albumService } from '@/services/modules';
-import { ARTIST_SLUG, ROUTES } from '@/constants';
+import { ROUTES } from '@/constants';
 import { formatDate, formatDuration } from '@/utils/format';
 import Spinner from '@/components/common/Spinner';
 import Card from '@/components/common/Card';
@@ -18,7 +18,7 @@ export default function AlbumDetailPage() {
     let isMounted = true;
     setLoading(true);
     albumService
-      .getAlbumBySlug(ARTIST_SLUG, slug)
+      .getAlbumBySlug(slug)
       .then((res) => { if (isMounted) setAlbum(res.data.data.album || res.data.album); })
       .catch(() => toast.error('Álbum no encontrado'))
       .finally(() => { if (isMounted) setLoading(false); });

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ARTIST_SLUG } from '@/constants';
 import {
   songService, albumService, eventService, productService,
   orderAdminApi, galleryAdminApi, postService,   videoService,
@@ -29,14 +28,14 @@ export default function AnalyticsAdmin() {
 
   useEffect(() => {
     Promise.allSettled([
-      songService.getSongs(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
-      albumService.getAlbums(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
-      eventService.getEvents(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
-      productService.getProducts(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      songService.getSongs({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      albumService.getAlbums({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      eventService.getEvents({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      productService.getProducts({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
       orderAdminApi.list({ params: { limit: 100 } }).then((rows) => rows || []).catch(() => []),
       galleryAdminApi.list({ params: { limit: 1 } }).then((rows) => (rows || []).length).catch(() => 0),
-      postService.getPosts(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
-      videoService.getVideos(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      postService.getPosts({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      videoService.getVideos({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
     ]).then(([songs, albums, events, products, ordersRes, gallery, posts, videos]) => {
       const orders = ordersRes.value || [];
       const byStatus = {};

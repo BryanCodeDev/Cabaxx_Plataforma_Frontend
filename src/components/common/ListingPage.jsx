@@ -41,14 +41,14 @@ export default function ListingPage({
 
   if (loading && !items.length) {
     return (
-      <div className="flex min-h-[50vh] items-center justify-center">
+      <div className="flex min-h-[50vh] items-center justify-center bg-primary">
         <Spinner size="lg" color="accent" />
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="mx-auto max-w-7xl bg-primary px-4 py-14 sm:px-8 sm:py-16">
       <SectionHeading eyebrow={eyebrow} title={title} />
 
       {items.length === 0 ? (
@@ -58,12 +58,12 @@ export default function ListingPage({
           description={`No encontramos ${title.toLowerCase()} por ahora. Vuelve pronto.`}
         />
       ) : (
-        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {items.map((it) => renderItem(it))}
         </div>
       )}
 
-      <div className="mt-8">
+      <div className="mt-10">
         <Pagination currentPage={page} totalPages={totalPages} total={total} onPageChange={setPage} />
       </div>
     </div>

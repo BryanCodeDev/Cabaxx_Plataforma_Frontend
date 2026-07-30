@@ -3,6 +3,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { communityService } from '@/services/modules';
 import Button from '@/components/common/Button';
 import { toast } from 'react-hot-toast';
+import { Check, Plus } from 'lucide-react';
 
 export default function FollowButton({ artistId, className = '' }) {
   const { user } = useAuth();
@@ -48,9 +49,11 @@ export default function FollowButton({ artistId, className = '' }) {
       variant={following ? 'secondary' : 'primary'}
       onClick={toggle}
       loading={loading}
-      className={className}
+      icon={following ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+      className={`uppercase tracking-wide ${className}`}
     >
       {following ? 'Siguiendo' : 'Seguir'}
+      {count > 0 && <span className="ml-1 font-mono text-xs opacity-60">· {count.toLocaleString('es-CO')}</span>}
     </Button>
   );
 }

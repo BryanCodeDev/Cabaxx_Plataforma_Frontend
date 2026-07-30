@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { artistService } from '@/services/modules';
-import { detectArtistSlug } from '@/utils/tenant';
 
 const ArtistContext = createContext(null);
 export { ArtistContext };
@@ -10,11 +9,11 @@ export function ArtistProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const loadArtist = useCallback(async (slug) => {
+  const loadArtist = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const { data } = await artistService.getArtistBySlug(slug);
+      const { data } = await artistService.getArtist();
       setArtist(data.data.artist);
     } catch (err) {
       setError(err.response?.data?.message || 'Artista no encontrado');
@@ -25,8 +24,7 @@ export function ArtistProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const slug = detectArtistSlug();
-    loadArtist(slug);
+    loadArtist();
   }, [loadArtist]);
 
   return (

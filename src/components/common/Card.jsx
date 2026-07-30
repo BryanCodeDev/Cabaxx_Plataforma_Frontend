@@ -14,9 +14,9 @@ export default function Card({ children, className, hover = false, padding = 'md
   return (
     <div
       className={classNames(
-        'rounded-2xl border border-border bg-surface',
+        'rounded-2xl border border-border bg-surface transition-all duration-300',
         glass && 'glass',
-        hover && 'card-hover cursor-pointer',
+        hover && 'card-hover cursor-pointer hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_12px_32px_rgba(229,9,20,0.15)]',
         PADDINGS[padding],
         className
       )}

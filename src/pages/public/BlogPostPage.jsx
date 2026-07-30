@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import { postService } from '@/services/modules';
-import { ARTIST_SLUG, ROUTES } from '@/constants';
+import { ROUTES } from '@/constants';
 import Spinner from '@/components/common/Spinner';
 import { EmptyState } from '@/components/common';
 import LikeButton from '@/components/common/LikeButton';
@@ -16,7 +16,7 @@ export default function BlogPostPage() {
 
   useEffect(() => {
     postService
-      .getPostBySlug(ARTIST_SLUG, slug)
+      .getPostBySlug(slug)
       .then((res) => setPost(res.data.data.post))
       .catch(() => toast.error('No encontrado'))
       .finally(() => setLoading(false));

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import {
   Music, Disc3, Calendar, ShoppingBag, Package, Users, Film, Image, FileText,
 } from 'lucide-react';
-import { ARTIST_SLUG } from '@/constants';
 import {
   songService, albumService, eventService, productService,
   orderAdminApi, galleryAdminApi, postService, newsletterSubscribersApi,   videoService,
@@ -28,15 +27,15 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     Promise.allSettled([
-      songService.getSongs(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
-      albumService.getAlbums(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
-      eventService.getEvents(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
-      productService.getProducts(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      songService.getSongs({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      albumService.getAlbums({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      eventService.getEvents({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      productService.getProducts({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
       orderAdminApi.list({ params: { limit: 100 } }).then((rows) => (rows || []).filter((o) => o.status === 'pending').length).catch(() => 0),
       galleryAdminApi.list({ params: { limit: 1 } }).then((rows) => (rows || []).length).catch(() => 0),
-      postService.getPosts(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      postService.getPosts({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
       newsletterSubscribersApi.list({ params: { limit: 1 } }).then((rows) => (rows || []).length).catch(() => 0),
-      videoService.getVideos(ARTIST_SLUG, { params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
+      videoService.getVideos({ params: { limit: 1 } }).then((r) => r.data?.pagination?.total ?? 0).catch(() => 0),
     ]).then(([songs, albums, events, products, pending, gallery, posts, subs, videos]) => {
       setStats({
         songs: songs.value || 0,

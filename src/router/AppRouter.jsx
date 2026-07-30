@@ -4,7 +4,6 @@ import Layout from '@/components/layout/Layout';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute';
-import SuperAdminRoute from './SuperAdminRoute';
 import Spinner from '@/components/common/Spinner';
 import { AuthProvider } from '@/context/AuthContext';
 import { ArtistProvider } from '@/context/ArtistContext';
@@ -82,8 +81,6 @@ const AdminNewsletter = lazy(() => import('@/pages/admin/NewsletterAdmin'));
   const AdminSettings = lazy(() => import('@/pages/admin/AdminSettings'));
   const AdminAlbums = lazy(() => import('@/pages/admin/AlbumsAdmin'));
   const AdminVideos = lazy(() => import('@/pages/admin/VideosAdmin'));
-  const SuperAdminDashboard = lazy(() => import('@/pages/superadmin/SuperAdminDashboard'));
-  const ArtistOnboarding = lazy(() => import('@/pages/superadmin/ArtistOnboarding'));
 
 function Page({ children }) {
   return (
@@ -160,17 +157,6 @@ export const router = createBrowserRouter(
       { path: 'configuracion', element: withProviders(withSuspense(AdminSettings)) },
       { path: 'albumes', element: withProviders(withSuspense(AdminAlbums)) },
       { path: 'videos', element: withProviders(withSuspense(AdminVideos)) },
-      { path: 'panel', element: withProviders(withSuspense(SuperAdminDashboard)) },
-      { path: 'onboarding', element: withProviders(withSuspense(ArtistOnboarding)) },
-    ],
-  },
-  {
-    path: '/superadmin',
-    element: withProviders(<SuperAdminRoute><AdminRoute><DashboardLayout /></AdminRoute></SuperAdminRoute>),
-    children: [
-      { index: true, element: withProviders(withSuspense(SuperAdminDashboard)) },
-      { path: 'artistas', element: withProviders(withSuspense(SuperAdminDashboard)) },
-      { path: 'onboarding', element: withProviders(withSuspense(ArtistOnboarding)) },
     ],
   },
   { path: '*', element: withProviders(<Page><NotFoundPage /></Page>) },

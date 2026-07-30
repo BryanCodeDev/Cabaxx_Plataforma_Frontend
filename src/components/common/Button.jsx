@@ -1,9 +1,9 @@
 import { classNames } from '@/utils/classNames';
 
 const VARIANTS = {
-  primary: 'bg-accent text-white hover:bg-accent-hover shadow-glow-sm',
-  secondary: 'bg-surface-2 text-text-primary border border-border hover:border-accent/50',
-  ghost: 'bg-transparent text-text-primary hover:bg-surface-2',
+  primary: 'bg-accent text-white font-semibold hover:bg-accent-hover shadow-[0_4px_20px_rgba(229,9,20,0.3)] hover:shadow-[0_6px_26px_rgba(229,9,20,0.45)]',
+  secondary: 'bg-surface-2 text-text-primary border border-border hover:border-accent/50 hover:bg-white/[0.04]',
+  ghost: 'bg-transparent text-text-primary hover:bg-white/[0.06]',
   danger: 'bg-error text-white hover:opacity-90',
   outline: 'bg-transparent border border-accent text-accent hover:bg-accent hover:text-white',
 };
@@ -43,6 +43,7 @@ export default function Button({
   children,
   type = 'button',
   icon,
+  className,
 }) {
   return (
     <button
@@ -50,10 +51,11 @@ export default function Button({
       onClick={onClick}
       disabled={disabled || loading}
       className={classNames(
-        'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary',
+        'inline-flex items-center justify-center gap-2 rounded-lg font-medium tracking-wide transition-all duration-200 active:scale-[0.97] disabled:opacity-40 disabled:pointer-events-none disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary',
         VARIANTS[variant],
         SIZES[size],
-        fullWidth && 'w-full'
+        fullWidth && 'w-full',
+        className
       )}
     >
       {loading ? <SpinnerMini /> : icon}

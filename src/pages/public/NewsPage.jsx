@@ -15,7 +15,7 @@ export default function NewsPage() {
       <ListingPage
       title="Noticias"
       eyebrow="Al día"
-      service={(slug, params) => postService.getPosts(slug, { ...params, type: 'news' })}
+       service={(params) => postService.getPosts({ ...params, type: 'news' })}
       renderItem={(p) => (
         <Link
           key={p.id}

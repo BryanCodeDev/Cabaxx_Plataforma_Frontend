@@ -3,9 +3,9 @@ import { useAuth } from '@/hooks/useAuth';
 import Spinner from '@/components/common/Spinner';
 import { ROLES, ROUTES } from '@/constants';
 
-// Redirige si no es superadmin (o artist_admin del artista activo)
+// Redirige si no es administrador del artista
 export default function AdminRoute({ children }) {
-  const { isAuthenticated, isLoading, isSuperadmin, hasRole } = useAuth();
+  const { isAuthenticated, isLoading, hasRole } = useAuth();
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -14,7 +14,6 @@ export default function AdminRoute({ children }) {
     );
   }
   if (!isAuthenticated) return <Navigate to={ROUTES.LOGIN} replace />;
-  const isArtistAdmin = hasRole(ROLES.ARTIST_ADMIN);
-  if (!isSuperadmin() && !isArtistAdmin) return <Navigate to={ROUTES.HOME} replace />;
+  if (!hasRole(ROLES.ARTIST_ADMIN)) return <Navigate to={ROUTES.HOME} replace />;
   return children;
 }

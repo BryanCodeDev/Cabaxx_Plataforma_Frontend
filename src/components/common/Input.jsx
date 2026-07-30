@@ -14,6 +14,7 @@ import { classNames } from '@/utils/classNames';
  * @param {boolean} disabled
  * @param {node} icon - icono a la izquierda
  * @param {node} suffix - elemento a la derecha
+ * @param {string} className
  */
 export default function Input({
   label,
@@ -28,6 +29,8 @@ export default function Input({
   disabled = false,
   icon,
   suffix,
+  className,
+  ...rest
 }) {
   return (
     <div className="space-y-1.5">
@@ -47,12 +50,15 @@ export default function Input({
           value={value}
           onChange={onChange}
           disabled={disabled}
+          required={required}
           className={classNames(
-            'input-base',
+            'w-full rounded-lg border border-border bg-surface-2 px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent disabled:opacity-50',
             icon && 'pl-10',
             suffix && 'pr-10',
-            error && 'border-error focus:border-error focus:ring-error'
+            error && 'border-error focus:border-error focus:ring-error',
+            className
           )}
+          {...rest}
         />
         {suffix && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted">{suffix}</span>}
       </div>

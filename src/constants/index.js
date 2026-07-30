@@ -1,9 +1,8 @@
 export { FOCUS, FOCUS_SURFACE } from './ui';
 export const API_URL = import.meta.env.VITE_API_URL || '';export const APP_NAME = 'Cabaxx';
-export const ARTIST_SLUG = 'cabaxx'; // primer artista del sistema
+export const ARTIST_SLUG = 'cabaxx';
 
 export const ROLES = {
-  SUPERADMIN: 'superadmin',
   ARTIST_ADMIN: 'artist_admin',
   FAN: 'fan',
   GUEST: 'guest',
@@ -54,11 +53,7 @@ export const ROUTES = {
   ADMIN_SETTINGS: '/admin/configuracion',
   ADMIN_POSTS: '/admin/publicaciones',
   ADMIN_ALBUMS: '/admin/albumes',
-  ADMIN_VIDEOS: '/admin/videos',
-
-  SUPERADMIN: '/superadmin',
-  SUPERADMIN_ARTISTS: '/superadmin/artistas',
-  SUPERADMIN_ONBOARDING: '/superadmin/onboarding',
+   ADMIN_VIDEOS: '/admin/videos',
 };
 
 export const PAGINATION = {
