@@ -18,6 +18,9 @@
   --color-success: #22c55e;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
+
+  /* Firma de movimiento — la misma curva en toda la experiencia, como Apple */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
@@ -36,6 +39,25 @@
     @apply font-display tracking-wide;
   }
 
+  /* Selección de texto en tono de marca — un detalle que nadie nota conscientemente
+     pero que refuerza la identidad hasta en la interacción más pequeña */
+  ::selection {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+
+  /* Foco visible accesible — nunca se elimina el outline, sólo se rediseña */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Los números (contadores, precios, fechas) no deben "bailar" mientras cambian */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+
   /* Scrollbar custom (dark, delgado) */
   ::-webkit-scrollbar {
     width: 8px;
@@ -50,6 +72,18 @@
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #3a3a3a;
+  }
+
+  /* Respeta reduce-motion de forma global, incluso si un componente lo olvida */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -66,7 +100,7 @@
 
   /* Hover de tarjeta: escala + sombra */
   .card-hover {
-    @apply transition duration-300 hover:scale-[1.02] hover:shadow-card hover:border-accent/40;
+    @apply transition duration-300 ease-premium hover:scale-[1.02] hover:shadow-card hover:border-accent/40;
   }
 
   .input-base {
@@ -82,6 +116,19 @@
   }
   .animate-slide-up {
     animation: slideUp 0.35s ease-out;
+  }
+
+  /* Mask-reveal — desvanece el borde inferior de una imagen hacia el fondo,
+     para que las fotos se sientan integradas en la escena, no "pegadas" */
+  .fade-mask-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  }
+
+  /* Título editorial: permite que las líneas se equilibren en vez de
+     dejar una palabra huérfana al final */
+  .text-balance {
+    text-wrap: balance;
   }
 }
 
