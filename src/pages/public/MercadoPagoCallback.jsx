@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { paymentService } from '@/services/modules';
 import Spinner from '@/components/common/Spinner';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import { ROUTES } from '@/constants';
-import { toast } from 'react-hot-toast';
 import { Check, X } from 'lucide-react';
 
 export default function MercadoPagoCallback() {
