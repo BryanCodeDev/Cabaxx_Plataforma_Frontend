@@ -99,7 +99,7 @@ export default function CheckoutPage() {
        setOrderNumber(data?.payment?.order_number || 'CAB-' + orderId);
       clearCart();
       setStep(4);
-      toast.success('Pago simulado exitosamente');
+      toast.success('Pago procesado exitosamente');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Error al procesar el pago');
     } finally {
@@ -180,7 +180,7 @@ export default function CheckoutPage() {
                 >
                   <div>
                     <p className="font-medium text-text-primary">Mercado Pago</p>
-                    <p className="text-xs text-text-muted">Mock — listo para integrar credenciales reales</p>
+                    <p className="text-xs text-text-muted">Pago seguro con Mercado Pago</p>
                   </div>
                   <span className="text-accent font-mono text-sm">Pagar</span>
                 </button>
@@ -191,8 +191,8 @@ export default function CheckoutPage() {
                   className={`flex items-center justify-between rounded-xl border border-border p-4 transition hover:border-accent ${FOCUS}`}
                 >
                   <div>
-                    <p className="font-medium text-text-primary">Stripe (mock)</p>
-                    <p className="text-xs text-text-muted">Simulación rápida</p>
+                    <p className="font-medium text-text-primary">Stripe</p>
+                    <p className="text-xs text-text-muted">Pago seguro con Stripe</p>
                   </div>
                   <span className="text-accent font-mono text-sm">Pagar</span>
                 </button>

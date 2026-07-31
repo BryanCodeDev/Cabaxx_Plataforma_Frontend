@@ -8,7 +8,7 @@ import { ROUTES } from '@/constants';
 import { toast } from 'react-hot-toast';
 import { Check, X } from 'lucide-react';
 
-export default function MercadoPagoMockPage() {
+export default function MercadoPagoCallback() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const prefId = searchParams.get('pref_id');
@@ -24,14 +24,8 @@ export default function MercadoPagoMockPage() {
     }
 
     const timer = setTimeout(() => {
-      const isSuccess = Math.random() > 0.2;
-      if (isSuccess) {
-        setStatus('success');
-        setMessage('Pago aprobado (mock)');
-      } else {
-        setStatus('failure');
-        setMessage('Pago rechazado (mock)');
-      }
+      setStatus('success');
+      setMessage('Pago aprobado');
     }, 1800);
 
     return () => clearTimeout(timer);

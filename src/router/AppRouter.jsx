@@ -62,7 +62,7 @@ const ResetPasswordPage = lazy(() => import('@/pages/auth/ResetPasswordPage'));
 const PaymentSuccessPage = lazy(() => import('@/pages/public/PaymentSuccess'));
 const PaymentFailurePage = lazy(() => import('@/pages/public/PaymentFailure'));
 const PaymentPendingPage = lazy(() => import('@/pages/public/PaymentPending'));
-const MercadoPagoMockPage = lazy(() => import('@/pages/public/MercadoPagoMockPage'));
+const MercadoPagoCallback = lazy(() => import('@/pages/public/MercadoPagoCallback'));
 
 // Usuario
 const UserAccountPage = lazy(() => import('@/pages/user/MyAccount'));
@@ -138,7 +138,7 @@ export const router = createBrowserRouter(
   { path: '/pagos/success', element: withProviders(<Page><PaymentSuccessPage /></Page>) },
   { path: '/pagos/failure', element: withProviders(<Page><PaymentFailurePage /></Page>) },
   { path: '/pagos/pending', element: withProviders(<Page><PaymentPendingPage /></Page>) },
-  { path: '/pagos/mercado-pago', element: withProviders(<Page><MercadoPagoMockPage /></Page>) },
+  { path: '/pagos/mercado-pago', element: withProviders(<Page><MercadoPagoCallback /></Page>) },
 
   {
     path: '/admin',
