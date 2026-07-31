@@ -32,7 +32,7 @@ const SOCIAL_PLATFORMS = [
   { key: 'facebook',  label: 'Facebook' },
 ];
 
-const GALLERY_IMAGES = artistPhotos.slice(0, 5).map((url, i) => ({ id: i, url, title: 'Cabaxx' }));
+const GALLERY_IMAGES = artistPhotos.slice(0, 8).map((url, i) => ({ id: i, url, title: 'Cabaxx' }));
 
 // ── Actualiza estos hitos con la historia real de Juan Esteban ──
 const CAREER_MILESTONES = [

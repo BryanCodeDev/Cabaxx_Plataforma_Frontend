@@ -214,7 +214,7 @@ export default function Footer() {
           <p className="text-xs text-white/20">
             Plataforma desarrollada por{' '}
             <a
-              href="https://mastercode.com.co"
+              href="https://mastercodecompany.com"
               target="_blank"
               rel="noreferrer"
               className={`text-white/30 transition hover:text-accent ${FOCUS_SURFACE}`}
