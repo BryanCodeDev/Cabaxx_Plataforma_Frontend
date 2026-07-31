@@ -534,7 +534,7 @@ function About() {
             <div
               key={s.label}
               style={{ transitionDelay: `${i * 80}ms` }}
-              className={`group rounded-2xl border border-white/10 bg-black p-5 text-center transition-all duration-500 ease-premium hover:-translate-y-1 hover:border-gold/30 hover:shadow-glow-gold ${
+              className={`group rounded-2xl border border-white/10 bg-black p-5 text-center transition-all duration-500 ease-premium hover:-translate-y-1 hover:border-accent/30 hover:shadow-glow ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               }`}
             >
@@ -1134,10 +1134,10 @@ function Newsletter() {
       <FilmGrain opacity={0.035} />
 
       <div className="relative mx-auto max-w-2xl px-4 text-center">
-        <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-mega text-gold">
-          <span className="h-px w-6 bg-gold/60" aria-hidden="true" />
+        <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-mega text-accent">
+          <span className="h-px w-6 bg-accent/60" aria-hidden="true" />
           Lista de acceso
-          <span className="h-px w-6 bg-gold/60" aria-hidden="true" />
+          <span className="h-px w-6 bg-accent/60" aria-hidden="true" />
         </p>
         <h2 className="mt-4 text-balance font-display text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl">
           Sé el primero

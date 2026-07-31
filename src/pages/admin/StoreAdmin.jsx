@@ -39,7 +39,7 @@ export default function StoreAdmin() {
     { key: 'name', label: 'Nombre' },
     { key: 'price', label: 'Precio', render: (r) => fmtPrice(r) },
     { key: 'stock_quantity', label: 'Stock', render: (r) => r.stock_quantity ?? 0 },
-    { key: 'type', label: 'Tipo', render: (r) => <Badge variant="gold" size="sm">{r.type}</Badge> },
+    { key: 'type', label: 'Tipo', render: (r) => <Badge variant="accent" size="sm">{r.type}</Badge> },
     { key: 'status', label: 'Estado', render: (r) => <Badge variant={STATUS_VARIANT[r.status] || 'default'} size="sm">{r.status}</Badge> },
   ];
 
@@ -69,7 +69,7 @@ export default function StoreAdmin() {
 
   const couponColumns = [
     { key: 'code', label: 'Código' },
-    { key: 'type', label: 'Tipo', render: (r) => <Badge variant="gold" size="sm">{r.type === 'percent' ? '%' : '$'}</Badge> },
+    { key: 'type', label: 'Tipo', render: (r) => <Badge variant="accent" size="sm">{r.type === 'percent' ? '%' : '$'}</Badge> },
     { key: 'value', label: 'Valor', render: (r) => (r.type === 'percent' ? `${r.value}%` : `$${r.value}`) },
     { key: 'min_purchase', label: 'Mín. compra', render: (r) => r.min_purchase ? `$${r.min_purchase}` : '—' },
     { key: 'uses_count', label: 'Usos', render: (r) => `${r.uses_count || 0}/${r.max_uses || '∞'}` },

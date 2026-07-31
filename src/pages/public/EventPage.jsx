@@ -57,7 +57,7 @@ export default function EventPage() {
       <img src={event.banner_url} alt={event.title} className="mt-6 h-56 w-full rounded-2xl object-cover shadow-card" />
 
       <div className="mt-6">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold">Evento</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Evento</p>
         <h1 className="font-display text-4xl text-text-primary md:text-5xl">{event.title}</h1>
         <p className="mt-3 font-mono text-text-secondary">{formatDate(event.start_datetime)} · {event.venue_name}</p>
         <p className="mt-4 text-text-secondary">{event.description}</p>

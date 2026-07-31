@@ -54,7 +54,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
           <ul className="mt-8 space-y-3">
             {FEATURES.map((f) => (
               <li key={f} className="flex items-center gap-3 text-text-secondary">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold shadow-[0_0_10px_rgba(255,215,0,0.25)]">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent shadow-[0_0_10px_rgba(255,59,92,0.25)]">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20 6L9 17l-5-5" />
                   </svg>
@@ -75,7 +75,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
       <div className="relative z-10 flex w-full items-center justify-center px-4 py-16 lg:w-1/2">
         <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-3 duration-700">
           {eyebrow && (
-            <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.25em] text-gold drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] lg:text-left lg:drop-shadow-none">
+            <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.25em] text-accent drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] lg:text-left lg:drop-shadow-none">
               {eyebrow}
             </p>
           )}

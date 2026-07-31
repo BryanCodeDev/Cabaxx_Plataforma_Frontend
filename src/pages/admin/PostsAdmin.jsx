@@ -36,7 +36,7 @@ export default function PostsAdmin() {
   const columns = [
     { key: 'cover_url', label: 'Imagen', render: (r) => r.cover_url ? <img src={r.cover_url} alt="" className="h-10 w-10 rounded object-cover" /> : <div className="h-10 w-10 rounded bg-surface-2" /> },
     { key: 'title', label: 'Título' },
-    { key: 'type', label: 'Tipo', render: (r) => <Badge variant="gold" size="sm">{r.type}</Badge> },
+    { key: 'type', label: 'Tipo', render: (r) => <Badge variant="accent" size="sm">{r.type}</Badge> },
     { key: 'status', label: 'Estado', render: (r) => <Badge variant={STATUS_VARIANT[r.status] || 'default'} size="sm">{r.status}</Badge> },
     { key: 'published_at', label: 'Publicado', render: (r) => (r.published_at ? new Date(r.published_at).toLocaleDateString('es-CO') : '—') },
   ];

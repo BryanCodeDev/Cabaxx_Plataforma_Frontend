@@ -46,7 +46,7 @@ export default function ProductPage() {
           />
         </Card>
         <div>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold">Merch oficial</p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Merch oficial</p>
           <h1 className="font-display text-4xl text-text-primary">{product.name}</h1>
           <p className="mt-3 text-text-secondary">{product.description}</p>
           <p className="mt-5 font-mono text-3xl text-accent">{formatCurrency(product.price)} COP</p>

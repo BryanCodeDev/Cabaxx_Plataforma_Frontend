@@ -10,7 +10,6 @@
   --color-surface-2: #252525;
   --color-accent: #ff3b5c;
   --color-accent-hover: #e0203f;
-  --color-gold: #ffd700;
   --color-text-primary: #ffffff;
   --color-text-secondary: #a0a0a0;
   --color-text-muted: #606060;
@@ -90,7 +89,7 @@
 @layer components {
   /* Texto con gradiente accent */
   .text-gradient {
-    @apply bg-gradient-to-r from-accent to-gold bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-accent bg-clip-text text-transparent;
   }
 
   /* Glassmorphism */

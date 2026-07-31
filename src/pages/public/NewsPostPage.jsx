@@ -41,7 +41,7 @@ export default function NewsPostPage() {
       </Link>
 
       <div className="mt-6">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold">Noticia</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Noticia</p>
         <h1 className="font-display text-4xl text-text-primary md:text-5xl">{post.title}</h1>
         {post.published_at && (
           <p className="mt-3 font-mono text-sm text-text-muted">{post.published_at}</p>

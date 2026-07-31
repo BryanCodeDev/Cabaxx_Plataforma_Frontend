@@ -47,7 +47,7 @@ export default function VideoDetailPage() {
       </Link>
 
       <div className="mt-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Video</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">Video</p>
         <h1 className="mt-2 font-display text-4xl text-text-primary md:text-5xl">{video.title}</h1>
         <p className="mt-3 font-mono text-sm text-text-muted">
           {formatNumber(video.views_count)} vistas · {formatDate(video.published_at)}

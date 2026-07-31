@@ -59,10 +59,10 @@ export default function ResetPasswordPage() {
           </div>
 
           <ul className="space-y-1.5 rounded-lg border border-border bg-surface-2 p-3">
-            <li className={`flex items-center gap-2 text-xs ${hasLength ? 'text-gold' : 'text-text-muted'}`}>
+            <li className={`flex items-center gap-2 text-xs ${hasLength ? 'text-accent' : 'text-text-muted'}`}>
               {hasLength ? <Check className="h-3.5 w-3.5" /> : <Circle className="h-3.5 w-3.5" />} Mínimo 8 caracteres
             </li>
-            <li className={`flex items-center gap-2 text-xs ${matches ? 'text-gold' : 'text-text-muted'}`}>
+            <li className={`flex items-center gap-2 text-xs ${matches ? 'text-accent' : 'text-text-muted'}`}>
               {matches ? <Check className="h-3.5 w-3.5" /> : <Circle className="h-3.5 w-3.5" />} Las contraseñas coinciden
             </li>
           </ul>

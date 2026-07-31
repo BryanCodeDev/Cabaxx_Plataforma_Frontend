@@ -38,7 +38,7 @@ export default function AlbumDetailPage() {
         <div className="mt-6 flex flex-col gap-8 md:flex-row">
           <img src={album.cover_url} alt={album.title} className="h-64 w-64 rounded-2xl object-cover shadow-card md:h-80 md:w-80" />
           <div className="flex-1">
-            <Badge variant="gold">{album.type}</Badge>
+            <Badge variant="accent">{album.type}</Badge>
             <h1 className="mt-3 font-display text-4xl text-text-primary md:text-5xl">{album.title}</h1>
             <p className="mt-3 font-mono text-text-secondary">{formatDate(album.release_date, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             <p className="mt-4 text-text-secondary">{album.description}</p>

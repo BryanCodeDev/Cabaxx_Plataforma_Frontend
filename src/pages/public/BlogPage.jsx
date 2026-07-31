@@ -24,7 +24,7 @@ export default function BlogPage() {
         >
           <Card hover padding="md">
             <div className="flex items-center gap-2">
-              <Badge variant="gold" size="sm">Blog</Badge>
+              <Badge variant="accent" size="sm">Blog</Badge>
               {p.published_at && (
                 <span className="font-mono text-xs text-text-muted">{p.published_at}</span>
               )}

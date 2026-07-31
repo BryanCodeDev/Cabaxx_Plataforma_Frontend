@@ -14,7 +14,7 @@ function Bars({ data }) {
         <div key={d.label} className="flex items-center gap-3">
           <span className="w-28 shrink-0 text-sm text-text-secondary">{d.label}</span>
           <div className="h-3 flex-1 overflow-hidden rounded-full bg-surface-2">
-            <div className="h-full rounded-full bg-gradient-to-r from-accent to-gold" style={{ width: `${(d.value / max) * 100}%` }} />
+            <div className="h-full rounded-full bg-gradient-to-r from-accent to-accent" style={{ width: `${(d.value / max) * 100}%` }} />
           </div>
           <span className="w-10 text-right text-sm font-medium text-text-primary">{d.value}</span>
         </div>

@@ -53,13 +53,13 @@ export default function AdminDashboard() {
 
   const kpis = stats ? [
     { icon: Music, label: 'Canciones', value: stats.songs, accent: 'bg-accent/10 text-accent' },
-    { icon: Disc3, label: 'Álbumes', value: stats.albums, accent: 'bg-gold/10 text-gold' },
+    { icon: Disc3, label: 'Álbumes', value: stats.albums, accent: 'bg-accent/10 text-accent' },
     { icon: Film, label: 'Videos', value: stats.videos, accent: 'bg-accent/10 text-accent' },
-    { icon: Calendar, label: 'Eventos', value: stats.events, accent: 'bg-gold/10 text-gold' },
+    { icon: Calendar, label: 'Eventos', value: stats.events, accent: 'bg-accent/10 text-accent' },
     { icon: ShoppingBag, label: 'Productos', value: stats.products, accent: 'bg-accent/10 text-accent' },
-    { icon: Image, label: 'Galería', value: stats.gallery, accent: 'bg-gold/10 text-gold' },
+    { icon: Image, label: 'Galería', value: stats.gallery, accent: 'bg-accent/10 text-accent' },
     { icon: FileText, label: 'Publicaciones', value: stats.posts, accent: 'bg-accent/10 text-accent' },
-    { icon: Package, label: 'Pedidos pendientes', value: stats.pending, accent: 'bg-gold/10 text-gold' },
+    { icon: Package, label: 'Pedidos pendientes', value: stats.pending, accent: 'bg-accent/10 text-accent' },
     { icon: Users, label: 'Suscriptores', value: stats.subs, accent: 'bg-accent/10 text-accent' },
   ] : [];
 

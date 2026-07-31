@@ -5,7 +5,7 @@ const SIZES = { sm: 'h-5 w-5', md: 'h-8 w-8', lg: 'h-12 w-12' };
 const COLORS = {
   accent: 'text-accent',
   primary: 'text-text-primary',
-  gold: 'text-gold',
+  gold: 'text-accent',
   muted: 'text-text-muted',
 };
 

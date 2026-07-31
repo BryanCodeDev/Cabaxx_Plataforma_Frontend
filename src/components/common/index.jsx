@@ -20,7 +20,7 @@ const BADGE_VARIANTS = {
   success: 'bg-success/15 text-success',
   warning: 'bg-warning/15 text-warning',
   error: 'bg-error/15 text-error',
-  gold: 'bg-gold/15 text-gold',
+  gold: 'bg-accent/15 text-accent',
 };
 
 const BADGE_SIZES = { sm: 'text-xs px-2 py-0.5', md: 'text-sm px-2.5 py-1' };
@@ -58,7 +58,7 @@ export function SectionHeading({ eyebrow, title, subtitle, action, align = 'left
     >
       <div>
         {eyebrow && (
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-gold">{eyebrow}</p>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-accent">{eyebrow}</p>
         )}
         <h2 className="font-display text-3xl text-text-primary md:text-4xl">{title}</h2>
         {subtitle && <p className="mt-2 max-w-xl text-sm text-text-secondary">{subtitle}</p>}

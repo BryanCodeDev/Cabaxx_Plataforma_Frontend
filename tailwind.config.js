@@ -11,7 +11,7 @@ export default {
         'surface-2': '#252525',
         accent: '#FF3B5C',
         'accent-hover': '#E0203F',
-        gold: '#FFD700',
+        gold: '#FF3B5C',
         'text-primary': '#FFFFFF',
         'text-secondary': '#A0A0A0',
         'text-muted': '#606060',
@@ -38,8 +38,8 @@ export default {
         glow: '0 0 20px rgba(255,59,92,0.4)',
         'glow-sm': '0 0 8px rgba(255,59,92,0.3)',
         'glow-lg': '0 0 60px rgba(255,59,92,0.35)',
-        // Toque dorado — reservado para 1-2 momentos "premium" por página, nunca decorativo masivo
-        'glow-gold': '0 0 24px rgba(255,215,0,0.22)',
+        // Resplandor de marca — usado para énfasis en acentos rojos
+        glow: '0 0 20px rgba(255,59,92,0.4)',
         card: '0 4px 20px rgba(0,0,0,0.4)',
       },
       backgroundImage: {
@@ -47,7 +47,7 @@ export default {
         noise:
           "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         'mesh-red': 'radial-gradient(ellipse 60% 50% at 30% 20%, rgba(255,59,92,0.14), transparent 70%)',
-        'gold-sheen': 'linear-gradient(110deg, transparent 20%, rgba(255,215,0,0.35) 50%, transparent 80%)',
+        'red-sheen': 'linear-gradient(110deg, transparent 20%, rgba(255,59,92,0.35) 50%, transparent 80%)',
       },
       // Curva de easing tipo Apple — usar como `ease-premium` junto a transition-*
       transitionTimingFunction: {

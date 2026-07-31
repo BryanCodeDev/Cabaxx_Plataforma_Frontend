@@ -39,7 +39,7 @@ export default function GalleryAdmin() {
       : (r.file_url ? <img src={r.file_url} alt="" className="h-10 w-10 rounded object-cover" /> : <div className="h-10 w-10 rounded bg-surface-2" />),
     },
     { key: 'title', label: 'Título' },
-    { key: 'category', label: 'Categoría', render: (r) => <Badge variant="gold" size="sm">{r.category}</Badge> },
+    { key: 'category', label: 'Categoría', render: (r) => <Badge variant="accent" size="sm">{r.category}</Badge> },
     { key: 'file_type', label: 'Tipo', render: (r) => r.file_type },
     { key: 'status', label: 'Estado', render: (r) => <Badge variant={STATUS_VARIANT[r.status] || 'default'} size="sm">{r.status}</Badge> },
   ];

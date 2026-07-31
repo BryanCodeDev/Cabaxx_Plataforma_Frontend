@@ -70,7 +70,7 @@ export default function AlbumsPage() {
                   <div className="mt-3 px-1">
                     <p className="truncate font-medium text-text-primary">{a.title}</p>
                     <div className="mt-2 flex items-center gap-2">
-                      <Badge variant="gold" size="sm">{a.type}</Badge>
+                      <Badge variant="accent" size="sm">{a.type}</Badge>
                       <span className="font-mono text-xs text-text-muted">{formatDate(a.release_date, { year: 'numeric' })}</span>
                     </div>
                   </div>
