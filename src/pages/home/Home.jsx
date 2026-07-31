@@ -155,14 +155,14 @@ function Hero({ artist }) {
             ? `url(${artist.banner_url})`
             : 'radial-gradient(ellipse at 30% 20%, #1a0505, #050505 70%)',
           transform: `translateY(${scrollY * 0.3}px) scale(1.08)`,
-          filter: 'grayscale(0.4) contrast(1.15)',
+          filter: 'grayscale(0) contrast(1)',
         }}
       />
       {!artist?.banner_url && (
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover will-change-transform"
-          style={{ transform: `translateY(${scrollY * 0.3}px) scale(1.08)`, filter: 'grayscale(0.4) contrast(1.15)' }}
+          style={{ transform: `translateY(${scrollY * 0.3}px) scale(1.08)`, filter: 'grayscale(0) contrast(1)' }}
           autoPlay muted loop playsInline
           poster={heroPoster}
           onEnded={handleVideoEnded}
@@ -171,12 +171,12 @@ function Hero({ artist }) {
         </video>
       )}
 
-      {/* Overlays: negro profundo + iluminación roja + vignette */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-accent/30 via-transparent to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40" />
-      <div className="pointer-events-none absolute inset-0 [box-shadow:inset_0_0_220px_140px_rgba(0,0,0,0.85)]" aria-hidden="true" />
-      <FilmGrain opacity={0.05} />
+{/* Overlays: negro suave + iluminación roja + vignette */}
+       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/10" />
+       <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent" />
+       <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/15" />
+       <div className="pointer-events-none absolute inset-0 [box-shadow:inset_0_0_220px_140px_rgba(0,0,0,0.4)]" aria-hidden="true" />
+       <FilmGrain opacity={0.02} />
 
       {/* Partículas */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
