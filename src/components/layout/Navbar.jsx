@@ -138,20 +138,14 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 md:px-8">
-        <Link to={ROUTES.HOME} className={`group flex shrink-0 items-center gap-3 rounded-md ${FOCUS}`} aria-label="Inicio">
+        <Link to={ROUTES.HOME} className={`group flex shrink-0 items-center rounded-md ${FOCUS}`} aria-label="Inicio">
           <img
             src={logoMark}
             alt="Cabaxx"
-            width="40"
-            height="40"
-            className="h-9 w-9 rounded-md object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:w-10"
+            width="48"
+            height="48"
+            className="h-11 w-11 rounded-md object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12"
           />
-          <span
-            className="font-display text-2xl font-black uppercase leading-none tracking-[0.01em] text-text-primary transition-colors sm:text-[26px]"
-            style={{ fontFamily: 'var(--font-display, inherit)' }}
-          >
-            {artistName}
-          </span>
         </Link>
 
         {/* Navegación desktop */}
