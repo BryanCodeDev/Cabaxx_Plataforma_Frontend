@@ -5,6 +5,7 @@ import { useArtist } from '@/hooks/useArtist';
 import { ROUTES, FOCUS_SURFACE } from '@/constants';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
+import { logoMark } from '@/assets';
 
 const LINK_GROUPS = [
   {
@@ -119,9 +120,15 @@ export default function Footer() {
 
           {/* Columna marca + newsletter */}
           <div className="md:col-span-2">
-            <Link to={ROUTES.HOME} className={`inline-flex items-center gap-2.5 rounded-sm ${FOCUS_SURFACE}`}>
-              <PulseMark />
-              <span className="font-display text-2xl font-black uppercase tracking-[0.02em] text-white transition-transform duration-300 hover:scale-[1.02] inline-block">
+            <Link to={ROUTES.HOME} className={`group inline-flex items-center gap-2.5 rounded-sm ${FOCUS_SURFACE}`}>
+              <img
+                src={logoMark}
+                alt={`${name} logo`}
+                width="40"
+                height="40"
+                className="h-9 w-9 rounded-md object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+              <span className="font-display text-2xl font-black uppercase tracking-[0.02em] text-white transition-transform duration-300 group-hover:scale-[1.02] inline-block">
                 {name}
               </span>
             </Link>

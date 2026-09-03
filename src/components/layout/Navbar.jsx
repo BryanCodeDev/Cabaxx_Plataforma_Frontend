@@ -7,6 +7,7 @@ import { ROUTES, FOCUS } from '@/constants';
 import Button from '@/components/common/Button';
 import { Avatar } from '@/components/common';
 import Dropdown from '@/components/common/Dropdown';
+import { logoMark } from '@/assets';
 import {
   ShoppingCart, Menu, X, ChevronDown, Disc3, Film, Image,
   Newspaper, Mail, LayoutDashboard, User, Package, LogOut,
@@ -138,7 +139,13 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 md:px-8">
         <Link to={ROUTES.HOME} className={`group flex shrink-0 items-center gap-3 rounded-md ${FOCUS}`} aria-label="Inicio">
-          <PulseMark className="opacity-90 transition-opacity group-hover:opacity-100" />
+          <img
+            src={logoMark}
+            alt="Cabaxx"
+            width="40"
+            height="40"
+            className="h-9 w-9 rounded-md object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:w-10"
+          />
           <span
             className="font-display text-2xl font-black uppercase leading-none tracking-[0.01em] text-text-primary transition-colors sm:text-[26px]"
             style={{ fontFamily: 'var(--font-display, inherit)' }}

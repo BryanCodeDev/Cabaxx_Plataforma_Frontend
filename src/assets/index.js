@@ -3,6 +3,7 @@
 // cuando el API (cover_url, gallery, etc.) aún no tiene datos.
 
 import img1 from './gallery/cabaxx-01.webp';
+import logo from './gallery/logo.webp';
 import img2 from './gallery/cabaxx-02.webp';
 import img3 from './gallery/cabaxx-03.webp';
 import img4 from './gallery/cabaxx-04.webp';
@@ -34,3 +35,4 @@ export const videos = [video1];
 export const heroVideo = video1;
 export const heroPoster = img1;
 export const artistPortrait = img2;
+export const logoMark = logo;

@@ -1,5 +1,5 @@
 import { useArtist } from '@/hooks/useArtist';
-import { heroPoster } from '@/assets';
+import { heroPoster, logoMark } from '@/assets';
 
 const FEATURES = [
   'Acceso prioritario a preventas y nuevos lanzamientos',
@@ -7,13 +7,15 @@ const FEATURES = [
   'Notificaciones de shows en Bogotá y gira por Colombia',
 ];
 
-function Wordmark({ className = '' }) {
+function LogoMark({ className = '' }) {
   return (
-    <span
-      className={`inline-flex -rotate-3 items-center rounded-xl border-2 border-primary bg-accent font-display font-black uppercase text-white shadow-glow ${className}`}
-    >
-      Cabax
-    </span>
+    <img
+      src={logoMark}
+      alt="Cabaxx"
+      width="64"
+      height="64"
+      className={`h-12 w-12 rounded-lg object-contain shadow-[0_0_20px_rgba(229,9,20,0.35)] ${className}`}
+    />
   );
 }
 
@@ -47,7 +49,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
         <div className="pointer-events-none absolute -left-16 top-1/3 h-72 w-72 rounded-full bg-accent/10 blur-[100px]" />
 
         <div className="relative z-10 px-14 animate-in fade-in slide-in-from-left-4 duration-700">
-          <Wordmark className="px-4 py-2 text-2xl" />
+          <LogoMark />
           <h2 className="mt-8 max-w-sm font-display text-4xl leading-[1.05] text-text-primary">
             Tu acceso directo a la música, los shows y la comunidad bogotana.
           </h2>
@@ -68,7 +70,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
 
       {/* ── Logo — solo móvil, flotando sobre la imagen ── */}
       <div className="absolute left-5 top-5 z-10 lg:hidden">
-        <Wordmark className="px-3.5 py-1.5 text-base" />
+        <LogoMark className="h-10 w-10" />
       </div>
 
       {/* ── Panel de formulario ── */}

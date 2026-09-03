@@ -11,6 +11,7 @@ import { ROUTES, FOCUS_SURFACE } from '@/constants';
 import { classNames } from '@/utils/classNames';
 import Button from '@/components/common/Button';
 import { Avatar } from '@/components/common';
+import { logoMark } from '@/assets';
 
 const SIDEBAR_LINKS = [
   { to: ROUTES.ADMIN, label: 'Inicio', icon: Home, end: true },
@@ -94,11 +95,23 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
           <Link
             to={ROUTES.HOME}
             className={classNames(
-              'font-display text-xl uppercase tracking-wide text-accent transition hover:text-accent/80',
-              collapsed ? 'text-center w-full' : ''
+              'flex items-center gap-2.5 text-accent transition hover:text-accent/80',
+              collapsed ? 'justify-center w-full' : ''
             )}
+            aria-label="Inicio"
           >
-            {!collapsed ? siteName : 'C'}
+            <img
+              src={logoMark}
+              alt={`${siteName} logo`}
+              width="32"
+              height="32"
+              className="h-8 w-8 rounded-md object-contain"
+            />
+            {!collapsed && (
+              <span className="font-display text-xl uppercase tracking-wide">
+                {siteName}
+              </span>
+            )}
           </Link>
           <button
             onClick={() => setCollapsed(!collapsed)}
@@ -119,8 +132,17 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
           />
           <aside className="animate-in slide-in-from-left duration-300 absolute left-0 top-0 flex h-full w-64 flex-col border-r border-white/10 bg-[#0a0a0a] p-3 shadow-2xl overflow-hidden">
             <div className="mb-4 flex h-12 shrink-0 items-center justify-between px-1">
-              <Link to={ROUTES.HOME} className="font-display text-xl uppercase tracking-wide text-accent transition-transform duration-300 hover:scale-105 inline-block">
-                {siteName}
+              <Link to={ROUTES.HOME} className="flex items-center gap-2.5 text-accent">
+                <img
+                  src={logoMark}
+                  alt={`${siteName} logo`}
+                  width="32"
+                  height="32"
+                  className="h-8 w-8 rounded-md object-contain"
+                />
+                <span className="font-display text-xl uppercase tracking-wide transition-transform duration-300 hover:scale-105 inline-block">
+                  {siteName}
+                </span>
               </Link>
               <button
                 onClick={() => setMobileOpen(false)}
