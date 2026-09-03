@@ -55,7 +55,7 @@ function FilmGrain({ opacity = 0.04 }) {
 export default function GalleryPage() {
   const { artist } = useArtist();
   const { data, loading } = useFetch(`/artists/${ARTIST_SLUG}/gallery`, { params: { limit: 24 } });
-  const apiItems = (data?.gallery?.rows || []).map((it) => ({ ...it, category: it.type || 'photo' }));
+  const apiItems = (data?.data?.gallery?.rows || []).map((it) => ({ ...it, category: it.type || 'photo' }));
   const items = (apiItems.length ? apiItems : localItems).map((it) => ({
     ...it,
     id: it.id ?? `${it.file_url}-${it.type}`,

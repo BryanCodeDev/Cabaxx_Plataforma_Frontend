@@ -20,11 +20,18 @@ export default function MyOrders() {
   const [detail, setDetail] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
     orderService
       .getMyOrders()
-      .then((res) => setOrders(res.data.data || []))
+      .then((res) => {
+        if (!isMounted) return;
+        const d = res.data?.data?.orders || {};
+        setOrders(d.rows || []);
+      })
       .catch((err) => toast.error(err.response?.data?.message || 'Error al cargar los pedidos'))
-      .finally(() => setLoading(false));
+      .finally(() => { if (isMounted) setLoading(false); });
+    return () => { isMounted = false; };
   }, []);
 
   return (

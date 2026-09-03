@@ -9,9 +9,8 @@ export default function ListingPage({
   title,
   eyebrow,
   service,
+  resource,
   renderItem,
-  dataKey = 'rows',
-  totalKey = 'total',
 }) {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -25,10 +24,12 @@ export default function ListingPage({
     service(ARTIST_SLUG, { page, limit: PAGINATION.DEFAULT_LIMIT })
       .then((res) => {
         if (!active) return;
-        const payload = res.data.data;
-        setItems(payload[dataKey] || payload.rows || []);
-        setTotal(payload[totalKey] || payload.total || 0);
-        setTotalPages(Math.ceil((payload[totalKey] || payload.total || 0) / PAGINATION.DEFAULT_LIMIT) || 1);
+        const payload = res.data?.data?.[resource] || res.data?.data || {};
+        const rows = payload.rows || [];
+        const totalCount = payload.total || 0;
+        setItems(rows);
+        setTotal(totalCount);
+        setTotalPages(Math.ceil(totalCount / PAGINATION.DEFAULT_LIMIT) || 1);
       })
       .catch(() => {})
       .finally(() => {
@@ -37,7 +38,7 @@ export default function ListingPage({
     return () => {
       active = false;
     };
-  }, [service, page]);
+  }, [service, page, resource]);
 
   if (loading && !items.length) {
     return (

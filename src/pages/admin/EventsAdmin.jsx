@@ -33,7 +33,7 @@ export default function EventsAdmin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const items = data?.data || [];
+  const items = data?.data?.events?.rows || [];
 
   const columns = [
     { key: 'banner_url', label: 'Banner', render: (r) => r.banner_url ? <img src={r.banner_url} alt="" className="h-10 w-10 rounded object-cover" /> : <div className="h-10 w-10 rounded bg-surface-2" /> },

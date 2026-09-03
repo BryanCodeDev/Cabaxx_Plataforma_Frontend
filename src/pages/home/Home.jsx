@@ -334,7 +334,7 @@ function Marquee({ artist }) {
 ───────────────────────────────────────── */
 function LatestRelease() {
   const { data } = useFetch(`/artists/${ARTIST_SLUG}/songs`, { params: { limit: 1 } });
-  const latest = data?.songs?.rows?.[0];
+  const latest = data?.data?.songs?.rows?.[0];
   const [ref, isVisible] = useScrollReveal();
   const [count, setCount] = useState(0);
   const target = latest?.play_count || 0;
@@ -593,7 +593,7 @@ function About() {
 ───────────────────────────────────────── */
 function FeaturedSongs() {
   const { data } = useFetch(`/artists/${ARTIST_SLUG}/songs`, { params: { limit: 4 } });
-  const songs = data?.songs?.rows || [];
+  const songs = data?.data?.songs?.rows || [];
   const [ref, isVisible] = useScrollReveal();
 
   return (
@@ -701,7 +701,7 @@ function CountdownChip({ date }) {
 
 function UpcomingEvents() {
   const { data } = useFetch(`/artists/${ARTIST_SLUG}/events`, { params: { limit: 3 } });
-  const events = data?.events?.rows || [];
+  const events = data?.data?.events?.rows || [];
   const [ref, isVisible] = useScrollReveal();
 
   if (!events.length) {
@@ -908,7 +908,7 @@ function GalleryPreview() {
 ───────────────────────────────────────── */
 function Merchandise() {
   const { data } = useFetch(`/artists/${ARTIST_SLUG}/products`, { params: { limit: 4 } });
-  const products = data?.products?.rows || [];
+  const products = data?.data?.products?.rows || [];
   const [ref, isVisible] = useScrollReveal();
 
   return (
@@ -979,7 +979,7 @@ function Merchandise() {
 ───────────────────────────────────────── */
 function News() {
   const { data } = useFetch(`/artists/${ARTIST_SLUG}/posts`, { params: { limit: 3, type: 'news' } });
-  const posts = data?.posts?.rows || [];
+  const posts = data?.data?.posts?.rows || [];
   const [ref, isVisible] = useScrollReveal();
 
   return (

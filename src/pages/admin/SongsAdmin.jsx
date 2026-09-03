@@ -37,7 +37,7 @@ export default function SongsAdmin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const items = data?.data || [];
+  const items = data?.data?.songs?.rows || [];
 
   const columns = [
     { key: 'cover_url', label: 'Portada', render: (r) => r.cover_url ? <img src={r.cover_url} alt="" className="h-10 w-10 rounded object-cover" /> : <div className="h-10 w-10 rounded bg-surface-2" /> },

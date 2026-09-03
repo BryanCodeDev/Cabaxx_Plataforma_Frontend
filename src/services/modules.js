@@ -153,7 +153,8 @@ export const categoryService = {
 
 export const couponService = {
   list(params) {
-    return api.get(`/artists/${ARTIST_SLUG}/coupons`, { params }).then((res) => res.data.data || []);
+    return api.get(`/artists/${ARTIST_SLUG}/coupons`, { params })
+      .then((res) => res.data?.data?.coupons?.rows || []);
   },
   create(values) {
     return api.post(`/artists/${ARTIST_SLUG}/coupons`, values).then(wrap('coupon'));
@@ -168,7 +169,8 @@ export const couponService = {
 
 export const galleryAdminApi = {
   list(params) {
-    return api.get(`/artists/${ARTIST_SLUG}/gallery`, { params }).then((res) => res.data.data || []);
+    return api.get(`/artists/${ARTIST_SLUG}/gallery`, { params })
+      .then((res) => res.data?.data?.gallery?.rows || []);
   },
   create(values) {
     return api.post(`/artists/${ARTIST_SLUG}/gallery`, toFormData(values, ['file'])).then(wrap('item'));
@@ -180,7 +182,8 @@ export const galleryAdminApi = {
 
 export const orderAdminApi = {
   list(params) {
-    return api.get(`/artists/${ARTIST_SLUG}/orders`, { params }).then((res) => res.data.data || []);
+    return api.get(`/artists/${ARTIST_SLUG}/orders`, { params })
+      .then((res) => res.data?.data?.orders?.rows || []);
   },
   updateStatus(id, status) {
     return api.put(`/artists/${ARTIST_SLUG}/orders/${id}/status`, { status }).then(wrap('order'));
@@ -192,7 +195,8 @@ export const orderAdminApi = {
 
 export const newsletterSubscribersApi = {
   list(params) {
-    return api.get(`/artists/${ARTIST_SLUG}/newsletter/subscribers`, { params }).then((res) => res.data.data || []);
+    return api.get(`/artists/${ARTIST_SLUG}/newsletter/subscribers`, { params })
+      .then((res) => res.data?.data?.subscribers?.rows || []);
   },
   remove(id) {
     return api.delete(`/artists/${ARTIST_SLUG}/newsletter/subscribers/${id}`);

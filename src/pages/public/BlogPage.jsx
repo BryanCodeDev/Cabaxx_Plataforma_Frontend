@@ -12,9 +12,10 @@ export default function BlogPage() {
   return (
     <>
       <SEOHead title="Blog" description={`Historias, entrevistas y detrás de cámaras de ${artist?.stage_name || 'Cabaxx'}.`} />
-      <ListingPage
+<ListingPage
       title="Blog"
       eyebrow="Historias"
+      resource="posts"
        service={(params) => postService.getPosts({ ...params, type: 'blog' })}
       renderItem={(p) => (
         <Link

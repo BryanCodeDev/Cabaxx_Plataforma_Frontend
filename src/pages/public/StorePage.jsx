@@ -8,7 +8,7 @@ import SEOHead from '@/components/seo/SEOHead';
 
 export default function StorePage() {
   const { data, loading } = useFetch(`/artists/${ARTIST_SLUG}/products`, { params: { limit: 24 } });
-  const products = data?.products?.rows || [];
+  const products = data?.data?.products?.rows || [];
   const [ref, isVisible] = useScrollReveal();
 
   return (

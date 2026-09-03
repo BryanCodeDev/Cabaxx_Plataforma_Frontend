@@ -29,10 +29,10 @@ export default function VideosPage() {
       .getVideos({ page, limit: PAGINATION.DEFAULT_LIMIT })
       .then((res) => {
         if (!isMounted) return;
-        const d = res.data?.data?.videos || res.data?.videos || {};
+        const d = res.data?.data?.videos || {};
         setVideos(d.rows || []);
         setTotal(d.total || 0);
-        setTotalPages(d.totalPages || Math.ceil((d.total || 0) / PAGINATION.DEFAULT_LIMIT) || 1);
+        setTotalPages(res.data?.pagination?.totalPages || Math.ceil((d.total || 0) / PAGINATION.DEFAULT_LIMIT) || 1);
       })
       .finally(() => { if (isMounted) setLoading(false); });
     return () => { isMounted = false; };

@@ -12,9 +12,10 @@ export default function NewsPage() {
   return (
     <>
       <SEOHead title="Noticias" description={`Últimas noticias y novedades de ${artist?.stage_name || 'Cabaxx'}.`} />
-      <ListingPage
+<ListingPage
       title="Noticias"
       eyebrow="Al día"
+      resource="posts"
        service={(params) => postService.getPosts({ ...params, type: 'news' })}
       renderItem={(p) => (
         <Link

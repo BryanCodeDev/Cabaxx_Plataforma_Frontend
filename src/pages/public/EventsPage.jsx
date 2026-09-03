@@ -16,6 +16,7 @@ export default function EventsPage() {
       <ListingPage
         title="Eventos"
         service={eventService.getEvents}
+        resource="events"
         renderItem={(e) => (
           <Link key={e.id} to={`/eventos/${e.slug}`}>
             <Card hover padding="md">

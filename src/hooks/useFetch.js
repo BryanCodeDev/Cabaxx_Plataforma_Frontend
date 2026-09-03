@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import api from '@/services/api';
 
-// Hook genérico para GET con loading, error, data y refetch
+// Hook genérico para GET con loading, error, data y refetch.
+// El backend responde `{ success, message, data, pagination? }`. Exponemos
+// `data` (el sobre) y `pagination` para los endpoints paginados.
 export function useFetch(url, options = {}) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [pagination, setPagination] = useState(null);
   const abortRef = useRef(null);
   const paramsKey = useMemo(() => JSON.stringify(options.params || {}), [options.params]);
 
@@ -23,7 +26,8 @@ export function useFetch(url, options = {}) {
           signal: abortRef.current.signal,
           params,
         });
-        setData(res.data);
+        setData(res);
+        setPagination(res?.pagination ?? null);
       } catch (err) {
         if (err.name !== 'CanceledError' && err.code !== 'ERR_CANCELED') {
           setError(err.response?.data?.message || 'Error de red');
@@ -40,5 +44,5 @@ export function useFetch(url, options = {}) {
     return () => abortRef.current?.abort();
   }, [fetchData]);
 
-  return { data, loading, error, refetch: fetchData };
+  return { data, loading, error, pagination, refetch: fetchData };
 }

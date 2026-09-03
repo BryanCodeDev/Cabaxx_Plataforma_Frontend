@@ -15,6 +15,7 @@ export default function SongsPage() {
       <ListingPage
         title="Canciones"
         service={songService.getSongs}
+        resource="songs"
         renderItem={(s) => (
           <Link key={s.id} to={`/canciones/${s.slug}`}>
             <Card hover padding="sm">

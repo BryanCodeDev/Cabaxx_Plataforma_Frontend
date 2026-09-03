@@ -3,7 +3,7 @@ import { useArtist } from '@/context/ArtistContext';
 import { APP_NAME } from '@/constants';
 import { buildJsonLd } from '@/utils/seo';
 
-export default function SEOHead({ title, description, image, url, type, data }) {
+export default function SEOHead({ title, description, image, url, type, data, noIndex = false }) {
   const { artist } = useArtist();
   const siteName = artist ? artist.stage_name || artist.name : APP_NAME;
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
@@ -16,6 +16,7 @@ export default function SEOHead({ title, description, image, url, type, data }) 
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
+      {noIndex && <meta name="robots" content="noindex,nofollow" />}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />

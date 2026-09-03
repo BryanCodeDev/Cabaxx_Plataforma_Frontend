@@ -25,7 +25,7 @@ export default function VideosAdmin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const items = data?.data || [];
+  const items = data?.data?.videos?.rows || [];
 
   const columns = [
     { key: 'thumbnail_url', label: 'Miniatura', render: (r) => r.thumbnail_url ? <img src={r.thumbnail_url} alt="" className="h-10 w-10 rounded object-cover" /> : <div className="h-10 w-10 rounded bg-surface-2" /> },

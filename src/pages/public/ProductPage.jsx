@@ -13,11 +13,9 @@ import SEOHead from '@/components/seo/SEOHead';
 
 export default function ProductPage() {
   const { slug } = useParams();
-  const { data, loading } = useFetch(`/artists/${ARTIST_SLUG}/products`, {
-    params: { slug },
-  });
+  const { data, loading } = useFetch(`/artists/${ARTIST_SLUG}/products/${slug}`);
   const { addItem } = useCart();
-  const product = data?.products?.rows?.[0];
+  const product = data?.data?.product;
 
   if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
   if (!product) {
