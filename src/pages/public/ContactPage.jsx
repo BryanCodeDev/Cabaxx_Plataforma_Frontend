@@ -4,7 +4,6 @@ import { toast } from 'react-hot-toast';
 import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
-import { SectionHeading } from '@/components/common';
 import SEOHead from '@/components/seo/SEOHead';
 import { Music, Newspaper, Handshake } from 'lucide-react';
 
@@ -28,23 +27,28 @@ export default function ContactPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
-      <SectionHeading eyebrow="Hablemos" title="Contacto" />
+      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">Hablemos</p>
+      <h1 className="mt-2 font-display text-4xl text-text-primary sm:text-5xl">Contacto</h1>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-secondary">
+        Escríbenos desde cualquier lugar. Respondemos personalmente cada mensaje desde Bogotá D.C.,
+        Colombia — para booking, prensa o alianzas.
+      </p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         <Card padding="md" className="flex flex-col items-center text-center">
           <div className="mb-3 text-2xl"><Music className="h-7 w-7 text-accent" /></div>
           <p className="font-display text-text-primary">Booking</p>
-          <p className="mt-1 text-sm text-text-secondary">Contrataciones y presentaciones en vivo.</p>
+          <p className="mt-1 text-sm text-text-secondary">Contrataciones para shows en vivo en Colombia y Latinoamérica.</p>
         </Card>
         <Card padding="md" className="flex flex-col items-center text-center">
           <div className="mb-3 text-2xl"><Newspaper className="h-7 w-7 text-accent" /></div>
           <p className="font-display text-text-primary">Prensa</p>
-          <p className="mt-1 text-sm text-text-secondary">Entrevistas y material de prensa.</p>
+          <p className="mt-1 text-sm text-text-secondary">Entrevistas, notas periodísticas y material oficial.</p>
         </Card>
         <Card padding="md" className="flex flex-col items-center text-center">
           <div className="mb-3 text-2xl"><Handshake className="h-7 w-7 text-accent" /></div>
           <p className="font-display text-text-primary">Empresas</p>
-          <p className="mt-1 text-sm text-text-secondary">Alianzas comerciales y patrocinios.</p>
+          <p className="mt-1 text-sm text-text-secondary">Alianzas comerciales, patrocinios y colaboraciones de marca.</p>
         </Card>
       </div>
 
@@ -91,7 +95,7 @@ export default function ContactPage() {
           </Button>
         </form>
       </Card>
-      <SEOHead title="Contacto" description="Contacta a Cabaxx para colaboraciones, booking y prensa." />
+      <SEOHead title="Contacto" description="Contacta a Cabaxx, artista urbano bogotano, para booking, prensa y alianzas comerciales desde Bogotá D.C., Colombia." />
     </div>
   );
 }

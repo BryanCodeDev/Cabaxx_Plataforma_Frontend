@@ -10,6 +10,7 @@ import CommentSection from '@/components/common/CommentSection';
 import { formatDuration } from '@/utils/format';
 import { toast } from 'react-hot-toast';
 import { ArrowLeft, Play } from 'lucide-react';
+import SEOHead from '@/components/seo/SEOHead';
 
 const FOCUS =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md';

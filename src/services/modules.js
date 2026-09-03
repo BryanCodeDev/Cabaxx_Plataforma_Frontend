@@ -66,13 +66,13 @@ export const songService = {
     return api.post(`/songs/${songId}/play`, data);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/songs`, toFormData(values, ['cover', 'audio'])).then(wrap('song'));
+    return api.post(`/artists/${ARTIST_SLUG}/songs`, toFormData(values, ['cover', 'audio'])).then(wrap('song'));
   },
   update(id, values) {
-    return api.put(`/artists/cabaxx/songs/${id}`, toFormData(values, ['cover', 'audio'])).then(wrap('song'));
+    return api.put(`/artists/${ARTIST_SLUG}/songs/${id}`, toFormData(values, ['cover', 'audio'])).then(wrap('song'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/songs/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/songs/${id}`);
   },
 };
 
@@ -87,13 +87,13 @@ export const eventService = {
     return api.post(`/tickets/${ticketId}/purchase`, { quantity });
   },
   create(values) {
-    return api.post(`/artists/cabaxx/events`, values).then(wrap('event'));
+    return api.post(`/artists/${ARTIST_SLUG}/events`, values).then(wrap('event'));
   },
   update(id, values) {
-    return api.put(`/artists/cabaxx/events/${id}`, values).then(wrap('event'));
+    return api.put(`/artists/${ARTIST_SLUG}/events/${id}`, values).then(wrap('event'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/events/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/events/${id}`);
   },
 };
 
@@ -105,13 +105,13 @@ export const postService = {
     return api.get(`/artists/${ARTIST_SLUG}/posts/${slug}`);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/posts`, values).then(wrap('post'));
+    return api.post(`/artists/${ARTIST_SLUG}/posts`, values).then(wrap('post'));
   },
   update(id, values) {
-    return api.put(`/artists/cabaxx/posts/${id}`, values).then(wrap('post'));
+    return api.put(`/artists/${ARTIST_SLUG}/posts/${id}`, values).then(wrap('post'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/posts/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/posts/${id}`);
   },
 };
 
@@ -126,13 +126,13 @@ export const productService = {
     return api.get(`/artists/${ARTIST_SLUG}/product-categories`);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/products`, toFormData(values, ['cover'])).then(wrap('product'));
+    return api.post(`/artists/${ARTIST_SLUG}/products`, toFormData(values, ['cover'])).then(wrap('product'));
   },
   update(id, values) {
-    return api.put(`/artists/cabaxx/products/${id}`, toFormData(values, ['cover'])).then(wrap('product'));
+    return api.put(`/artists/${ARTIST_SLUG}/products/${id}`, toFormData(values, ['cover'])).then(wrap('product'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/products/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/products/${id}`);
   },
 };
 
@@ -141,73 +141,73 @@ export const categoryService = {
     return api.get(`/artists/${ARTIST_SLUG}/product-categories`).then((res) => res.data.data?.categories || []);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/product-categories`, values).then(wrap('category'));
+    return api.post(`/artists/${ARTIST_SLUG}/product-categories`, values).then(wrap('category'));
   },
   update(id, values) {
-    return api.put(`/artists/cabaxx/product-categories/${id}`, values).then(wrap('category'));
+    return api.put(`/artists/${ARTIST_SLUG}/product-categories/${id}`, values).then(wrap('category'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/product-categories/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/product-categories/${id}`);
   },
 };
 
 export const couponService = {
   list(params) {
-    return api.get(`/artists/cabaxx/coupons`, { params }).then((res) => res.data.data || []);
+    return api.get(`/artists/${ARTIST_SLUG}/coupons`, { params }).then((res) => res.data.data || []);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/coupons`, values).then(wrap('coupon'));
+    return api.post(`/artists/${ARTIST_SLUG}/coupons`, values).then(wrap('coupon'));
   },
   update(id, values) {
-    return api.put(`/artists/cabaxx/coupons/${id}`, values).then(wrap('coupon'));
+    return api.put(`/artists/${ARTIST_SLUG}/coupons/${id}`, values).then(wrap('coupon'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/coupons/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/coupons/${id}`);
   },
 };
 
 export const galleryAdminApi = {
   list(params) {
-    return api.get(`/artists/cabaxx/gallery`, { params }).then((res) => res.data.data || []);
+    return api.get(`/artists/${ARTIST_SLUG}/gallery`, { params }).then((res) => res.data.data || []);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/gallery`, toFormData(values, ['file'])).then(wrap('item'));
+    return api.post(`/artists/${ARTIST_SLUG}/gallery`, toFormData(values, ['file'])).then(wrap('item'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/gallery/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/gallery/${id}`);
   },
 };
 
 export const orderAdminApi = {
   list(params) {
-    return api.get(`/artists/cabaxx/orders`, { params }).then((res) => res.data.data || []);
+    return api.get(`/artists/${ARTIST_SLUG}/orders`, { params }).then((res) => res.data.data || []);
   },
   updateStatus(id, status) {
-    return api.put(`/artists/cabaxx/orders/${id}/status`, { status }).then(wrap('order'));
+    return api.put(`/artists/${ARTIST_SLUG}/orders/${id}/status`, { status }).then(wrap('order'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/orders/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/orders/${id}`);
   },
 };
 
 export const newsletterSubscribersApi = {
   list(params) {
-    return api.get(`/artists/cabaxx/newsletter/subscribers`, { params }).then((res) => res.data.data || []);
+    return api.get(`/artists/${ARTIST_SLUG}/newsletter/subscribers`, { params }).then((res) => res.data.data || []);
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/newsletter/subscribers/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/newsletter/subscribers/${id}`);
   },
 };
 
 export const newsletterCampaignsApi = {
   list() {
-    return api.get(`/artists/cabaxx/newsletter/campaigns`).then((res) => res.data.data?.campaigns || []);
+    return api.get(`/artists/${ARTIST_SLUG}/newsletter/campaigns`).then((res) => res.data.data?.campaigns || []);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/newsletter/campaigns`, values).then(wrap('campaign'));
+    return api.post(`/artists/${ARTIST_SLUG}/newsletter/campaigns`, values).then(wrap('campaign'));
   },
   send(id) {
-    return api.post(`/artists/cabaxx/newsletter/campaigns/${id}/send`);
+    return api.post(`/artists/${ARTIST_SLUG}/newsletter/campaigns/${id}/send`);
   },
 };
 
@@ -219,13 +219,13 @@ export const albumService = {
     return api.get(`/artists/${ARTIST_SLUG}/albums/${slug}`);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/albums`, values).then(wrap('album'));
+    return api.post(`/artists/${ARTIST_SLUG}/albums`, values).then(wrap('album'));
   },
   update(id, values) {
-    return api.put(`/artists/cabaxx/albums/${id}`, values).then(wrap('album'));
+    return api.put(`/artists/${ARTIST_SLUG}/albums/${id}`, values).then(wrap('album'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/albums/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/albums/${id}`);
   },
 };
 
@@ -237,13 +237,13 @@ export const videoService = {
     return api.get(`/artists/${ARTIST_SLUG}/videos/${slug}`);
   },
   create(values) {
-    return api.post(`/artists/cabaxx/videos`, values).then(wrap('video'));
+    return api.post(`/artists/${ARTIST_SLUG}/videos`, values).then(wrap('video'));
   },
   update(id, values) {
-    return api.patch(`/artists/cabaxx/videos/${id}`, values).then(wrap('video'));
+    return api.patch(`/artists/${ARTIST_SLUG}/videos/${id}`, values).then(wrap('video'));
   },
   remove(id) {
-    return api.delete(`/artists/cabaxx/videos/${id}`);
+    return api.delete(`/artists/${ARTIST_SLUG}/videos/${id}`);
   },
 };
 

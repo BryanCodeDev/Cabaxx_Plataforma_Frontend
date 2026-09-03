@@ -3,11 +3,14 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import SEOHead from '@/components/seo/SEOHead';
+import { ArtistContext } from '@/context/ArtistContext';
 
 const renderWithProviders = (ui) => render(
   <HelmetProvider>
     <BrowserRouter>
-      {ui}
+      <ArtistContext.Provider value={{ artist: null, isLoading: false, error: null, loadArtist: () => {} }}>
+        {ui}
+      </ArtistContext.Provider>
     </BrowserRouter>
   </HelmetProvider>
 );

@@ -2,9 +2,9 @@ import { useArtist } from '@/hooks/useArtist';
 import { heroPoster } from '@/assets';
 
 const FEATURES = [
-  'Acceso prioritario a preventas',
-  'Contenido y adelantos exclusivos',
-  'Notificaciones de nuevos lanzamientos',
+  'Acceso prioritario a preventas y nuevos lanzamientos',
+  'Contenido exclusivo del estudio y bastidores',
+  'Notificaciones de shows en Bogotá y gira por Colombia',
 ];
 
 function Wordmark({ className = '' }) {
@@ -49,7 +49,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
         <div className="relative z-10 px-14 animate-in fade-in slide-in-from-left-4 duration-700">
           <Wordmark className="px-4 py-2 text-2xl" />
           <h2 className="mt-8 max-w-sm font-display text-4xl leading-[1.05] text-text-primary">
-            Gestiona tu música, eventos y comunidad.
+            Tu acceso directo a la música, los shows y la comunidad bogotana.
           </h2>
           <ul className="mt-8 space-y-3">
             {FEATURES.map((f) => (

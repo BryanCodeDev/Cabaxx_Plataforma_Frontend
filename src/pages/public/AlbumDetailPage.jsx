@@ -1,6 +1,7 @@
 import { EmptyState, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 import { useParams, Link } from 'react-router-dom';
 import { albumService } from '@/services/modules';
 import { ROUTES } from '@/constants';

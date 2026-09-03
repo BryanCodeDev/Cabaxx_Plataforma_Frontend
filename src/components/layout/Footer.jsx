@@ -108,9 +108,9 @@ export default function Footer() {
         <div className="animate-in fade-in slide-in-from-bottom-2 duration-700">
           <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-accent">Directo al oyente</p>
           <h2 className="mt-4 max-w-2xl font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl">
-            Nada de intermediarios.
+            Conexión directa.
             <br />
-            Solo el sonido.
+            Bogotá para el mundo.
           </h2>
         </div>
 
@@ -127,7 +127,7 @@ export default function Footer() {
             </Link>
 
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/40">
-              Todo lo que rodea a {name} — música, fechas y noticias — en un solo lugar, sin filtros.
+              Plataforma oficial de {name}, artista urbano bogotano. Música, eventos, tienda y comunidad — todo directo desde Bogotá D.C., Colombia.
             </p>
 
             {/* Newsletter inline */}

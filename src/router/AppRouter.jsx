@@ -152,7 +152,6 @@ export const router = createBrowserRouter(
       { path: 'noticias', element: withProviders(withSuspense(AdminPosts)) },
       { path: 'galeria', element: withProviders(withSuspense(AdminGallery)) },
       { path: 'newsletter', element: withProviders(withSuspense(AdminNewsletter)) },
-      { path: 'publicaciones', element: withProviders(withSuspense(AdminPosts)) },
       { path: 'analiticas', element: withProviders(withSuspense(AdminAnalytics)) },
       { path: 'configuracion', element: withProviders(withSuspense(AdminSettings)) },
       { path: 'albumes', element: withProviders(withSuspense(AdminAlbums)) },

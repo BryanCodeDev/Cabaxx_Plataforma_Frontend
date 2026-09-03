@@ -13,7 +13,6 @@ import { ARTIST_SLUG } from '@/constants';
 import { artistPortrait, artistPhotos, heroVideo, heroPoster } from '@/assets';
 import { formatDate } from '@/utils/format';
 import Button from '@/components/common/Button';
-import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
 import FollowButton from '@/components/common/FollowButton';
 
@@ -52,12 +51,12 @@ const GALLERY_IMAGES = artistPhotos.slice(0, 8).map((url, i) => ({
   title: `Cabaxx en vivo — ${GALLERY_CAPTIONS[i % GALLERY_CAPTIONS.length]}`,
 }));
 
-// ── Actualiza estos hitos con la historia real de Juan Esteban ──
+// ── Hitos de la carrera de Cabaxx, radicado y produciendo desde Bogotá D.C., Colombia ──
 const CAREER_MILESTONES = [
-  { year: '2019', label: 'Primeras grabaciones en Mosquera, Cundinamarca' },
-  { year: '2021', label: 'Primer sencillo lanzado en plataformas digitales' },
-  { year: '2023', label: 'Primeras presentaciones en escenarios de la región' },
-  { year: '2025', label: 'Lanzamiento oficial con ecosistema digital propio' },
+  { year: '2019', label: 'Primeras grabaciones en la sabana de Bogotá' },
+  { year: '2021', label: 'Debut en plataformas digitales con su primer sencillo' },
+  { year: '2023', label: 'Primeras presentaciones en escenarios de la capital colombiana' },
+  { year: '2025', label: 'Consolidación de su plataforma digital con sede en Bogotá D.C.' },
 ];
 
 const particles = Array.from({ length: 18 }, (_, i) => ({
@@ -145,7 +144,7 @@ function Hero({ artist }) {
     <section
       id="home"
       className="relative flex min-h-[100svh] scroll-mt-16 items-end overflow-hidden bg-black sm:items-center"
-      aria-label={`${displayName} — artista urbano colombiano`}
+      aria-label={`${displayName} — artista urbano bogotano`}
     >
       {/* Fondo: banner o video cinematográfico */}
       <div
@@ -205,7 +204,7 @@ function Hero({ artist }) {
         >
           <PulseBars count={3} />
           <p className="text-[11px] font-bold uppercase tracking-mega text-white/70 sm:text-xs">
-            {artist?.genre || 'Mosquera, Cundinamarca · Música urbana colombiana'}
+            {artist?.genre || 'Bogotá D.C., Colombia · Música urbana hecha en la capital'}
           </p>
         </motion.div>
 
@@ -228,7 +227,8 @@ function Hero({ artist }) {
           className="mt-8 max-w-lg text-base font-light leading-relaxed text-white/60 sm:text-lg"
         >
           {artist?.tagline ||
-            `${displayName}, artista urbano colombiano — trap, reggaetón y drill grabados sin filtro desde Mosquera, Cundinamarca. Cada lanzamiento queda como evidencia.`}
+            `${displayName}, artista urbano bogotano — trap, reggaetón y drill grabados sin filtro desde el corazón de Bogotá D.C., Colombia. Cada lanzamiento queda como evidencia.`
+          }
         </motion.p>
 
         <motion.div
@@ -293,11 +293,11 @@ function Marquee({ artist }) {
   const words = [
     artist?.stage_name?.toUpperCase() || 'CABAXX',
     '·',
-    'ARTISTA URBANO COLOMBIANO',
+    'ARTISTA URBANO BOGOTANO',
     '·',
-    artist?.genre?.toUpperCase() || 'REGGAETÓN · TRAP · DRILL COLOMBIANO',
+    artist?.genre?.toUpperCase() || 'REGGAETÓN · TRAP · DRILL DESDE BOGOTÁ',
     '·',
-    'MOSQUERA, CUNDINAMARCA',
+    'BOGOTÁ D.C., COLOMBIA',
     '·',
     'SIN TRADUCIR',
     '·',
@@ -492,21 +492,21 @@ function About() {
             ) : (
               <div className="mt-6 max-w-lg space-y-4 leading-loose text-white/55">
                 <p>
-                  Cabaxx nació en Mosquera, Cundinamarca, y construyó su sonido lejos de cualquier
+                  Nacido y radicado en Bogotá D.C., Cabaxx construyó su sonido lejos de cualquier
                   fórmula. Reggaetón, trap, drill y la calle colombiana conviven en cada tema, sin
                   poses y sin traducir nada para nadie.
                 </p>
                 <p>
-                  Desde la primera grabación hasta hoy, la regla no ha cambiado: si no es real,
+                  Desde el primer track hasta hoy, la regla no ha cambiado: si no es real,
                   no se graba. Eso es lo único que separa a un artista de un catálogo de canciones.
                 </p>
               </div>
             )}
 
             <blockquote className="mt-8 border-l-2 border-accent pl-6 font-display font-bold uppercase leading-snug text-white" style={{ fontSize: 'clamp(1.4rem,3vw,2rem)' }}>
-              "No grabo para llenar un espacio.
+              &ldquo;No grabo para llenar un espacio.
               <br />
-              Grabo para que se quede."
+              Grabo para que se quede.&rdquo;
             </blockquote>
 
             <div className="mt-8">
@@ -520,7 +520,7 @@ function About() {
               <div className="absolute -inset-3 -z-10 rounded-3xl bg-accent/20 blur-2xl transition-all duration-700 ease-premium group-hover:blur-3xl" aria-hidden="true" />
               <img
                 src={artist?.avatar_url || artistPortrait}
-                alt={`${displayName}, artista urbano colombiano, retrato de estudio`}
+                alt={`${displayName}, artista urbano bogotano, retrato de estudio`}
                 loading="lazy"
                 className="aspect-[4/5] w-full rounded-3xl border border-white/10 object-cover shadow-2xl grayscale transition-all duration-500 ease-premium hover:-rotate-1 hover:scale-[1.02] hover:grayscale-0"
               />
