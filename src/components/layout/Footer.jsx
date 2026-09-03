@@ -120,17 +120,14 @@ export default function Footer() {
 
           {/* Columna marca + newsletter */}
           <div className="md:col-span-2">
-            <Link to={ROUTES.HOME} className={`group inline-flex items-center gap-2.5 rounded-sm ${FOCUS_SURFACE}`}>
+            <Link to={ROUTES.HOME} className={`group inline-flex items-center rounded-sm ${FOCUS_SURFACE}`} aria-label="Inicio">
               <img
                 src={logoMark}
                 alt={`${name} logo`}
-                width="40"
-                height="40"
-                className="h-9 w-9 rounded-md object-contain transition-transform duration-300 group-hover:scale-105"
+                width="48"
+                height="48"
+                className="h-11 w-11 rounded-md object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12"
               />
-              <span className="font-display text-2xl font-black uppercase tracking-[0.02em] text-white transition-transform duration-300 group-hover:scale-[1.02] inline-block">
-                {name}
-              </span>
             </Link>
 
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/40">
