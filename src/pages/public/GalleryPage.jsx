@@ -55,7 +55,12 @@ function FilmGrain({ opacity = 0.04 }) {
 export default function GalleryPage() {
   const { artist } = useArtist();
   const { data, loading } = useFetch(`/artists/${ARTIST_SLUG}/gallery`, { params: { limit: 24 } });
-  const apiItems = (data?.data?.gallery?.rows || []).map((it) => ({ ...it, category: it.type || 'photo' }));
+  const apiRows = Array.isArray(data?.data?.gallery?.rows) ? data.data.gallery.rows : [];
+  const apiItems = apiRows.map((it) => ({
+    ...it,
+    type: it.file_type || it.type || 'image',
+    category: it.category || it.file_type || 'photo',
+  }));
   const items = (apiItems.length ? apiItems : localItems).map((it) => ({
     ...it,
     id: it.id ?? `${it.file_url}-${it.type}`,
@@ -64,9 +69,10 @@ export default function GalleryPage() {
   const [filter, setFilter] = useState('all');
   const [lightbox, setLightbox] = useState(null);
 
-  const visibleItems = filter === 'all' ? items : items.filter((it) => it.category === filter);
-  const photoCount = items.filter((it) => it.category === 'photo').length;
-  const videoCount = items.filter((it) => it.category === 'video').length;
+  const safeItems = Array.isArray(items) ? items : [];
+  const visibleItems = filter === 'all' ? safeItems : safeItems.filter((it) => it.category === filter);
+  const photoCount = safeItems.filter((it) => it.category === 'photo').length;
+  const videoCount = safeItems.filter((it) => it.category === 'video').length;
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
   useEffect(() => {
@@ -145,7 +151,7 @@ export default function GalleryPage() {
                     className={`group relative mb-4 w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] text-left transition-all duration-500 ease-premium hover:border-accent/40 hover:shadow-glow ${
                       tileSize
                     } ${
-                      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                      isVisible ? 'translate-y-0 opacity-100' : ''
                     }`}
                     style={{ transitionDelay: `${(i % 12) * 60}ms` }}
                     aria-label={`Ver ${item.type === 'video' ? 'video' : 'imagen'}: ${item.title}`}
