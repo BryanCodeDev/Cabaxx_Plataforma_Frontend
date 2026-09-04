@@ -146,8 +146,9 @@ export default function DataTable({
   const canEdit = !!(onAdd || onEdit);
   const canDelete = !!onDelete;
 
-  const filtered = data.filter((row) =>
-    columns.some((c) => String(row[c.key] ?? '').toLowerCase().includes(search.toLowerCase()))
+  const safeData = Array.isArray(data) ? data : [];
+  const filtered = safeData.filter((row) =>
+    columns.some((c) => String(row?.[c.key] ?? '').toLowerCase().includes(search.toLowerCase()))
   );
 
   const setField = (name, value) => setValues((prev) => ({ ...prev, [name]: value }));

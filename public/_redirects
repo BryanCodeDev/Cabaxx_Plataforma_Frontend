@@ -1,0 +1,4 @@
+# Netlify _redirects — SPA fallback
+# Cualquier ruta que no sea un asset estático devuelve index.html,
+# permitiendo que React Router maneje rutas como /galeria, /admin/canciones, etc.
+/*    /index.html   200

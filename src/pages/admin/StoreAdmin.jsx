@@ -11,7 +11,7 @@ const fmtPrice = (r) => `$${(r.price ?? 0).toLocaleString('es-CO')} ${r.currency
 
 export default function StoreAdmin() {
   const [tab, setTab] = useState('products');
-  const [products, setProducts] = useState({ data: [] });
+  const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [categories, setCategories] = useState([]);
   const [coupons, setCoupons] = useState([]);
@@ -20,7 +20,8 @@ export default function StoreAdmin() {
   useEffect(() => {
     categoryService.list().then((rows) => setCategories(rows)).catch(() => {});
     productService.getProducts({ params: { limit: 100 } })
-      .then((res) => setProducts(res.data)).catch(() => toast.error('Error al cargar productos'))
+      .then((res) => setProducts(res?.data?.data?.products?.rows || []))
+      .catch(() => toast.error('Error al cargar productos'))
       .finally(() => setLoadingProducts(false));
     couponService.list({ params: { limit: 100 } })
       .then((rows) => setCoupons(rows)).catch(() => toast.error('Error al cargar cupones'))
@@ -28,7 +29,9 @@ export default function StoreAdmin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const reloadProducts = () => productService.getProducts({ params: { limit: 100 } }).then((res) => setProducts(res.data));
+  const reloadProducts = () =>
+    productService.getProducts({ params: { limit: 100 } })
+      .then((res) => setProducts(res?.data?.data?.products?.rows || []));
   const reloadCoupons = () => couponService.list({ params: { limit: 100 } }).then((rows) => setCoupons(rows));
   const reloadCategories = () => categoryService.list().then((rows) => setCategories(rows));
 
@@ -102,7 +105,7 @@ export default function StoreAdmin() {
           <Card padding="lg">
             <DataTable
               columns={productColumns}
-              data={products.data || []}
+              data={products}
               loading={loadingProducts}
               searchable
               emptyMessage="Sin productos"
