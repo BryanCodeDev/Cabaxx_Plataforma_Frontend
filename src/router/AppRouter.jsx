@@ -5,6 +5,7 @@ import DashboardLayout from '@/components/layout/DashboardLayout';
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute';
 import Spinner from '@/components/common/Spinner';
+import ScrollToTop from '@/components/common/ScrollToTop';
 import { AuthProvider } from '@/context/AuthContext';
 import { ArtistProvider } from '@/context/ArtistContext';
 import { ThemeProvider } from '@/context/ThemeContext';
@@ -16,6 +17,7 @@ const Providers = ({ children }) => (
     <ArtistProvider>
       <ThemeProvider>
         <CartProvider>
+          <ScrollToTop />
           {children}
         </CartProvider>
       </ThemeProvider>
