@@ -1,38 +1,65 @@
-import { createContext, useContext, useEffect } from 'react';
-import { useArtist } from '@/context/ArtistContext';
+import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 
-const ThemeContext = createContext(null);
-export { ThemeContext };
+const STORAGE_KEY = 'cabaxx:theme';
+const ThemeContext = createContext({
+  theme: 'dark',
+  setTheme: () => {},
+  toggle: () => {},
+  systemPreference: 'dark',
+});
 
-export function ThemeProvider({ children }) {
-  const { artist, isLoading } = useArtist();
-  const theme = artist?.theme || null;
+const getSystemPref = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches
+    ? 'light'
+    : 'dark';
 
-  function applyArtistTheme(themeData) {
-    if (!themeData) return;
-    const root = document.documentElement;
-    if (themeData.primary_color) root.style.setProperty('--color-primary', themeData.primary_color);
-    if (themeData.secondary_color) root.style.setProperty('--color-secondary', themeData.secondary_color);
-    if (themeData.accent_color) root.style.setProperty('--color-accent', themeData.accent_color);
-    if (themeData.font_heading) root.style.setProperty('--font-heading', themeData.font_heading);
-    if (themeData.font_body) root.style.setProperty('--font-body', themeData.font_body);
-    if (themeData.dark_mode_default) root.classList.add('dark');
-    else root.classList.remove('dark');
+const apply = (theme) => {
+  if (typeof document === 'undefined') return;
+  const root = document.documentElement;
+  if (theme === 'light') {
+    root.classList.add('light');
+    root.style.colorScheme = 'light';
+  } else {
+    root.classList.remove('light');
+    root.style.colorScheme = 'dark';
   }
+};
+
+export function ThemeProvider({ children, defaultTheme = 'dark' }) {
+  const [theme, setThemeState] = useState(() => {
+    if (typeof window === 'undefined') return defaultTheme;
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'light' || stored === 'dark') return stored;
+    return defaultTheme;
+  });
+  const [systemPreference, setSystemPreference] = useState(getSystemPref);
 
   useEffect(() => {
-    if (theme) applyArtistTheme(theme);
+    apply(theme);
   }, [theme]);
 
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: light)');
+    const onChange = (e) => setSystemPreference(e.matches ? 'light' : 'dark');
+    mq.addEventListener?.('change', onChange);
+    return () => mq.removeEventListener?.('change', onChange);
+  }, []);
+
+  const setTheme = useCallback((next) => {
+    setThemeState(next);
+    try { localStorage.setItem(STORAGE_KEY, next); } catch (_) { /* noop */ }
+  }, []);
+
+  const toggle = useCallback(() => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme, setTheme]);
+
   return (
-    <ThemeContext.Provider value={{ theme, applyArtistTheme, isLoading }}>
+    <ThemeContext.Provider value={{ theme, setTheme, toggle, systemPreference }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
-export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error('useTheme must be used within ThemeProvider');
-  return ctx;
-}
+export const useTheme = () => useContext(ThemeContext);

@@ -57,16 +57,12 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Scrollbar custom (dark, delgado) */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
+  /* Scrollbar custom — color tracks con tokens */
   ::-webkit-scrollbar-track {
-    background: #0d0d0d;
+    background: var(--color-primary);
   }
   ::-webkit-scrollbar-thumb {
-    background: #2e2e2e;
+    background: var(--color-border);
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -84,6 +80,25 @@
       scroll-behavior: auto !important;
     }
   }
+}
+
+/* ─────────────────────────────────────────
+   Tema claro — solo se activa con clase `.light` en <html>.
+   Por defecto la marca es oscura (hero, fotos, identidad urbana).
+───────────────────────────────────────── */
+.light {
+  --color-primary: #f6f6f7;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0f0f1;
+  --color-text-primary: #0d0d0d;
+  --color-text-secondary: #4b4b4f;
+  --color-text-muted: #8a8a8e;
+  --color-border: #e2e2e5;
+}
+
+.light body {
+  background: var(--color-primary);
+  color: var(--color-text-primary);
 }
 
 @layer components {

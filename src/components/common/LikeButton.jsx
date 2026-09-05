@@ -3,6 +3,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { communityService } from '@/services/modules';
 import { toast } from 'react-hot-toast';
 import { Heart } from 'lucide-react';
+import { FOCUS } from '@/constants';
 
 export default function LikeButton({ referenceType, referenceId, initialCount = 0, className = '' }) {
   const { user } = useAuth();
@@ -38,26 +39,37 @@ export default function LikeButton({ referenceType, referenceId, initialCount = 
       const data = res.data?.data || res.data;
       setLiked(data.liked);
       setCount(data.count ?? count);
-    } catch (err) {
+    } catch {
       toast.error('No se pudo actualizar el me gusta');
     } finally {
       setLoading(false);
     }
   };
 
+  const label = liked ? 'Quitar me gusta' : 'Dar me gusta';
+
   return (
     <button
       type="button"
       onClick={toggle}
       disabled={loading}
-      className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 transition-all duration-200 active:scale-95 disabled:opacity-50 ${
+      aria-pressed={liked}
+      aria-label={`${label} (${count} en total)`}
+      className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-all duration-200 active:scale-95 disabled:opacity-50 ${FOCUS} ${
         liked
           ? 'border-accent/50 bg-accent/10 text-accent'
           : 'border-border text-text-secondary hover:border-accent/40 hover:text-text-primary'
       } ${className}`}
     >
-      <Heart className={`h-4 w-4 transition-transform ${liked ? 'scale-110 fill-accent text-accent' : 'text-text-secondary'}`} />
-      <span className="font-mono text-sm">{count.toLocaleString('es-CO')}</span>
+      <Heart
+        className={`h-4 w-4 shrink-0 transition-transform ${
+          liked ? 'scale-110 fill-accent text-accent' : 'text-text-secondary'
+        }`}
+        aria-hidden="true"
+      />
+      <span className="font-mono text-sm tabular-nums">
+        {count.toLocaleString('es-CO')}
+      </span>
     </button>
   );
 }

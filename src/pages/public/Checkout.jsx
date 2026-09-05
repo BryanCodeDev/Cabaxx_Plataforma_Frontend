@@ -7,8 +7,9 @@ import { orderService, paymentService } from '@/services/modules';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Card from '@/components/common/Card';
+import StickyCartSummary from '@/components/common/StickyCartSummary';
 import { ROUTES, FOCUS } from '@/constants';
-import { Check } from 'lucide-react';
+import { Check, ShieldCheck } from 'lucide-react';
 import { formatCurrency } from '@/utils/format';
 import { toast } from 'react-hot-toast';
 import SEOHead from '@/components/seo/SEOHead';
@@ -226,6 +227,22 @@ export default function CheckoutPage() {
           </Card>
         </div>
       </div>
+      {step < 4 && (
+        <StickyCartSummary
+          total={formatCurrency(total)}
+          primary={{
+            label: step === 1 ? 'Continuar' : step === 2 ? 'Confirmar pedido' : 'Elegir pago',
+            icon: <ShieldCheck className="h-4 w-4" />,
+            loading,
+            onClick: () => {
+              if (step === 1) setStep(2);
+              else if (step === 2) submitOrder();
+            },
+          }}
+          secondary={step > 1 ? { label: 'Atrás', onClick: () => setStep((s) => s - 1) } : null}
+        />
+      )}
+
       <SEOHead title="Checkout" description="Finaliza tu compra en la tienda de Cabaxx." noIndex />
     </div>
   );

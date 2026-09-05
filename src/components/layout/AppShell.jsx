@@ -13,6 +13,7 @@ import { ROUTES, FOCUS } from '@/constants';
 import Button from '@/components/common/Button';
 import { Avatar } from '@/components/common';
 import Dropdown from '@/components/common/Dropdown';
+import ThemeToggle from '@/components/common/ThemeToggle';
 import { logoMark } from '@/assets';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 
@@ -304,8 +305,8 @@ export default function AppShell() {
           </nav>
         )}
 
-        {/* ── Acciones (auth + carrito + burger) ── */}
-        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        {/* ── Acciones (auth + carrito + theme + burger) ── */}
+        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
           {mode === 'public' && (
             <Link
               to={ROUTES.CART}
@@ -315,6 +316,8 @@ export default function AppShell() {
               <ShoppingCart className="h-5 w-5" />
             </Link>
           )}
+
+          <ThemeToggle variant="icon" className="hidden sm:inline-flex" />
 
           {isAuthenticated ? (
             <Dropdown
@@ -426,6 +429,9 @@ export default function AppShell() {
                     <ShoppingCart className="h-4 w-4" />
                     Carrito
                   </Link>
+                  <div className="mt-4 px-3">
+                    <ThemeToggle variant="pill" />
+                  </div>
                 </>
               )}
 

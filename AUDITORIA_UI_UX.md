@@ -1,8 +1,24 @@
 # Auditoría UI/UX & Frontend — Cabaxx Plataforma
 
 > Stack detectado: **React 18 + Vite + Tailwind 3 + React Router 6 + Framer Motion**.
-> Single-source-of-truth en `tailwind.config.js`, `index.css` y la familia de `Layout`/`Navbar`/`Footer`/`Home.jsx`.
+> Single-source-of-truth en `tailwind.config.js`, `index.css` y la familia de `Layout`/`AppShell`/`Footer`/`Home.jsx`.
 > Este documento es una **guía accionable**: cada bloque incluye *qué cambiar*, *dónde* (con `file:line`) y *por qué*.
+
+---
+
+## Estado actual (al cierre de Fase 1)
+
+| Fase | Estado | Notas |
+|------|--------|-------|
+| **1. Sistema de diseño responsive** (Rondas 1–3) | ✅ Cerrada | Breakpoints `xs/3xl/4xl`, fontSize `display-*`, maxWidth `8xl–10xl`, boxShadow `elev-1/2/3`, `container-fluid`, grids semánticas (`grid-cards`, `grid-feature`, `grid-stat`). |
+| **1b. Shell unificado** (Ronda 4) | ✅ Cerrada | `AppShell` reemplaza `Navbar` + `DashboardLayout`; detecta modo público/admin; drawer accesible; `AdminPageHeader` en 11 páginas. |
+| **1c. A11y profunda** (Ronda 5) | ✅ Cerrada | `CommentSection`, `LikeButton`, `FollowButton`, `Dropdown`, `ProductCard` con semántica ARIA; `StickyCartSummary` en Cart y Checkout. |
+| **2. Modo claro/oscuro** | 🟡 Pendiente | Token system existe en `tailwind.config.js`; falta `darkMode: 'class'` + ThemeProvider + toggle. |
+| **3. Command palette / Búsqueda global** | 🟡 Pendiente | `prefers-reduced-motion` ya respetado en drawer. |
+| **4. Auditoría final / Lighthouse** | 🟡 Pendiente | A11y AA, perf <2s, CLS <0.1, LCP <2.5s. |
+
+**Build:** 0 errores, 21 warnings preexistentes (no introducidos por las rondas).
+**Componentes nuevos:** `useBreakpoint`, `useFocusTrap`, `ScrollUtilities`, `SkipLink`, `CenteredContainer`, `StickyBottomCTA`, `PageSpinner`, `StickyCartSummary`, `AppShell`, `AdminPageHeader`.
 
 ---
 

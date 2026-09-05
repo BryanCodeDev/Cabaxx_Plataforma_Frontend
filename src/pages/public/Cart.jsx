@@ -1,18 +1,21 @@
 import { SectionHeading, EmptyState } from '@/components/common'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/hooks/useAuth';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
+import StickyCartSummary from '@/components/common/StickyCartSummary';
 import { ROUTES, FOCUS } from '@/constants';
 import { formatCurrency } from '@/utils/format';
 import { toast } from 'react-hot-toast';
+import { ShoppingCart as CartIcon, ShieldCheck } from 'lucide-react';
 import SEOHead from '@/components/seo/SEOHead';
 export default function CartPage() {
   const { items, total, itemCount, removeItem, updateQuantity, clearCart } = useCart();
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
   const [applying, setApplying] = useState(false);
@@ -116,13 +119,23 @@ export default function CartPage() {
               </Button>
             </div>
             <Link to={isAuthenticated ? ROUTES.CHECKOUT : ROUTES.LOGIN} state={{ from: { pathname: ROUTES.CHECKOUT } }} className={FOCUS}>
-              <Button fullWidth className="mt-4">
+              <Button fullWidth className="mt-4 hidden sm:inline-flex" icon={<ShieldCheck className="h-4 w-4" />}>
                 Finalizar Compra
               </Button>
             </Link>
           </Card>
         </div>
       </div>
+
+      <StickyCartSummary
+        total={formatCurrency(finalTotal)}
+        primary={{
+          label: 'Finalizar compra',
+          icon: <ShieldCheck className="h-4 w-4" />,
+          onClick: () => navigate(isAuthenticated ? ROUTES.CHECKOUT : ROUTES.LOGIN, { state: { from: { pathname: ROUTES.CHECKOUT } } }),
+        }}
+      />
+
       <SEOHead title="Carrito" description="Tu carrito de compras en la tienda de Cabaxx." noIndex />
     </div>
   );

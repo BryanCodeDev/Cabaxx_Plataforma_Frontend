@@ -27,6 +27,23 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Anti-FOUC: aplica el tema antes del primer paint.
+      (function () {
+        try {
+          var stored = localStorage.getItem('cabaxx:theme');
+          var theme = stored === 'light' || stored === 'dark'
+            ? stored
+            : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.add('light');
+            document.documentElement.style.colorScheme = 'light';
+          } else {
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (e) { /* noop */ }
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

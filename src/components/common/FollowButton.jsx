@@ -37,7 +37,8 @@ export default function FollowButton({ artistId, className = '' }) {
       const data = res.data?.data || res.data;
       setFollowing(data.following);
       setCount(data.count ?? count);
-    } catch (err) {
+      toast.success(data.following ? 'Siguiendo al artista' : 'Has dejado de seguir');
+    } catch {
       toast.error('No se pudo actualizar el seguimiento');
     } finally {
       setLoading(false);
@@ -50,10 +51,16 @@ export default function FollowButton({ artistId, className = '' }) {
       onClick={toggle}
       loading={loading}
       icon={following ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-      className={`uppercase tracking-wide ${className}`}
+      aria-pressed={following}
+      aria-label={following ? `Dejar de seguir al artista (${count} seguidores)` : `Seguir al artista (${count} seguidores)`}
+      className={className}
     >
       {following ? 'Siguiendo' : 'Seguir'}
-      {count > 0 && <span className="ml-1 font-mono text-xs opacity-60">· {count.toLocaleString('es-CO')}</span>}
+      {count > 0 && (
+        <span className="ml-1 font-mono text-xs opacity-60 tabular-nums">
+          · {count.toLocaleString('es-CO')}
+        </span>
+      )}
     </Button>
   );
 }
