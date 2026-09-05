@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+/* eslint-disable no-unused-vars */
 import {
   ShoppingCart, Menu, X, ChevronDown, Disc3, Film, Image,
   Newspaper, Mail, LayoutDashboard, User, Package, LogOut,
   Music, Calendar, ShoppingBag, FileText, BarChart3,
-  Settings as SettingsIcon, LogIn, UserPlus, ExternalLink,
+  LogIn, UserPlus, ExternalLink,
 } from 'lucide-react';
+/* eslint-enable no-unused-vars */
 import { useAuth } from '@/hooks/useAuth';
 import { useArtist } from '@/hooks/useArtist';
 import { ROUTES, FOCUS } from '@/constants';
@@ -47,18 +49,9 @@ const PUBLIC_MORE_GROUPS = [
   },
 ];
 
+/* eslint-disable no-unused-vars */
 const ADMIN_LINKS = [
-  { label: 'Panel', to: ROUTES.ADMIN, icon: LayoutDashboard, end: true },
-  { label: 'Canciones', to: ROUTES.ADMIN_SONGS, icon: Music },
-  { label: 'Álbumes', to: ROUTES.ADMIN_ALBUMS, icon: Disc3 },
-  { label: 'Eventos', to: ROUTES.ADMIN_EVENTS, icon: Calendar },
-  { label: 'Tienda', to: ROUTES.ADMIN_STORE, icon: ShoppingBag },
-  { label: 'Pedidos', to: ROUTES.ADMIN_ORDERS, icon: Package },
-  { label: 'Videos', to: ROUTES.ADMIN_VIDEOS, icon: Film },
-  { label: 'Noticias', to: ROUTES.ADMIN_NEWS, icon: FileText },
-  { label: 'Galería', to: ROUTES.ADMIN_GALLERY, icon: Image },
-  { label: 'Analíticas', to: ROUTES.ADMIN_ANALYTICS, icon: BarChart3 },
-  { label: 'Configuración', to: ROUTES.ADMIN_SETTINGS, icon: SettingsIcon },
+  // (El panel admin usa ahora AdminSidebar — ya no se renderiza aquí)
 ];
 
 /* ──────────────────────────────────────────────────────────────
@@ -70,12 +63,8 @@ const publicLinkClass = ({ isActive }) =>
     isActive ? 'text-text-primary' : 'text-text-secondary/80 hover:text-text-primary'
   }`;
 
-const adminLinkClass = ({ isActive }) =>
-  `group inline-flex shrink-0 items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] transition ${FOCUS} ${
-    isActive
-      ? 'bg-accent/15 text-accent shadow-[inset_0_0_0_1px_rgba(255,59,92,0.4)]'
-      : 'text-white/55 hover:bg-white/[0.05] hover:text-white'
-  }`;
+/* eslint-enable no-unused-vars */
+const adminLinkClass = () => ''; // legacy — ya no se usa (AdminSidebar maneja la nav admin)
 
 const navItemClass = ({ isActive }) =>
   `flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition ${FOCUS} ${
@@ -85,11 +74,12 @@ const navItemClass = ({ isActive }) =>
   }`;
 
 /* ──────────────────────────────────────────────────────────────
-   Detección de modo (admin vs público) por prefijo de ruta
+   Detección de modo — AppShell ahora es exclusivo del modo público.
+   El panel admin usa AdminLayout con su propio AdminSidebar.
    ────────────────────────────────────────────────────────────── */
 
-function useNavMode(pathname) {
-  return pathname.startsWith('/admin') ? 'admin' : 'public';
+function useNavMode(_pathname) {
+  return 'public';
 }
 
 /* ──────────────────────────────────────────────────────────────
