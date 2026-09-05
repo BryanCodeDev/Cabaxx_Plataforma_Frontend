@@ -1,9 +1,11 @@
-import { SectionHeading, Badge } from '@/components/common'
+import { Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
+import { Package } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { orderAdminApi } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const STATUS_VARIANT = {
   pending: 'warning', paid: 'success', processing: 'warning',
@@ -63,7 +65,12 @@ export default function OrdersAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Pedidos" subtitle="Gestiona los pedidos de la tienda" />
+      <AdminPageHeader
+        icon={Package}
+        eyebrow="Panel"
+        title="Pedidos"
+        subtitle="Gestiona los pedidos de la tienda"
+      />
       <Card padding="lg">
         <DataTable
           columns={columns}

@@ -1,9 +1,11 @@
-import { SectionHeading, Badge } from '@/components/common'
+import { Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
+import { Disc3 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { albumService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const TYPE_OPTIONS = [
   { value: 'single', label: 'Single' },
@@ -52,7 +54,12 @@ export default function AlbumsAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Álbumes" subtitle="Lanzamientos discográficos" />
+      <AdminPageHeader
+        icon={Disc3}
+        eyebrow="Panel"
+        title="Álbumes"
+        subtitle="Lanzamientos discográficos"
+      />
       <Card padding="lg">
         <DataTable
           columns={columns}

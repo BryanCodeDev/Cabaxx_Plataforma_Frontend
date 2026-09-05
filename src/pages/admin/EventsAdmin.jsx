@@ -1,9 +1,11 @@
-import { SectionHeading, Badge } from '@/components/common'
+import { Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
+import { Calendar } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { eventService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const STATUS_VARIANT = { published: 'success', draft: 'warning', cancelled: 'error', sold_out: 'default' };
 
@@ -61,7 +63,12 @@ export default function EventsAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Eventos" subtitle="Conciertos y presentaciones" />
+      <AdminPageHeader
+        icon={Calendar}
+        eyebrow="Panel"
+        title="Eventos"
+        subtitle="Conciertos y presentaciones"
+      />
         <Card padding="lg">
           <DataTable
             columns={columns}

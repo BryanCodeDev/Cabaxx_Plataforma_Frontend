@@ -1,16 +1,15 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import SEOHead from '@/components/seo/SEOHead';
-import Navbar from './Navbar';
+import AppShell from './AppShell';
 import Footer from './Footer';
 import Breadcrumbs from './Breadcrumbs';
 import ScrollUtilities from '@/components/common/ScrollUtilities';
 import SkipLink from '@/components/common/SkipLink';
-import { useArtist } from '@/hooks/useArtist';
-import { APP_NAME } from '@/constants';
 
-export default function Layout({ children }) {
-  const { artist } = useArtist();
+export default function Layout({ children, hideFooter = false }) {
   const { pathname } = useLocation();
+  const isAdmin = pathname.startsWith('/admin');
+
   return (
     <>
       <SEOHead />
@@ -25,16 +24,16 @@ export default function Layout({ children }) {
           }}
           aria-hidden="true"
         />
-        <Navbar />
+        <AppShell />
         <main
           id="main-content"
           key={pathname}
-          className="animate-in fade-in relative z-[2] flex-1 duration-300"
+          className={`animate-in fade-in relative z-[2] flex-1 duration-300 ${isAdmin ? 'bg-[#0a0a0a]' : ''}`}
         >
-          <Breadcrumbs />
+          {!isAdmin && <Breadcrumbs />}
           {children || <Outlet />}
         </main>
-        <Footer />
+        {!hideFooter && !isAdmin && <Footer />}
       </div>
       <ScrollUtilities />
     </>

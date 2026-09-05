@@ -1,9 +1,11 @@
-import { SectionHeading, Badge } from '@/components/common'
+import { Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
+import { Image as ImageIcon } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { galleryAdminApi } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const CATEGORY_OPTIONS = [
   { value: 'general', label: 'General' },
@@ -53,7 +55,12 @@ export default function GalleryAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Galería" subtitle="Imágenes y videos promocionales" />
+      <AdminPageHeader
+        icon={ImageIcon}
+        eyebrow="Panel"
+        title="Galería"
+        subtitle="Imágenes y videos promocionales"
+      />
       <Card padding="lg">
         <DataTable
           columns={columns}

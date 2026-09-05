@@ -1,9 +1,11 @@
-import { SectionHeading, Badge } from '@/components/common'
+import { Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
+import { Film } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { videoService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const STATUS_VARIANT = { published: 'success', draft: 'warning' };
 
@@ -45,7 +47,12 @@ export default function VideosAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Videos" subtitle="Clips y videoclips" />
+      <AdminPageHeader
+        icon={Film}
+        eyebrow="Panel"
+        title="Videos"
+        subtitle="Clips y videoclips"
+      />
       <Card padding="lg">
         <DataTable
           columns={columns}

@@ -1,9 +1,11 @@
-import { SectionHeading, Badge } from '@/components/common'
+import { Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
+import { FileText } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { postService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'Noticia' },
@@ -52,7 +54,12 @@ export default function PostsAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Noticias / Blog" subtitle="Publicaciones y novedades" />
+      <AdminPageHeader
+        icon={FileText}
+        eyebrow="Panel"
+        title="Noticias / Blog"
+        subtitle="Publicaciones y novedades"
+      />
       <Card padding="lg">
         <DataTable
           columns={columns}

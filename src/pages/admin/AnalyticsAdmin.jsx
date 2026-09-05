@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { BarChart3 } from 'lucide-react';
 import {
   songService, albumService, eventService, productService,
   orderAdminApi, galleryAdminApi, postService,   videoService,
 } from '@/services/modules';
 import Card from '@/components/common/Card';
-import { SectionHeading } from '@/components/common';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 function Bars({ data }) {
   const max = Math.max(1, ...data.map((d) => d.value));
@@ -57,7 +58,12 @@ export default function AnalyticsAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Analíticas" subtitle="Distribución de contenido y pedidos" />
+      <AdminPageHeader
+        icon={BarChart3}
+        eyebrow="Panel"
+        title="Analíticas"
+        subtitle="Distribución de contenido y pedidos"
+      />
 
       {!stats ? (
         <Card padding="lg">Cargando métricas...</Card>

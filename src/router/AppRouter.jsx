@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute';
 import Spinner from '@/components/common/Spinner';
@@ -144,7 +143,7 @@ export const router = createBrowserRouter(
 
   {
     path: '/admin',
-    element: withProviders(<AdminRoute><DashboardLayout /></AdminRoute>),
+    element: withProviders(<AdminRoute><Layout hideFooter><Outlet /></Layout></AdminRoute>),
     children: [
       { index: true, element: withProviders(withSuspense(AdminDashboard)) },
       { path: 'canciones', element: withProviders(withSuspense(AdminSongs)) },

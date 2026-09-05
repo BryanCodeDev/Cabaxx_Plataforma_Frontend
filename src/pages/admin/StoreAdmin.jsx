@@ -1,9 +1,11 @@
-import { SectionHeading, Tabs, Badge } from '@/components/common'
+import { Tabs, Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
+import { ShoppingBag } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { productService, categoryService, couponService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const STATUS_VARIANT = { active: 'success', inactive: 'default', expired: 'error', published: 'success', draft: 'warning' };
 
@@ -98,7 +100,12 @@ export default function StoreAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Tienda" subtitle="Catálogo, categorías y cupones" />
+      <AdminPageHeader
+        icon={ShoppingBag}
+        eyebrow="Panel"
+        title="Tienda"
+        subtitle="Catálogo, categorías y cupones"
+      />
         <Tabs tabs={TABS.map((t) => ({ ...t, onClick: () => setTab(t.key) }))} active={tab} />
 
         {tab === 'products' && (

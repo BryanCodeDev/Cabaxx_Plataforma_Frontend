@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Settings as SettingsIcon, Trash2 } from 'lucide-react';
 import api from '@/services/api';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
-import { SectionHeading } from '@/components/common';
+import Spinner from '@/components/common/Spinner';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 export default function AdminSettings() {
   const [settings, setSettings] = useState({});
@@ -38,11 +39,16 @@ export default function AdminSettings() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Configuración" subtitle="Ajustes generales del artista" />
+      <AdminPageHeader
+        icon={SettingsIcon}
+        eyebrow="Panel"
+        title="Configuración"
+        subtitle="Ajustes generales del artista"
+      />
 
       <Card padding="lg">
           {loading ? (
-            <p className="text-sm text-text-muted">Cargando...</p>
+            <div className="flex justify-center py-10"><Spinner size="md" color="accent" /></div>
           ) : (
             <div className="space-y-3">
               {entries.length === 0 && (

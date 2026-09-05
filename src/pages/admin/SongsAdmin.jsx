@@ -1,9 +1,11 @@
-import { SectionHeading, Badge } from '@/components/common'
+import { Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
+import { Music } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { songService } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import Card from '@/components/common/Card';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const STATUS_OPTIONS = [
   { value: 'draft', label: 'Borrador' },
@@ -59,7 +61,12 @@ export default function SongsAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Canciones" subtitle="Gestiona el catálogo musical del artista" />
+      <AdminPageHeader
+        icon={Music}
+        eyebrow="Panel"
+        title="Canciones"
+        subtitle="Gestiona el catálogo musical del artista"
+      />
         <Card padding="lg">
           <DataTable
             columns={columns}

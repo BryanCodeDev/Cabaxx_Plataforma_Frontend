@@ -1,12 +1,13 @@
-import { SectionHeading, Badge } from '@/components/common'
+import { Badge } from '@/components/common'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { Send } from 'lucide-react';
+import { Mail, Send } from 'lucide-react';
 import { newsletterSubscribersApi, newsletterCampaignsApi } from '@/services/modules';
 import DataTable from '@/components/admin/DataTable';
 import FormModal from '@/components/admin/FormModal';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
 
 const STATUS_VARIANT = { subscribed: 'success', unsubscribed: 'default', bounced: 'error' };
 
@@ -61,7 +62,12 @@ export default function NewsletterAdmin() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Panel" title="Newsletter" subtitle="Suscriptores y campañas" />
+      <AdminPageHeader
+        icon={Mail}
+        eyebrow="Panel"
+        title="Newsletter"
+        subtitle="Suscriptores y campañas"
+      />
 
         <Card padding="lg">
           <div className="mb-4 flex items-center justify-between">

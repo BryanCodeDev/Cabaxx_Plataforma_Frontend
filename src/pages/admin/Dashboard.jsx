@@ -1,25 +1,44 @@
 import { useEffect, useState } from 'react';
 import {
   Music, Disc3, Calendar, ShoppingBag, Package, Users, Film, Image, FileText,
+  LayoutDashboard, ArrowRight,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import {
   songService, albumService, eventService, productService,
-  orderAdminApi, galleryAdminApi, postService, newsletterSubscribersApi,   videoService,
+  orderAdminApi, galleryAdminApi, postService, newsletterSubscribersApi, videoService,
 } from '@/services/modules';
 import Card from '@/components/common/Card';
+import Spinner from '@/components/common/Spinner';
+import AdminPageHeader from '@/components/admin/AdminPageHeader';
+import { ROUTES } from '@/constants';
 
-function Kpi({ icon: Icon, label, value, accent }) {
-  return (
-    <Card padding="md" className="flex items-center gap-4">
-      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${accent}`}>
+const KPIS = [
+  { key: 'songs', icon: Music, label: 'Canciones', to: ROUTES.ADMIN_SONGS },
+  { key: 'albums', icon: Disc3, label: 'Álbumes', to: ROUTES.ADMIN_ALBUMS },
+  { key: 'videos', icon: Film, label: 'Videos', to: ROUTES.ADMIN_VIDEOS },
+  { key: 'events', icon: Calendar, label: 'Eventos', to: ROUTES.ADMIN_EVENTS },
+  { key: 'products', icon: ShoppingBag, label: 'Productos', to: ROUTES.ADMIN_STORE },
+  { key: 'gallery', icon: Image, label: 'Galería', to: ROUTES.ADMIN_GALLERY },
+  { key: 'posts', icon: FileText, label: 'Publicaciones', to: ROUTES.ADMIN_NEWS },
+  { key: 'pending', icon: Package, label: 'Pedidos pendientes', to: ROUTES.ADMIN_ORDERS },
+  { key: 'subs', icon: Users, label: 'Suscriptores', to: ROUTES.ADMIN_NEWSLETTER },
+];
+
+function Kpi({ icon: Icon, label, value, to }) {
+  const inner = (
+    <Card padding="md" className="group flex items-center gap-4 transition hover:border-accent/40 hover:bg-[#111]">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition group-hover:scale-105">
         <Icon className="h-5 w-5" />
       </div>
-      <div className="min-w-0">
-        <p className="truncate text-sm text-text-secondary">{label}</p>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-xs uppercase tracking-[0.15em] text-text-secondary">{label}</p>
         <p className="mt-1 font-display text-2xl text-text-primary">{value}</p>
       </div>
+      {to && <ArrowRight className="h-4 w-4 shrink-0 text-text-muted opacity-0 transition group-hover:translate-x-1 group-hover:opacity-100 group-hover:text-accent" />}
     </Card>
   );
+  return to ? <Link to={to} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] rounded-2xl">{inner}</Link> : inner;
 }
 
 export default function AdminDashboard() {
@@ -51,32 +70,26 @@ export default function AdminDashboard() {
     });
   }, []);
 
-  const kpis = stats ? [
-    { icon: Music, label: 'Canciones', value: stats.songs, accent: 'bg-accent/10 text-accent' },
-    { icon: Disc3, label: 'Álbumes', value: stats.albums, accent: 'bg-accent/10 text-accent' },
-    { icon: Film, label: 'Videos', value: stats.videos, accent: 'bg-accent/10 text-accent' },
-    { icon: Calendar, label: 'Eventos', value: stats.events, accent: 'bg-accent/10 text-accent' },
-    { icon: ShoppingBag, label: 'Productos', value: stats.products, accent: 'bg-accent/10 text-accent' },
-    { icon: Image, label: 'Galería', value: stats.gallery, accent: 'bg-accent/10 text-accent' },
-    { icon: FileText, label: 'Publicaciones', value: stats.posts, accent: 'bg-accent/10 text-accent' },
-    { icon: Package, label: 'Pedidos pendientes', value: stats.pending, accent: 'bg-accent/10 text-accent' },
-    { icon: Users, label: 'Suscriptores', value: stats.subs, accent: 'bg-accent/10 text-accent' },
-  ] : [];
-
   return (
     <div className="space-y-8">
-      <div>
-        <h2 className="font-display text-2xl text-text-primary">Panel de control</h2>
-        <p className="text-sm text-text-muted">Resumen general de la plataforma</p>
-      </div>
-      <div className="grid-stat">
-        {kpis.map((k) => (
-          <Kpi key={k.label} {...k} />
-        ))}
-        {!stats && (
-          <Card padding="md" className="sm:col-span-2 lg:col-span-4">Cargando métricas...</Card>
-        )}
-      </div>
+      <AdminPageHeader
+        icon={LayoutDashboard}
+        eyebrow="Panel"
+        title="Resumen general"
+        subtitle="Vista rápida del estado de la plataforma"
+      />
+
+      {!stats ? (
+        <div className="flex min-h-[40vh] items-center justify-center">
+          <Spinner size="lg" color="accent" />
+        </div>
+      ) : (
+        <div className="grid-stat">
+          {KPIS.map((k) => (
+            <Kpi key={k.key} {...k} value={stats[k.key]} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
