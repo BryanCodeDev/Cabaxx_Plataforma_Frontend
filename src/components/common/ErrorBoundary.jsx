@@ -46,6 +46,53 @@ export default class ErrorBoundary extends Component {
     if (typeof window !== 'undefined') window.location.reload();
   };
 
+  handleClearCacheAndReload = async () => {
+    if (typeof window === 'undefined') return;
+    try {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(
+          regs.map(async (reg) => {
+            try {
+              if (reg.waiting) {
+                reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+              }
+              await reg.unregister();
+            } catch (e) {
+              /* noop */
+            }
+          })
+        );
+      }
+      if (typeof caches !== 'undefined') {
+        try {
+          const keys = await caches.keys();
+          await Promise.all(keys.map((k) => caches.delete(k)));
+        } catch (e) {
+          /* noop */
+        }
+      }
+      const url = new URL(window.location.href);
+      url.searchParams.set('_', String(Date.now()));
+      window.location.replace(url.toString());
+    } catch (e) {
+      window.location.reload();
+    }
+  };
+
+  isChunkLoadError = () => {
+    const msg = String(this.state.error?.message || '');
+    return (
+      msg.includes('Failed to fetch dynamically imported module') ||
+      msg.includes('Importing a module script failed') ||
+      msg.includes("error loading dynamically imported module") ||
+      msg.includes('Loading chunk') ||
+      msg.includes('Loading CSS chunk') ||
+      msg.includes('ChunkLoadError') ||
+      msg.includes('Expected a JavaScript-or-Wasm module script')
+    );
+  };
+
   handleCopy = async () => {
     const { error, errorInfo } = this.state;
     const text = [
@@ -128,6 +175,17 @@ export default class ErrorBoundary extends Component {
                 <RefreshCw className="h-4 w-4" />
                 Recargar página
               </button>
+
+              {this.isChunkLoadError() && (
+                <button
+                  type="button"
+                  onClick={this.handleClearCacheAndReload}
+                  className="inline-flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-5 py-2.5 text-sm font-semibold text-amber-300 transition hover:bg-amber-500/20 focus:outline-none focus:ring-2 focus:ring-amber-500/40 focus:ring-offset-2 focus:ring-offset-black"
+                >
+                  <RefreshCw className="h-4 w-4" />
+                  Limpiar caché y recargar
+                </button>
+              )}
 
               <Link
                 to={ROUTES.HOME}
