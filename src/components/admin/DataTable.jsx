@@ -199,16 +199,16 @@ export default function DataTable({
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         {searchable ? (
-          <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar..." className="max-w-xs" />
+          <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar..." className="w-full sm:max-w-xs" />
         ) : (
           <span />
         )}
         {onAdd && <Button onClick={openCreate}>{addLabel}</Button>}
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-border">
+      <div className="-mx-4 overflow-x-auto rounded-2xl border border-border px-4 sm:mx-0 sm:px-0">
         <table className="w-full text-left text-sm">
           <thead className="bg-surface-2 text-text-secondary">
             <tr>

@@ -3,6 +3,7 @@ import SEOHead from '@/components/seo/SEOHead';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Breadcrumbs from './Breadcrumbs';
+import ScrollUtilities from '@/components/common/ScrollUtilities';
 import { useArtist } from '@/hooks/useArtist';
 import { APP_NAME } from '@/constants';
 
@@ -29,6 +30,7 @@ export default function Layout({ children }) {
         </main>
         <Footer />
       </div>
+      <ScrollUtilities />
     </>
   );
 }

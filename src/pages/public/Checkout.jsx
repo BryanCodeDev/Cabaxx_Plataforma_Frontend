@@ -32,7 +32,7 @@ export default function CheckoutPage() {
 
   if (!items.length && step !== 4) {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-20">
+      <div className="container-fluid py-20">
         <EmptyState
           title="No hay items en el carrito"
           description="Añade productos desde la tienda para continuar."
@@ -108,18 +108,18 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
+    <div className="container-fluid py-10 sm:py-12">
       <SectionHeading eyebrow="Finalizar compra" title="Checkout" />
-      <div className="mt-6 flex items-center gap-4">
+      <ol className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
         {STEPS.map((s) => (
-          <div key={s.step} className="flex items-center gap-2">
+          <li key={s.step} className="flex items-center gap-2">
             <div className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium ${FOCUS} ${step >= s.step ? 'bg-accent text-white' : 'bg-surface-2 text-text-muted'}`}>
               {s.step}
             </div>
             <span className={`text-sm ${step >= s.step ? 'text-text-primary' : 'text-text-muted'}`}>{s.label}</span>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2">

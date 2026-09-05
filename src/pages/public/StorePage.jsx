@@ -14,7 +14,7 @@ export default function StorePage() {
   return (
     <>
       <SEOHead title="Tienda" description={`Tienda oficial de Cabaxx. Merch, música y más.`} />
-      <div className="mx-auto max-w-6xl px-4 py-12">
+      <div className="container-fluid py-12">
         <SectionHeading eyebrow="Merch oficial" title="Tienda" />
 
       {loading ? (
@@ -28,7 +28,7 @@ export default function StorePage() {
           description="Aún no hay productos disponibles. Vuelve en unos días para ver el merch oficial."
         />
       ) : (
-        <div ref={ref} className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div ref={ref} className="grid-cards mt-8">
           {products.map((p, i) => (
             <div
               key={p.id}

@@ -39,7 +39,7 @@ export default function VideosPage() {
   }, [page]);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="container-fluid py-12">
       <SectionHeading eyebrow="Audiovisual" title="Videos" />
 
       {loading ? (
@@ -53,7 +53,7 @@ export default function VideosPage() {
           description="Pronto publicaremos nuevo contenido audiovisual."
         />
       ) : (
-        <div ref={ref} className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3">
+        <div ref={ref} className="grid-cards-tight mt-8">
           {videos.map((v, i) => (
             <Link key={v.id} to={`/videos/${v.slug}`}>
               <div
@@ -90,6 +90,6 @@ export default function VideosPage() {
         </div>
       )}
       <SEOHead title="Videos" description={`Videos musicales y detrás de cámaras de ${artist?.stage_name || 'Cabaxx'}.`} />
-      </div>
+    </div>
   );
 }

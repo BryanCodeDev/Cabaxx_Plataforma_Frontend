@@ -212,8 +212,7 @@ function Hero({ artist }) {
           initial={{ opacity: 0, y: 36, filter: 'blur(6px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1, delay: 0.08, ease: EASE }}
-          className="max-w-5xl text-balance font-display font-black leading-[0.84] tracking-tight text-white drop-shadow-[0_12px_50px_rgba(0,0,0,0.7)]"
-          style={{ fontSize: 'clamp(3.25rem,11.5vw,8.5rem)' }}
+          className="max-w-5xl text-balance font-display font-black leading-[0.84] tracking-tight text-white drop-shadow-[0_12px_50px_rgba(0,0,0,0.7)] text-display-lg"
         >
           NO TRADUZCO LA CALLE.
           <br />
@@ -362,7 +361,7 @@ function LatestRelease() {
         aria-hidden="true"
       />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-8">
+      <div className="container-fluid">
         <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">Recién salido del estudio</p>
         <h2 className="sr-only">Lo Nuevo de Cabaxx</h2>
       </div>
@@ -390,7 +389,7 @@ function LatestRelease() {
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/40">
             Sencillo · {latest.album_title || 'Catálogo 2025'}
           </p>
-          <h3 className="mt-4 font-display font-black uppercase leading-[0.92] text-white" style={{ fontSize: 'clamp(2.5rem,6vw,4.5rem)' }}>
+          <h3 className="mt-4 font-display font-black uppercase leading-[0.92] text-white text-display-md">
             {latest.title}
           </h3>
           <p className="mt-3 text-sm text-white/40">{latest.release_date || '2025'} · Streaming en todas las plataformas</p>
@@ -477,7 +476,7 @@ function About() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className="container-fluid relative">
         <div
           className={`grid gap-12 transition-all duration-700 ease-premium md:grid-cols-12 md:items-start md:gap-10 ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
@@ -503,7 +502,7 @@ function About() {
               </div>
             )}
 
-            <blockquote className="mt-8 border-l-2 border-accent pl-6 font-display font-bold uppercase leading-snug text-white" style={{ fontSize: 'clamp(1.4rem,3vw,2rem)' }}>
+            <blockquote className="mt-8 border-l-2 border-accent pl-6 font-display font-bold uppercase leading-snug text-white text-display-sm">
               &ldquo;No grabo para llenar un espacio.
               <br />
               Grabo para que se quede.&rdquo;
@@ -529,7 +528,7 @@ function About() {
         </div>
 
         {/* Stats — evidencia, no decoración */}
-        <div className="mt-16 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+        <div className="grid-stat mt-16">
           {stats.map((s, i) => (
             <div
               key={s.label}
@@ -597,7 +596,7 @@ function FeaturedSongs() {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <section id="music" ref={ref} className="mx-auto max-w-7xl scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
+    <section id="music" ref={ref} className="container-fluid scroll-mt-20 py-20 sm:py-24 lg:py-28">
       <SectionHeading
         eyebrow="Discografía"
         title="Canciones"
@@ -706,7 +705,7 @@ function UpcomingEvents() {
 
   if (!events.length) {
     return (
-      <section id="events" className="mx-auto max-w-7xl scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
+      <section id="events" className="container-fluid scroll-mt-20 py-20 sm:py-24 lg:py-28">
         <SectionHeading eyebrow="Agenda" title="Próximos Shows" />
         <div className="mt-8 rounded-2xl border border-white/10 bg-[#0a0a0a] p-10 text-center">
           <p className="text-white/40">Próximamente, fechas de concierto en tu ciudad. Activa las notificaciones.</p>
@@ -716,9 +715,9 @@ function UpcomingEvents() {
   }
 
   return (
-    <section id="events" ref={ref} className="relative overflow-hidden border-y border-white/10 bg-[#0a0a0a] scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
+    <section id="events" ref={ref} className="relative overflow-hidden border-y border-white/10 bg-[#0a0a0a] scroll-mt-20 py-20 sm:py-24 lg:py-28">
       <FilmGrain opacity={0.025} />
-      <div className="relative mx-auto max-w-7xl">
+      <div className="container-fluid relative">
         <SectionHeading
           eyebrow="Agenda"
           title="Próximos Shows"
@@ -822,7 +821,7 @@ function GalleryPreview() {
     } ${i === 0 ? 'col-span-2 row-span-2 aspect-[4/3]' : 'aspect-square'}`;
 
   return (
-    <section id="gallery" ref={ref} className="mx-auto max-w-7xl scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
+    <section id="gallery" ref={ref} className="container-fluid scroll-mt-20 py-20 sm:py-24 lg:py-28">
       <SectionHeading
         eyebrow="Detrás de cámaras"
         title="Galería"
@@ -912,8 +911,8 @@ function Merchandise() {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <section id="store" ref={ref} className="border-y border-white/10 bg-[#0a0a0a] scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-7xl">
+    <section id="store" ref={ref} className="border-y border-white/10 bg-[#0a0a0a] scroll-mt-20 py-20 sm:py-24 lg:py-28">
+      <div className="container-fluid">
         <SectionHeading
           eyebrow="Merch oficial"
           title="Tienda"
@@ -934,7 +933,7 @@ function Merchandise() {
             <p className="text-white/40">El próximo drop está en producción. Activa las notificaciones para ser el primero.</p>
           </div>
         ) : (
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
+          <div className="grid-cards mt-10">
             {products.map((p, i) => (
               <Link
                 key={p.id}
@@ -983,7 +982,7 @@ function News() {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <section id="news" ref={ref} className="mx-auto max-w-7xl scroll-mt-20 px-4 py-20 sm:px-8 sm:py-24 lg:py-28">
+    <section id="news" ref={ref} className="container-fluid scroll-mt-20 py-20 sm:py-24 lg:py-28">
       <SectionHeading
         eyebrow="Al día"
         title="Noticias"
@@ -1004,7 +1003,7 @@ function News() {
           <p className="text-white/40">Las noticias llegan pronto.</p>
         </div>
       ) : (
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
+        <div className="grid-feature mt-10">
           {posts.map((post, i) => (
             <Link
               key={post.id}
@@ -1055,7 +1054,7 @@ function Social() {
 
   return (
     <section className="border-y border-white/10 bg-[#0a0a0a]">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-8 sm:py-20">
+      <div className="container-fluid py-16 sm:py-20">
         <p className="text-center text-xs font-bold uppercase tracking-mega text-accent">Conecta</p>
         <h2 className="mt-2 text-center font-display text-3xl font-black uppercase text-white sm:text-4xl">
           Sígueme de cerca

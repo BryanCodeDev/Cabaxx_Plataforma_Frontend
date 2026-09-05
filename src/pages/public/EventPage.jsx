@@ -29,7 +29,7 @@ export default function EventPage() {
   if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
   if (!event) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-12">
+      <div className="container-fluid py-12">
         <EmptyState title="Evento no encontrado" description="El evento que buscas ya no está disponible." />
       </div>
     );
@@ -46,7 +46,7 @@ export default function EventPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
+    <div className="container-fluid py-10 sm:py-12">
       <Link
         to={ROUTES.EVENTS}
         className="inline-flex items-center gap-1 text-sm text-text-secondary transition hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md"
@@ -54,11 +54,11 @@ export default function EventPage() {
         <ArrowLeft className="h-4 w-4" /> Volver a eventos
       </Link>
 
-      <img src={event.banner_url} alt={event.title} className="mt-6 h-56 w-full rounded-2xl object-cover shadow-card" />
+      <img src={event.banner_url} alt={event.title} className="mt-6 aspect-[21/9] w-full rounded-2xl object-cover shadow-card" />
 
       <div className="mt-6">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Evento</p>
-        <h1 className="font-display text-4xl text-text-primary md:text-5xl">{event.title}</h1>
+        <h1 className="font-display text-display-sm text-text-primary">{event.title}</h1>
         <p className="mt-3 font-mono text-text-secondary">{formatDate(event.start_datetime)} · {event.venue_name}</p>
         <p className="mt-4 text-text-secondary">{event.description}</p>
         <div className="mt-4">
@@ -69,12 +69,12 @@ export default function EventPage() {
       <h3 className="mt-10 text-xl font-display text-text-primary">Boletos disponibles</h3>
       <div className="mt-4 space-y-3">
         {event.tickets?.map((t) => (
-          <div key={t.id} className="flex items-center justify-between rounded-xl border border-border bg-surface p-4">
-            <div>
+          <div key={t.id} className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
               <p className="font-medium text-text-primary">{t.name}</p>
               <p className="font-mono text-sm text-text-muted">{formatCurrency(t.price, t.currency)}</p>
             </div>
-            <Button size="sm" onClick={() => buy(t.id)}>
+            <Button size="sm" onClick={() => buy(t.id)} className="sm:shrink-0">
               Comprar
             </Button>
           </div>

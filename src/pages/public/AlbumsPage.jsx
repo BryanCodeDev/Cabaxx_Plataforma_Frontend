@@ -38,7 +38,7 @@ export default function AlbumsPage() {
   }, [page]);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="container-fluid py-12">
       <SectionHeading eyebrow="Discografía" title="Álbumes" />
 
       {loading ? (
@@ -52,7 +52,7 @@ export default function AlbumsPage() {
           description="Pronto habrá nueva música disponible."
         />
       ) : (
-        <div ref={ref} className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div ref={ref} className="grid-cards mt-8">
           {albums.map((a, i) => (
             <Link key={a.id} to={`/albumes/${a.slug}`}>
               <div
@@ -87,6 +87,6 @@ export default function AlbumsPage() {
         </div>
       )}
       <SEOHead title="Álbumes" description={`Álbumes y sencillos de ${artist?.stage_name || 'Cabaxx'}.`} />
-      </div>
+    </div>
   );
 }

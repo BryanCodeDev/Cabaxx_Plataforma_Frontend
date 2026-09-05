@@ -31,14 +31,14 @@ export default function VideoDetailPage() {
   if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
   if (!video) {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-12">
+      <div className="container-fluid py-12">
         <EmptyState title="Video no encontrado" description="Este video ya no está disponible." />
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="container-fluid py-10 sm:py-12">
       <Link
         to={ROUTES.VIDEOS}
         className="inline-flex items-center gap-1 text-sm text-text-secondary transition hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md"
@@ -48,7 +48,7 @@ export default function VideoDetailPage() {
 
       <div className="mt-6">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">Video</p>
-        <h1 className="mt-2 font-display text-4xl text-text-primary md:text-5xl">{video.title}</h1>
+        <h1 className="mt-2 font-display text-display-sm text-text-primary">{video.title}</h1>
         <p className="mt-3 font-mono text-sm text-text-muted">
           {formatNumber(video.views_count)} vistas · {formatDate(video.published_at)}
         </p>

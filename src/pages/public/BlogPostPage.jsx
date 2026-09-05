@@ -25,14 +25,14 @@ export default function BlogPostPage() {
   if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
   if (!post) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-12">
+      <div className="container-fluid py-12">
         <EmptyState title="Publicación no encontrada" description="Este artículo ya no está disponible." />
       </div>
     );
   }
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12">
+    <article className="container-fluid max-w-4xl py-10 sm:py-12">
       <Link
         to={ROUTES.BLOG}
         className="inline-flex items-center gap-1 text-sm text-text-secondary transition hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md"
@@ -42,7 +42,7 @@ export default function BlogPostPage() {
 
       <div className="mt-6">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Blog</p>
-        <h1 className="font-display text-4xl text-text-primary md:text-5xl">{post.title}</h1>
+        <h1 className="font-display text-display-sm text-text-primary">{post.title}</h1>
         {post.published_at && (
           <p className="mt-3 font-mono text-sm text-text-muted">{post.published_at}</p>
         )}
@@ -52,9 +52,9 @@ export default function BlogPostPage() {
       </div>
 
       {post.cover_url && (
-        <img src={post.cover_url} alt="" className="mt-6 w-full rounded-2xl object-cover shadow-card" />
+        <img src={post.cover_url} alt="" className="mt-6 aspect-video w-full rounded-2xl object-cover shadow-card" />
       )}
-      <div className="mt-6 leading-relaxed text-text-secondary" dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div className="prose prose-invert mt-6 max-w-none leading-relaxed text-text-secondary" dangerouslySetInnerHTML={{ __html: post.content }} />
       <CommentSection referenceType="post" referenceId={post.id} title="Comentarios" />
     </article>
   );

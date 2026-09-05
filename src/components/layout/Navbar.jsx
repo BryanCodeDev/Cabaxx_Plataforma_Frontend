@@ -8,6 +8,7 @@ import Button from '@/components/common/Button';
 import { Avatar } from '@/components/common';
 import Dropdown from '@/components/common/Dropdown';
 import { logoMark } from '@/assets';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 import {
   ShoppingCart, Menu, X, ChevronDown, Disc3, Film, Image,
   Newspaper, Mail, LayoutDashboard, User, Package, LogOut,
@@ -113,9 +114,14 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    if (typeof window === 'undefined') return undefined;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    document.body.style.overflow = menuOpen && !prefersReduced.matches ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+  const mobileNavRef = useFocusTrap(menuOpen, closeMenu);
 
   const moreActive = MORE_LINKS.some((l) => pathname.startsWith(l.to));
   const artistName = artist?.name || 'Cabaxx';
@@ -137,7 +143,7 @@ export default function Navbar() {
           : 'border-transparent bg-gradient-to-b from-black/60 to-transparent'
       }`}
     >
-      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 md:px-8">
+      <div className="container-fluid flex h-[76px] items-center justify-between">
         <Link to={ROUTES.HOME} className={`group flex shrink-0 items-center rounded-md ${FOCUS}`} aria-label="Inicio">
           <img
             src={logoMark}
@@ -149,7 +155,7 @@ export default function Navbar() {
         </Link>
 
         {/* Navegación desktop */}
-        <nav className="hidden items-center gap-9 lg:flex xl:gap-11" aria-label="Navegación principal">
+        <nav className="hidden items-center gap-7 xl:gap-9 2xl:gap-11 lg:flex" aria-label="Navegación principal">
           {NAV_LINKS.map((l) => (
             <NavLink key={l.to} to={l.to} className={linkClass} aria-current={pathname === l.to ? 'page' : undefined}>
               {({ isActive }) => (
@@ -277,8 +283,11 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="fixed inset-x-0 top-[76px] bottom-0 z-40 overflow-y-auto bg-black lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú principal"
           >
-            <nav className="flex flex-col gap-1 p-6" aria-label="Navegación móvil">
+            <nav ref={mobileNavRef} className="flex flex-col gap-1 p-6 pb-24" aria-label="Navegación móvil">
               {NAV_LINKS.map((l, i) => (
                 <motion.div
                   key={l.to}

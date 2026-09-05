@@ -103,7 +103,7 @@ export default function Footer() {
       {/* Línea de firma superior */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-8 sm:py-24">
+      <div className="container-fluid relative px-0 py-20 sm:py-24">
 
         {/* ── Titular editorial ── */}
         <div className="animate-in fade-in slide-in-from-bottom-2 duration-700">
@@ -116,10 +116,10 @@ export default function Footer() {
         </div>
 
         {/* ── Grid principal ── */}
-        <div className="mt-16 grid gap-10 sm:grid-cols-2 md:grid-cols-6 md:gap-12">
+        <div className="mt-16 grid gap-10 sm:grid-cols-2 md:grid-cols-12 md:gap-12">
 
           {/* Columna marca + newsletter */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-4">
             <Link to={ROUTES.HOME} className={`group inline-flex items-center rounded-sm ${FOCUS_SURFACE}`} aria-label="Inicio">
               <img
                 src={logoMark}
@@ -168,7 +168,7 @@ export default function Footer() {
           {LINK_GROUPS.map((group, gi) => (
             <div
               key={group.title}
-              className="animate-in fade-in slide-in-from-bottom-2 duration-700"
+              className="animate-in fade-in slide-in-from-bottom-2 duration-700 sm:col-span-1 md:col-span-2"
               style={{ animationDelay: `${gi * 75}ms`, animationFillMode: 'backwards' }}
             >
               <h4 className="text-[11px] font-bold uppercase tracking-[0.28em] text-white/50">

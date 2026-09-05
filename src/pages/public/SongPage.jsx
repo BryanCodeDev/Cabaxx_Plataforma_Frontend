@@ -31,7 +31,7 @@ export default function SongPage() {
   if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
   if (!song) {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-12">
+      <div className="container-fluid py-12">
         <EmptyState title="Canción no encontrada" description="El tema que buscas ya no está disponible." />
       </div>
     );
@@ -50,20 +50,20 @@ export default function SongPage() {
   const spotifyId = spotify?.url?.match(/track\/([a-zA-Z0-9]+)/)?.[1];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
+    <div className="container-fluid py-10 sm:py-12">
       <Link to={ROUTES.SONGS} className={`inline-flex items-center gap-1 text-sm text-text-secondary transition hover:text-text-primary ${FOCUS}`}>
         <ArrowLeft className="h-4 w-4" /> Volver a canciones
       </Link>
 
-      <div className="mt-6 flex flex-col gap-8 md:flex-row">
+      <div className="mt-6 flex flex-col gap-6 sm:gap-8 md:flex-row md:items-start">
         <img
           src={song.cover_url}
           alt={song.title}
-          className="h-64 w-64 rounded-2xl object-cover shadow-card md:h-80 md:w-80"
+          className="aspect-square w-full max-w-xs shrink-0 self-start rounded-2xl object-cover shadow-card md:h-80 md:w-80 md:max-w-none"
         />
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Canción</p>
-          <h1 className="font-display text-4xl text-text-primary md:text-5xl">{song.title}</h1>
+          <h1 className="font-display text-display-sm text-text-primary">{song.title}</h1>
           <p className="mt-3 font-mono text-text-secondary">{formatDuration(song.duration_seconds)}</p>
           <SEOHead title={song.title} description={`${song.title} - ${song.album_title || 'Cabaxx'}. Escucha y letra oficial.`} />
           <p className="mt-4 text-text-secondary">{song.description}</p>

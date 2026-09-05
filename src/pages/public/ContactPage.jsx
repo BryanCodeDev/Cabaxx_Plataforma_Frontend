@@ -26,9 +26,9 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
+    <div className="container-fluid max-w-3xl py-10 sm:py-12">
       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">Hablemos</p>
-      <h1 className="mt-2 font-display text-4xl text-text-primary sm:text-5xl">Contacto</h1>
+      <h1 className="mt-2 font-display text-display-sm text-text-primary">Contacto</h1>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-secondary">
         Escríbenos desde cualquier lugar. Respondemos personalmente cada mensaje desde Bogotá D.C.,
         Colombia — para booking, prensa o alianzas.

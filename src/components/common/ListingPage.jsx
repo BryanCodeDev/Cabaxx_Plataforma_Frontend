@@ -49,7 +49,7 @@ export default function ListingPage({
   }
 
   return (
-    <div className="mx-auto max-w-7xl bg-primary px-4 py-14 sm:px-8 sm:py-16">
+    <div className="container-fluid bg-primary py-14 sm:py-16">
       <SectionHeading eyebrow={eyebrow} title={title} />
 
       {items.length === 0 ? (
@@ -59,7 +59,7 @@ export default function ListingPage({
           description={`No encontramos ${title.toLowerCase()} por ahora. Vuelve pronto.`}
         />
       ) : (
-        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid-cards mt-10">
           {items.map((it) => renderItem(it))}
         </div>
       )}

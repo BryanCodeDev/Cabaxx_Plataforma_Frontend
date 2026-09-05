@@ -11,11 +11,11 @@ import Card from '@/components/common/Card';
 function Kpi({ icon: Icon, label, value, accent }) {
   return (
     <Card padding="md" className="flex items-center gap-4">
-      <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${accent}`}>
+      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${accent}`}>
         <Icon className="h-5 w-5" />
       </div>
-      <div>
-        <p className="text-sm text-text-secondary">{label}</p>
+      <div className="min-w-0">
+        <p className="truncate text-sm text-text-secondary">{label}</p>
         <p className="mt-1 font-display text-2xl text-text-primary">{value}</p>
       </div>
     </Card>
@@ -69,12 +69,12 @@ export default function AdminDashboard() {
         <h2 className="font-display text-2xl text-text-primary">Panel de control</h2>
         <p className="text-sm text-text-muted">Resumen general de la plataforma</p>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid-stat">
         {kpis.map((k) => (
           <Kpi key={k.label} {...k} />
         ))}
         {!stats && (
-          <Card padding="md" className="sm:col-span-2 lg:col-span-3">Cargando métricas...</Card>
+          <Card padding="md" className="sm:col-span-2 lg:col-span-4">Cargando métricas...</Card>
         )}
       </div>
     </div>

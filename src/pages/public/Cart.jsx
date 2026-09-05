@@ -42,7 +42,7 @@ export default function CartPage() {
 
   if (!items.length) {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-20">
+      <div className="container-fluid py-20">
         <EmptyState
           title="Tu carrito está vacío"
           description="Explora la tienda y añade productos."
@@ -57,30 +57,30 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="container-fluid py-12">
       <SectionHeading eyebrow="Tu selección" title="Carrito de Compras" />
       <div className="mt-8 grid gap-8 lg:grid-cols-3">
         <div className="space-y-4 lg:col-span-2">
           {items.map((item) => (
             <Card key={item.key} padding="md" className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <img src={item.product.cover_url} alt={item.product.name} className="h-20 w-20 rounded-lg object-cover" />
-              <div className="flex-1">
+              <img src={item.product.cover_url} alt={item.product.name} className="h-20 w-20 shrink-0 rounded-lg object-cover" />
+              <div className="min-w-0 flex-1">
                 <Link to={`/tienda/${item.product.slug}`} className={`font-medium text-text-primary transition hover:text-accent ${FOCUS}`}>
                   {item.product.name}
                 </Link>
                 <p className="text-sm text-text-muted">{item.variant?.name || 'Única'}</p>
               </div>
               <div className="flex items-center gap-3">
-                <Button variant="secondary" size="sm" className={FOCUS} onClick={() => updateQuantity(item.product.id, item.variant?.id, item.quantity - 1)}>
+                <Button variant="secondary" size="sm" className={FOCUS} onClick={() => updateQuantity(item.product.id, item.variant?.id, item.quantity - 1)} aria-label="Disminuir cantidad">
                   -
                 </Button>
                 <span className="w-8 text-center text-sm">{item.quantity}</span>
-                <Button variant="secondary" size="sm" className={FOCUS} onClick={() => updateQuantity(item.product.id, item.variant?.id, item.quantity + 1)}>
+                <Button variant="secondary" size="sm" className={FOCUS} onClick={() => updateQuantity(item.product.id, item.variant?.id, item.quantity + 1)} aria-label="Aumentar cantidad">
                   +
                 </Button>
               </div>
               <p className="font-mono text-sm text-text-primary">{formatCurrency(item.product.price * item.quantity)}</p>
-              <Button variant="ghost" size="sm" className={FOCUS} onClick={() => removeItem(item.product.id, item.variant?.id)}>
+              <Button variant="ghost" size="sm" className={FOCUS} onClick={() => removeItem(item.product.id, item.variant?.id)} aria-label={`Eliminar ${item.product.name}`}>
                 Eliminar
               </Button>
             </Card>

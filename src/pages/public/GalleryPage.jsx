@@ -96,9 +96,9 @@ export default function GalleryPage() {
       <section className="relative overflow-hidden bg-black">
         <div className="pointer-events-none absolute -left-32 top-20 h-[420px] w-[420px] rounded-full bg-accent/[0.10] blur-[160px]" aria-hidden="true" />
         <FilmGrain opacity={0.035} />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-20">
+        <div className="container-fluid relative py-16 sm:py-20">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Detrás de cámaras</p>
-          <h1 className="mt-3 max-w-3xl font-display text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl md:text-6xl">
+          <h1 className="mt-3 max-w-3xl font-display font-black uppercase leading-[0.95] text-white text-display-md sm:text-display-md md:text-display-lg">
             La vida entre bambalinas
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/55">
@@ -134,13 +134,13 @@ export default function GalleryPage() {
           <Spinner size="lg" color="accent" />
         </div>
       ) : (
-        <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-8" aria-label="Galería de fotos y videos">
+        <section className="container-fluid pb-24" aria-label="Galería de fotos y videos">
           {visibleItems.length === 0 ? (
             <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] p-12 text-center text-white/50">
               Las fotos están en camino. Vuelve pronto.
             </div>
           ) : (
-            <div ref={ref} className="columns-2 gap-4 md:columns-3 lg:columns-4">
+            <div ref={ref} className="columns-2 gap-3 sm:gap-4 md:columns-3 lg:columns-4 2xl:columns-5 4xl:columns-6">
               {visibleItems.map((item, i) => {
                 const tileSize = (i % 7 === 0) ? 'aspect-[4/5]' : (i % 5 === 0) ? 'aspect-[3/4]' : 'aspect-square';
                 return (

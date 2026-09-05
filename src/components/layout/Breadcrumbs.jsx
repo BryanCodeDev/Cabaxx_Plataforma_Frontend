@@ -50,7 +50,7 @@ export default function Breadcrumbs() {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="mx-auto max-w-7xl animate-in fade-in slide-in-from-top-1 px-4 pt-6 duration-500 sm:px-8"
+      className="container-fluid animate-in fade-in slide-in-from-top-1 pt-6 duration-500"
     >
       <ol className="flex flex-nowrap items-center gap-1.5 overflow-x-auto whitespace-nowrap text-xs uppercase tracking-wide text-white/35 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap">
         {crumbs.map((c, i) => {

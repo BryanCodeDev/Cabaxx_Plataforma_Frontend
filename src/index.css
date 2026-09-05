@@ -87,6 +87,26 @@
 }
 
 @layer components {
+  /* Contenedor fluido — escala de max-w-7xl hasta 4xl sin saltos */
+  .container-fluid {
+    @apply mx-auto w-full max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl 4xl:max-w-10xl
+           px-4 sm:px-6 lg:px-8 3xl:px-12;
+  }
+
+  /* Sistemas de rejilla canónicos — ver AUDITORIA_UI_UX.md §1.4 */
+  .grid-cards {
+    @apply grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 4xl:grid-cols-6;
+  }
+  .grid-cards-tight {
+    @apply grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5;
+  }
+  .grid-feature {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-6;
+  }
+  .grid-stat {
+    @apply grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4;
+  }
+
   /* Texto con gradiente accent */
   .text-gradient {
     @apply bg-gradient-to-r from-accent bg-clip-text text-transparent;
