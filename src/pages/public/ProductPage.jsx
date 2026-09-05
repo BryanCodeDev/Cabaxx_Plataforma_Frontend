@@ -1,13 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ShoppingCart } from 'lucide-react';
 import { useFetch } from '@/hooks/useFetch';
 import { useCart } from '@/context/CartContext';
 import { ARTIST_SLUG, ROUTES } from '@/constants';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/common/Button';
-import Spinner from '@/components/common/Spinner';
+import PageSpinner from '@/components/common/PageSpinner';
 import { EmptyState } from '@/components/common';
 import Card from '@/components/common/Card';
+import StickyBottomCTA from '@/components/common/StickyBottomCTA';
 import { formatCurrency } from '@/utils/format';
 import SEOHead from '@/components/seo/SEOHead';
 
@@ -16,8 +17,15 @@ export default function ProductPage() {
   const { data, loading } = useFetch(`/artists/${ARTIST_SLUG}/products/${slug}`);
   const { addItem } = useCart();
   const product = data?.data?.product;
+  const soldOut = product?.status === 'sold_out';
 
-  if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
+  const addToCart = () => {
+    if (!product) return;
+    addItem(product, product.variants?.[0] || null);
+    toast.success('Agregado al carrito');
+  };
+
+  if (loading) return <PageSpinner label="Cargando producto" />;
   if (!product) {
     return (
       <div className="container-fluid py-12">
@@ -27,7 +35,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="container-fluid py-10 sm:py-12">
+    <div className="container-fluid pb-24 pt-10 sm:py-12 sm:pb-12">
       <Link
         to={ROUTES.STORE}
         className="inline-flex items-center gap-1 text-sm text-text-secondary transition hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md"
@@ -61,18 +69,26 @@ export default function ProductPage() {
           </div>
 
           <Button
-            className="mt-8"
-            disabled={product.status === 'sold_out'}
-            onClick={() => {
-              addItem(product, product.variants?.[0] || null);
-              toast.success('Agregado al carrito');
-            }}
+            className="mt-8 hidden sm:inline-flex"
+            disabled={soldOut}
+            onClick={addToCart}
+            icon={<ShoppingCart className="h-4 w-4" />}
           >
-            {product.status === 'sold_out' ? 'Agotado' : 'Añadir al carrito'}
+            {soldOut ? 'Agotado' : 'Añadir al carrito'}
           </Button>
         </div>
       </div>
       <SEOHead title={product?.name || 'Producto'} description={product?.description || 'Producto de Cabaxx'} />
+
+      <StickyBottomCTA
+        price={`${formatCurrency(product.price)} COP`}
+        primary={{
+          label: soldOut ? 'Agotado' : 'Añadir al carrito',
+          onClick: addToCart,
+          disabled: soldOut,
+          icon: <ShoppingCart className="h-4 w-4" />,
+        }}
+      />
     </div>
   );
 }

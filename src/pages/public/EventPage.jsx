@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Ticket } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import { eventService } from '@/services/modules';
 import { ROUTES } from '@/constants';
-import Spinner from '@/components/common/Spinner';
+import PageSpinner from '@/components/common/PageSpinner';
 import { EmptyState } from '@/components/common';
 import Button from '@/components/common/Button';
 import LikeButton from '@/components/common/LikeButton';
 import CommentSection from '@/components/common/CommentSection';
+import StickyBottomCTA from '@/components/common/StickyBottomCTA';
 import { formatDate, formatCurrency } from '@/utils/format';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
@@ -26,7 +27,7 @@ export default function EventPage() {
       .finally(() => setLoading(false));
   }, [slug]);
 
-  if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
+  if (loading) return <PageSpinner label="Cargando evento" />;
   if (!event) {
     return (
       <div className="container-fluid py-12">
@@ -46,7 +47,7 @@ export default function EventPage() {
   };
 
   return (
-    <div className="container-fluid py-10 sm:py-12">
+    <div className="container-fluid pb-24 pt-10 sm:py-12 sm:pb-12">
       <Link
         to={ROUTES.EVENTS}
         className="inline-flex items-center gap-1 text-sm text-text-secondary transition hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md"
@@ -74,7 +75,7 @@ export default function EventPage() {
               <p className="font-medium text-text-primary">{t.name}</p>
               <p className="font-mono text-sm text-text-muted">{formatCurrency(t.price, t.currency)}</p>
             </div>
-            <Button size="sm" onClick={() => buy(t.id)} className="sm:shrink-0">
+            <Button size="sm" onClick={() => buy(t.id)} className="sm:shrink-0" icon={<Ticket className="h-4 w-4" />}>
               Comprar
             </Button>
           </div>
@@ -82,6 +83,21 @@ export default function EventPage() {
       </div>
 
       <CommentSection referenceType="event" referenceId={event.id} title="Comentarios del evento" />
+
+      {event.tickets?.[0] && (
+        <StickyBottomCTA
+          price={
+            event.tickets[0].price === 0
+              ? 'Entrada libre'
+              : `${formatCurrency(event.tickets[0].price, event.tickets[0].currency)}`
+          }
+          primary={{
+            label: 'Conseguir entrada',
+            onClick: () => buy(event.tickets[0].id),
+            icon: <Ticket className="h-4 w-4" />,
+          }}
+        />
+      )}
     </div>
   );
 }

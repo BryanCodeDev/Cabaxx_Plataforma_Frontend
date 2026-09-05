@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { videoService } from '@/services/modules';
 import { ROUTES } from '@/constants';
 import { formatDate, formatNumber } from '@/utils/format';
-import Spinner from '@/components/common/Spinner';
+import PageSpinner from '@/components/common/PageSpinner';
 import { EmptyState } from '@/components/common';
 import Card from '@/components/common/Card';
 import LikeButton from '@/components/common/LikeButton';
@@ -28,7 +28,7 @@ export default function VideoDetailPage() {
     return () => { isMounted = false; };
   }, [slug]);
 
-  if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
+  if (loading) return <PageSpinner label="Cargando video" />;
   if (!video) {
     return (
       <div className="container-fluid py-12">

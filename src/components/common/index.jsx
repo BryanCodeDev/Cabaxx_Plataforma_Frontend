@@ -35,15 +35,20 @@ export function Badge({ variant = 'default', size = 'md', children }) {
 
 export function EmptyState({ title, description, action, icon, className = '' }) {
   return (
-    <div className={`flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-surface/40 px-6 py-16 text-center ${className}`}>
+    <div
+      role="status"
+      className={`flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-surface/40 px-6 py-12 text-center sm:py-16 ${className}`}
+    >
       {icon && (
-        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-surface-2 text-text-muted">
+        <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-border bg-surface-2 text-text-muted [&_svg]:h-6 [&_svg]:w-6">
           {icon}
         </div>
       )}
-      <p className="text-lg font-display text-text-primary">{title}</p>
-      {description && <p className="mt-2 max-w-sm text-sm text-text-muted">{description}</p>}
-      {action && <div className="mt-5">{action}</div>}
+      <p className="font-display text-lg text-text-primary sm:text-xl">{title}</p>
+      {description && (
+        <p className="mt-2 max-w-sm text-sm leading-relaxed text-text-muted">{description}</p>
+      )}
+      {action && <div className="mt-6">{action}</div>}
     </div>
   );
 }

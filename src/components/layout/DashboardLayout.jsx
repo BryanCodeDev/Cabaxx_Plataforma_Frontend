@@ -12,7 +12,7 @@ import { classNames } from '@/utils/classNames';
 import Button from '@/components/common/Button';
 import { Avatar } from '@/components/common';
 import { logoMark } from '@/assets';
-import { useMediaQuery } from '@/hooks/useBreakpoint';
+import SkipLink from '@/components/common/SkipLink';
 
 const SIDEBAR_LINKS = [
   { to: ROUTES.ADMIN, label: 'Inicio', icon: Home, end: true },
@@ -99,6 +99,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
 
   return (
     <div className="flex min-h-screen bg-black">
+      <SkipLink />
       <aside
         className={classNames(
           'hidden shrink-0 flex-col border-r border-white/10 bg-[#0a0a0a] transition-all duration-300 xl:flex h-full min-h-0',
@@ -207,7 +208,7 @@ export default function DashboardLayout({ children, breadcrumb = '' }) {
             </Button>
           </div>
         </header>
-        <main key={pathname} className="animate-in fade-in flex-1 bg-black p-4 duration-300 md:p-6">{children}<Outlet /></main>
+        <main id="main-content" key={pathname} className="animate-in fade-in flex-1 bg-black p-4 duration-300 md:p-6">{children}<Outlet /></main>
       </div>
     </div>
   );

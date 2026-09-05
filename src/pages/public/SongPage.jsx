@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { songService } from '@/services/modules';
 import { ROUTES } from '@/constants';
-import Spinner from '@/components/common/Spinner';
+import PageSpinner from '@/components/common/PageSpinner';
 import { EmptyState } from '@/components/common';
 import Button from '@/components/common/Button';
 import LikeButton from '@/components/common/LikeButton';
@@ -28,7 +28,7 @@ export default function SongPage() {
       .finally(() => setLoading(false));
   }, [slug]);
 
-  if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
+  if (loading) return <PageSpinner label="Cargando canción" />;
   if (!song) {
     return (
       <div className="container-fluid py-12">

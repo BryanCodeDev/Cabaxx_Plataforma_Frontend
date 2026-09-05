@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import { postService } from '@/services/modules';
 import { ROUTES } from '@/constants';
-import Spinner from '@/components/common/Spinner';
+import PageSpinner from '@/components/common/PageSpinner';
 import { EmptyState } from '@/components/common';
 import LikeButton from '@/components/common/LikeButton';
 import CommentSection from '@/components/common/CommentSection';
@@ -22,7 +22,7 @@ export default function NewsPostPage() {
       .finally(() => setLoading(false));
   }, [slug]);
 
-  if (loading) return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
+  if (loading) return <PageSpinner label="Cargando publicación" />;
   if (!post) {
     return (
       <div className="container-fluid py-12">

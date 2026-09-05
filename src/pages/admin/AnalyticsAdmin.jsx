@@ -12,11 +12,11 @@ function Bars({ data }) {
     <div className="space-y-3">
       {data.map((d) => (
         <div key={d.label} className="flex items-center gap-3">
-          <span className="w-28 shrink-0 text-sm text-text-secondary">{d.label}</span>
-          <div className="h-3 flex-1 overflow-hidden rounded-full bg-surface-2">
+          <span className="w-20 shrink-0 text-xs text-text-secondary sm:w-28 sm:text-sm">{d.label}</span>
+          <div className="h-3 min-w-0 flex-1 overflow-hidden rounded-full bg-surface-2">
             <div className="h-full rounded-full bg-gradient-to-r from-accent to-accent" style={{ width: `${(d.value / max) * 100}%` }} />
           </div>
-          <span className="w-10 text-right text-sm font-medium text-text-primary">{d.value}</span>
+          <span className="w-8 shrink-0 text-right text-xs font-medium text-text-primary sm:w-10 sm:text-sm">{d.value}</span>
         </div>
       ))}
     </div>
@@ -62,13 +62,13 @@ export default function AnalyticsAdmin() {
       {!stats ? (
         <Card padding="lg">Cargando métricas...</Card>
       ) : (
-        <div className="grid gap-4 lg:grid-cols-2">
-          <Card padding="lg">
-            <h3 className="mb-4 font-display text-xl text-text-primary">Catálogo de contenido</h3>
+        <div className="grid gap-4 lg:grid-cols-2 3xl:grid-cols-2">
+          <Card padding="md" className="sm:p-6 lg:p-8">
+            <h3 className="mb-4 font-display text-lg text-text-primary sm:text-xl">Catálogo de contenido</h3>
             <Bars data={stats.content} />
           </Card>
-          <Card padding="lg">
-            <h3 className="mb-4 font-display text-xl text-text-primary">Pedidos por estado</h3>
+          <Card padding="md" className="sm:p-6 lg:p-8">
+            <h3 className="mb-4 font-display text-lg text-text-primary sm:text-xl">Pedidos por estado</h3>
             {stats.orders.length ? <Bars data={stats.orders} /> : <p className="text-sm text-text-muted">Sin pedidos registrados.</p>}
           </Card>
         </div>

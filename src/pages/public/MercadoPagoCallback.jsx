@@ -3,8 +3,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import Spinner from '@/components/common/Spinner';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
+import CenteredContainer from '@/components/common/CenteredContainer';
 import { ROUTES } from '@/constants';
-import { Check, X } from 'lucide-react';
+import { Check, X, ShoppingBag, RefreshCw } from 'lucide-react';
 
 export default function MercadoPagoCallback() {
   const [searchParams] = useSearchParams();
@@ -40,23 +41,23 @@ export default function MercadoPagoCallback() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-20">
+    <CenteredContainer maxWidth="lg">
       <Card padding="lg" className="text-center">
         {status === 'processing' && (
           <>
             <Spinner size="lg" color="accent" />
-            <h1 className="mt-6 font-display text-3xl text-text-primary">Conectando con Mercado Pago</h1>
+            <h1 className="mt-6 font-display text-3xl text-text-primary sm:text-4xl">Conectando con Mercado Pago</h1>
             <p className="mt-2 text-text-secondary">Espere mientras se procesa el pago simulado...</p>
-            <p className="mt-2 font-mono text-xs text-text-muted">Preferencia: {prefId}</p>
+            <p className="mt-2 font-mono text-xs text-text-muted break-all">Preferencia: {prefId}</p>
           </>
         )}
 
         {status === 'success' && (
           <>
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success/15">
-              <Check className="h-8 w-8 text-success" />
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success/15 [&_svg]:h-8 [&_svg]:w-8 text-success">
+              <Check />
             </div>
-            <h1 className="mt-4 font-display text-3xl text-text-primary">Pago aprobado</h1>
+            <h1 className="mt-4 font-display text-3xl text-text-primary sm:text-4xl">Pago aprobado</h1>
             <p className="mt-2 text-text-secondary">{message}</p>
             <Button className="mt-6" onClick={goToResult}>Ver comprobante</Button>
           </>
@@ -64,29 +65,33 @@ export default function MercadoPagoCallback() {
 
         {status === 'failure' && (
           <>
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-error/15">
-              <X className="h-8 w-8 text-error" />
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-error/15 [&_svg]:h-8 [&_svg]:w-8 text-error">
+              <X />
             </div>
-            <h1 className="mt-4 font-display text-3xl text-text-primary">Pago rechazado</h1>
+            <h1 className="mt-4 font-display text-3xl text-text-primary sm:text-4xl">Pago rechazado</h1>
             <p className="mt-2 text-text-secondary">{message}</p>
-            <div className="mt-6 flex justify-center gap-3">
-              <Button onClick={() => navigate(ROUTES.CHECKOUT)}>Reintentar</Button>
-              <Button variant="secondary" onClick={() => navigate(ROUTES.STORE)}>Volver a la tienda</Button>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <Button onClick={() => navigate(ROUTES.CHECKOUT)} icon={<RefreshCw className="h-4 w-4" />} fullWidth>
+                Reintentar
+              </Button>
+              <Button variant="secondary" onClick={() => navigate(ROUTES.STORE)} icon={<ShoppingBag className="h-4 w-4" />} fullWidth>
+                Volver a la tienda
+              </Button>
             </div>
           </>
         )}
 
         {status === 'error' && (
           <>
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-error/15">
-              <span className="text-3xl text-error">!</span>
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-error/15 [&_svg]:h-8 [&_svg]:w-8 text-error">
+              <X />
             </div>
-            <h1 className="mt-4 font-display text-3xl text-text-primary">Error</h1>
+            <h1 className="mt-4 font-display text-3xl text-text-primary sm:text-4xl">Error</h1>
             <p className="mt-2 text-text-secondary">{message}</p>
             <Button className="mt-6" variant="secondary" onClick={() => navigate(ROUTES.CHECKOUT)}>Volver al checkout</Button>
           </>
         )}
       </Card>
-    </div>
+    </CenteredContainer>
   );
 }

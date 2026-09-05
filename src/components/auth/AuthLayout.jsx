@@ -1,5 +1,6 @@
 import { useArtist } from '@/hooks/useArtist';
 import { heroPoster, logoMark } from '@/assets';
+import SkipLink from '@/components/common/SkipLink';
 
 const FEATURES = [
   'Acceso prioritario a preventas y nuevos lanzamientos',
@@ -25,6 +26,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
 
   return (
     <div className="relative flex min-h-screen bg-primary">
+      <SkipLink targetId="auth-main" />
       {/* ── Fondo — móvil/tablet ──
           La foto ocupa toda la pantalla, con un balance de overlay que la deja
           claramente visible (no un fondo negro con una sombra de imagen). */}
@@ -74,14 +76,17 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
       </div>
 
       {/* ── Panel de formulario ── */}
-      <div className="relative z-10 flex w-full items-center justify-center px-4 py-16 lg:w-1/2">
-        <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-3 duration-700">
+      <div className="relative z-10 flex w-full items-center justify-center px-4 py-12 sm:py-16 lg:w-1/2">
+        <main
+          id="auth-main"
+          className="w-full max-w-md animate-in fade-in slide-in-from-bottom-3 duration-700"
+        >
           {eyebrow && (
             <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.25em] text-accent drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] lg:text-left lg:drop-shadow-none">
               {eyebrow}
             </p>
           )}
-          <h1 className="text-center font-display text-3xl text-text-primary drop-shadow-[0_2px_16px_rgba(0,0,0,0.6)] lg:text-left lg:drop-shadow-none">
+          <h1 className="text-center font-display text-display-sm text-text-primary drop-shadow-[0_2px_16px_rgba(0,0,0,0.6)] lg:text-left lg:drop-shadow-none">
             {title}
           </h1>
           {subtitle && (
@@ -92,7 +97,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
 
           <div className="mt-8">{children}</div>
           {footer && <div className="mt-6">{footer}</div>}
-        </div>
+        </main>
       </div>
 
       <style>{`
