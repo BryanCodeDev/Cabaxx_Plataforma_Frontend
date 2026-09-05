@@ -162,18 +162,17 @@ export default function AppShell() {
       : []),
   ];
 
-  /* En modo admin no usamos la lógica de "isActive" pública */
   const headerBg = scrolled
-    ? 'border-white/10 bg-black/85 shadow-[0_12px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl'
-    : 'border-transparent bg-gradient-to-b from-black/60 to-transparent';
+    ? 'border-white/[0.06] bg-black/85 backdrop-blur-xl'
+    : 'border-transparent bg-gradient-to-b from-black/70 to-transparent';
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-all duration-500 ${
+      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
         mode === 'admin' ? 'bg-[#0a0a0a]/95 backdrop-blur-xl border-white/10' : headerBg
       }`}
     >
-      <div className="container-fluid flex h-[76px] items-center gap-4">
+      <div className="container-fluid flex h-[72px] items-center gap-4">
         {/* ── Brand ── */}
         <Link
           to={mode === 'admin' ? ROUTES.ADMIN : ROUTES.HOME}
@@ -183,15 +182,13 @@ export default function AppShell() {
           <img
             src={logoMark}
             alt={artistName}
-            width="48"
-            height="48"
-            className="h-10 w-10 rounded-md object-contain transition-transform duration-300 group-hover:scale-105 sm:h-11 sm:w-11"
+            width="40"
+            height="40"
+            className="h-9 w-9 rounded-md object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:w-10"
           />
-          {mode === 'admin' && (
-            <span className="hidden text-[10px] font-bold uppercase tracking-[0.25em] text-accent sm:inline">
-              Panel
-            </span>
-          )}
+          <span className="hidden font-display text-sm font-bold uppercase tracking-[0.18em] text-white sm:inline">
+            {artistName}
+          </span>
         </Link>
 
         {/* ── Nav desktop pública ── */}

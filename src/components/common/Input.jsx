@@ -8,12 +8,12 @@ import { classNames } from '@/utils/classNames';
  * @param {string} placeholder
  * @param {any} value
  * @param {function} onChange
- * @param {string} error - mensaje de error
- * @param {string} hint - texto de ayuda
+ * @param {string} error
+ * @param {string} hint
  * @param {boolean} required
  * @param {boolean} disabled
- * @param {node} icon - icono a la izquierda
- * @param {node} suffix - elemento a la derecha
+ * @param {node} icon
+ * @param {node} suffix
  * @param {string} className
  */
 export default function Input({
@@ -35,13 +35,17 @@ export default function Input({
   return (
     <div className="space-y-1.5">
       {label && (
-        <label htmlFor={name} className="block text-sm font-medium text-text-secondary">
+        <label htmlFor={name} className="block text-xs font-semibold uppercase tracking-[0.14em] text-text-secondary">
           {label}
-          {required && <span className="text-accent"> *</span>}
+          {required && <span className="ml-0.5 text-accent">*</span>}
         </label>
       )}
       <div className="relative">
-        {icon && <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">{icon}</span>}
+        {icon && (
+          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">
+            {icon}
+          </span>
+        )}
         <input
           id={name}
           name={name}
@@ -51,22 +55,31 @@ export default function Input({
           onChange={onChange}
           disabled={disabled}
           required={required}
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={error || hint ? `${name}-desc` : undefined}
           className={classNames(
-            'w-full rounded-lg border border-border bg-surface-2 px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent disabled:opacity-50',
+            'h-11 w-full rounded-lg border border-white/[0.1] bg-white/[0.03] px-3.5 text-sm text-text-primary placeholder:text-text-muted/70 outline-none transition-colors focus:border-accent/70 focus:bg-white/[0.05] focus:ring-1 focus:ring-accent/40 disabled:opacity-50',
             icon && 'pl-10',
             suffix && 'pr-10',
-            error && 'border-error focus:border-error focus:ring-error',
+            error && 'border-error/70 focus:border-error focus:ring-error/40',
             className
           )}
           {...rest}
         />
-        {suffix && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted">{suffix}</span>}
+        {suffix && (
+          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-text-muted">
+            {suffix}
+          </span>
+        )}
       </div>
-      {error ? (
-        <p className="text-xs text-error">{error}</p>
-      ) : hint ? (
-        <p className="text-xs text-text-muted">{hint}</p>
-      ) : null}
+      {(error || hint) && (
+        <p
+          id={`${name}-desc`}
+          className={classNames('text-xs', error ? 'text-error' : 'text-text-muted')}
+        >
+          {error || hint}
+        </p>
+      )}
     </div>
   );
 }

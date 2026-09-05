@@ -2,37 +2,40 @@ import { classNames } from '@/utils/classNames';
 
 const VARIANTS = {
   primary:
-    'relative bg-accent text-white font-bold shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_10px_30px_-8px_rgba(229,9,20,0.55)] hover:shadow-[0_1px_0_rgba(255,255,255,0.2)_inset,0_14px_38px_-8px_rgba(229,9,20,0.7)] before:absolute before:inset-0 before:rounded-[inherit] before:bg-gradient-to-b before:from-white/15 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300',
+    'bg-accent text-white font-semibold shadow-[0_8px_24px_-10px_rgba(229,9,20,0.55)] hover:bg-accent-hover hover:shadow-[0_10px_28px_-10px_rgba(229,9,20,0.7)]',
   secondary:
-    'bg-white/[0.03] text-text-primary border border-white/15 hover:border-accent/50 hover:bg-white/[0.06] backdrop-blur-sm',
+    'bg-white/[0.04] text-text-primary border border-white/15 hover:border-white/30 hover:bg-white/[0.07]',
   ghost:
-    'bg-transparent text-text-primary hover:bg-white/[0.06]',
+    'bg-transparent text-text-secondary hover:bg-white/[0.05] hover:text-text-primary',
   danger:
     'bg-error text-white hover:opacity-90',
   outline:
-    'relative bg-transparent border border-accent/70 text-accent overflow-hidden transition-colors hover:text-white before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:scale-x-100',
+    'bg-transparent border border-accent/70 text-accent hover:bg-accent hover:text-white',
   premium:
-    'relative bg-white text-black font-bold shadow-[0_10px_30px_-10px_rgba(255,255,255,0.35)] hover:shadow-[0_14px_38px_-10px_rgba(255,255,255,0.5)] hover:-translate-y-0.5',
+    'bg-white text-black font-semibold shadow-[0_8px_24px_-10px_rgba(255,255,255,0.35)] hover:bg-white hover:shadow-[0_10px_28px_-10px_rgba(255,255,255,0.5)]',
 };
 
 const SIZES = {
-  sm: 'px-4 py-2 text-xs',
-  md: 'px-6 py-3 text-sm',
-  lg: 'px-8 py-4 text-[15px]',
+  sm: 'h-9 px-4 text-xs',
+  md: 'h-11 px-6 text-sm',
+  lg: 'h-12 px-7 text-[15px]',
 };
 
 const SpinnerMini = () => (
-  <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+  <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
   </svg>
 );
 
 /**
- * Botón del sistema de diseño Cabaxx — silueta nítida, peso tipográfico marcado,
- * microinteracción de una sola capa (sin exceso) por variante.
- * @param {string} variant - 'primary'|'secondary'|'ghost'|'danger'|'outline'|'premium'
- * @param {string} size - 'sm'|'md'|'lg'
+ * Botón del sistema Cabaxx.
+ *  - Silueta de cápsula (rounded-full)
+ *  - Acento reservado para la acción primaria
+ *  - Estados focus/disabled accesibles
+ *
+ * @param {string} variant - 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline' | 'premium'
+ * @param {string} size    - 'sm' | 'md' | 'lg'
  * @param {boolean} loading
  * @param {boolean} disabled
  * @param {boolean} fullWidth
@@ -59,7 +62,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled || loading}
       className={classNames(
-        'group inline-flex items-center justify-center gap-2 overflow-hidden rounded-full uppercase tracking-[0.08em] transition-all duration-300 ease-out active:scale-[0.96] disabled:opacity-40 disabled:pointer-events-none disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black',
+        'group relative inline-flex items-center justify-center gap-2 rounded-full uppercase tracking-[0.12em] transition-all duration-200 active:scale-[0.97] disabled:opacity-40 disabled:pointer-events-none disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary',
         VARIANTS[variant],
         SIZES[size],
         fullWidth && 'w-full',
@@ -67,7 +70,7 @@ export default function Button({
       )}
     >
       {loading ? <SpinnerMini /> : icon}
-      <span className="relative">{children}</span>
+      <span>{children}</span>
     </button>
   );
 }

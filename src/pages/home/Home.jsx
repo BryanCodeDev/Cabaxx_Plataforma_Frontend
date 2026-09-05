@@ -238,7 +238,7 @@ function Hero({ artist }) {
         >
           <Button
             size="lg"
-            className="w-full shadow-glow transition-shadow duration-300 ease-premium hover:shadow-glow-lg sm:w-auto"
+            className="w-full sm:w-auto"
             onClick={() => document.getElementById('latest')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <Play className="mr-1 h-4 w-4" /> Escuchar el catálogo

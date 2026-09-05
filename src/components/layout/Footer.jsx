@@ -49,29 +49,9 @@ const PLATFORM_LABELS = {
   facebook:  'Facebook',
 };
 
-function PulseMark() {
-  return (
-    <span className="inline-flex items-end gap-[3px]" aria-hidden="true">
-      {[0, 1, 2].map((i) => (
-        <span
-          key={i}
-          className="w-[3px] rounded-full bg-accent shadow-[0_0_6px_rgba(229,9,20,0.8)]"
-          style={{ height: '13px', animation: `pulseBarFooter 1.1s ease-in-out ${i * 0.15}s infinite` }}
-        />
-      ))}
-      <style>{`
-        @keyframes pulseBarFooter {
-          0%, 100% { transform: scaleY(0.35); opacity: .55; }
-          50% { transform: scaleY(1); opacity: 1; }
-        }
-      `}</style>
-    </span>
-  );
-}
-
 export default function Footer() {
   const { artist } = useArtist();
-  const [email, setEmail]   = useState('');
+  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
   const subscribe = async (e) => {
@@ -96,113 +76,97 @@ export default function Footer() {
   const name = artist?.stage_name || artist?.name || 'Cabaxx';
 
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-black">
-      {/* Resplandor decorativo rojo, sutil */}
-      <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-accent/[0.07] blur-[100px]" aria-hidden="true" />
-      <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-accent/[0.05] blur-[100px]" aria-hidden="true" />
-      {/* Línea de firma superior */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-[#060606]">
+      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-accent/[0.05] blur-[120px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-accent/[0.04] blur-[120px]" aria-hidden="true" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
-      <div className="container-fluid relative px-0 py-20 sm:py-24">
+      <div className="container-fluid relative py-16 sm:py-20">
 
-        {/* ── Titular editorial ── */}
-        <div className="animate-in fade-in slide-in-from-bottom-2 duration-700">
-          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-accent">Directo al oyente</p>
-          <h2 className="mt-4 max-w-2xl font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl">
-            Conexión directa.
-            <br />
-            Bogotá para el mundo.
-          </h2>
-        </div>
-
-        {/* ── Grid principal ── */}
-        <div className="mt-16 grid gap-10 sm:grid-cols-2 md:grid-cols-12 md:gap-12">
-
-          {/* Columna marca + newsletter */}
-          <div className="md:col-span-4">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-10">
+          {/* ── Marca + newsletter ── */}
+          <div className="md:col-span-5">
             <Link to={ROUTES.HOME} className={`group inline-flex items-center rounded-sm ${FOCUS_SURFACE}`} aria-label="Inicio">
               <img
                 src={logoMark}
                 alt={`${name} logo`}
-                width="48"
-                height="48"
-                className="h-11 w-11 rounded-md object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12"
+                width="44"
+                height="44"
+                className="h-11 w-11 rounded-md object-contain transition-transform duration-300 group-hover:scale-105"
               />
+              <span className="ml-3 font-display text-base font-bold uppercase tracking-wider text-white">
+                {name}
+              </span>
             </Link>
 
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/40">
-              Plataforma oficial de {name}, artista urbano bogotano. Música, eventos, tienda y comunidad — todo directo desde Bogotá D.C., Colombia.
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
+              Plataforma oficial de {name}, artista urbano bogotano. Música, eventos, tienda y comunidad — directo desde Bogotá D.C., Colombia.
             </p>
 
-            {/* Newsletter inline */}
-            <p className="mt-9 text-[11px] font-bold uppercase tracking-[0.28em] text-white/70">
-              Lista de acceso
-            </p>
-            <p className="mt-1 text-xs text-white/40">
-              Lanzamientos y fechas antes que nadie.
-            </p>
-            <form onSubmit={subscribe} className="mt-3 flex gap-2">
-              <div className="flex-1 min-w-0">
+            <form onSubmit={subscribe} className="mt-8 max-w-sm">
+              <label
+                htmlFor="footer-newsletter"
+                className="block text-[11px] font-bold uppercase tracking-[0.22em] text-white/70"
+              >
+                Lista de acceso
+              </label>
+              <p className="mt-1 text-xs text-white/40">
+                Lanzamientos y fechas antes que nadie.
+              </p>
+              <div className="mt-3 flex gap-2">
                 <Input
+                  id="footer-newsletter"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="tu@email.com"
                   aria-label="Email de suscripción"
-                  className="border-white/15 bg-white/[0.04] text-white placeholder:text-white/30 focus:border-accent/60"
                   required
+                  className="flex-1"
                 />
+                <Button type="submit" size="md" disabled={loading} className="shrink-0">
+                  {loading ? 'Enviando…' : 'Entrar'}
+                </Button>
               </div>
-              <Button
-                type="submit"
-                size="sm"
-                disabled={loading}
-                className="shrink-0"
-              >
-                {loading ? '···' : 'Entrar'}
-              </Button>
             </form>
           </div>
 
-          {/* Columnas de links */}
-          {LINK_GROUPS.map((group, gi) => (
-            <div
-              key={group.title}
-              className="animate-in fade-in slide-in-from-bottom-2 duration-700 sm:col-span-1 md:col-span-2"
-              style={{ animationDelay: `${gi * 75}ms`, animationFillMode: 'backwards' }}
-            >
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.28em] text-white/50">
-                {group.title}
-              </h4>
-              <ul className="mt-4 space-y-2.5">
-                {group.links.map((l) => (
-                  <li key={l.to}>
-                    <Link
-                      to={l.to}
-                      className={`group inline-flex items-center gap-1 rounded text-[15px] text-white/55 transition-colors hover:text-white ${FOCUS_SURFACE}`}
-                    >
-                      <span className="relative">
-                        {l.label}
-                        <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* ── Columnas de links ── */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 md:col-span-7 md:gap-6">
+            {LINK_GROUPS.map((group) => (
+              <div key={group.title}>
+                <h4 className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">
+                  {group.title}
+                </h4>
+                <ul className="mt-4 space-y-2.5">
+                  {group.links.map((l) => (
+                    <li key={l.to}>
+                      <Link
+                        to={l.to}
+                        className={`group inline-flex items-center text-sm text-white/55 transition-colors hover:text-white ${FOCUS_SURFACE}`}
+                      >
+                        <span className="relative">
+                          {l.label}
+                          <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* ── Redes sociales ── */}
         {artist?.social_links?.length > 0 && (
-          <div className="mt-16 flex flex-wrap gap-3">
+          <div className="mt-12 flex flex-wrap gap-2.5">
             {artist.social_links.map((s) => (
               <a
                 key={s.platform}
                 href={s.url}
                 target="_blank"
                 rel="noreferrer"
-                className={`rounded-full border border-white/15 px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:text-white hover:shadow-[0_8px_24px_rgba(229,9,20,0.25)] ${FOCUS_SURFACE}`}
+                className={`rounded-full border border-white/[0.1] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/60 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:text-white ${FOCUS_SURFACE}`}
               >
                 {PLATFORM_LABELS[s.platform] || s.platform}
               </a>
@@ -210,18 +174,17 @@ export default function Footer() {
           </div>
         )}
 
-        {/* ── Copyright ── */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-6 sm:flex-row">
           <p className="text-xs text-white/35">
             © {new Date().getFullYear()} {name}. Todos los derechos reservados.
           </p>
-          <p className="text-xs text-white/20">
+          <p className="text-xs text-white/25">
             Plataforma desarrollada por{' '}
             <a
               href="https://mastercodecompany.com"
               target="_blank"
               rel="noreferrer"
-              className={`text-white/30 transition hover:text-accent ${FOCUS_SURFACE}`}
+              className={`text-white/40 transition hover:text-accent ${FOCUS_SURFACE}`}
             >
               MasterCode Company
             </a>

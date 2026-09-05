@@ -42,19 +42,19 @@ export default function ListingPage({
 
   if (loading && !items.length) {
     return (
-      <div className="flex min-h-[50vh] items-center justify-center bg-primary">
+      <div className="flex min-h-[60vh] items-center justify-center bg-primary">
         <Spinner size="lg" color="accent" />
       </div>
     );
   }
 
   return (
-    <div className="container-fluid bg-primary py-14 sm:py-16">
+    <div className="container-fluid bg-primary py-14 sm:py-20">
       <SectionHeading eyebrow={eyebrow} title={title} />
 
       {items.length === 0 ? (
         <EmptyState
-          className="mt-8"
+          className="mt-10"
           title="Aún no hay contenido"
           description={`No encontramos ${title.toLowerCase()} por ahora. Vuelve pronto.`}
         />
@@ -64,9 +64,11 @@ export default function ListingPage({
         </div>
       )}
 
-      <div className="mt-10">
-        <Pagination currentPage={page} totalPages={totalPages} total={total} onPageChange={setPage} />
-      </div>
+      {totalPages > 1 && (
+        <div className="mt-12">
+          <Pagination currentPage={page} totalPages={totalPages} total={total} onPageChange={setPage} />
+        </div>
+      )}
     </div>
   );
 }

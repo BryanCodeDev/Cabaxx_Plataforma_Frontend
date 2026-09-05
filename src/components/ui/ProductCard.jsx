@@ -14,25 +14,24 @@ export default function ProductCard({ product, onClick }) {
           src={cover}
           alt={product?.name || 'Producto'}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 ease-premium group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-500 ease-premium group-hover:scale-[1.03]"
         />
         {soldOut && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/60">
             <Badge variant="default">Agotado</Badge>
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
-      <div className="p-3 sm:p-4">
+      <div className="p-4">
         <p className="line-clamp-2 text-sm font-medium text-text-primary transition-colors group-hover:text-accent">
           {product?.name}
         </p>
         <div className="mt-2 flex items-center justify-between gap-2">
-          <span className="font-mono text-sm font-bold tabular-nums">
+          <span className="font-mono text-sm font-semibold tabular-nums">
             {formatCurrency(product?.price, product?.currency)}
           </span>
           {!soldOut && (
-            <span className="text-[10px] uppercase tracking-[0.15em] text-success">En stock</span>
+            <span className="text-[10px] uppercase tracking-[0.14em] text-text-muted">En stock</span>
           )}
         </div>
       </div>

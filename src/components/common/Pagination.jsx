@@ -25,9 +25,9 @@ export default function Pagination({
   const range = getRange(currentPage, totalPages);
 
   const btnBase =
-    'inline-flex h-9 min-w-[2.25rem] items-center justify-center rounded-lg border border-border px-2 text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
-  const btnEnabled = 'text-text-secondary hover:border-accent/50 hover:bg-surface-2 hover:text-white';
-  const btnDisabled = 'pointer-events-none opacity-40';
+    'inline-flex h-9 min-w-[2.25rem] items-center justify-center rounded-lg border px-2 text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary';
+  const btnEnabled = 'border-white/[0.08] text-text-secondary hover:border-white/20 hover:bg-white/[0.04] hover:text-text-primary';
+  const btnDisabled = 'border-white/[0.06] pointer-events-none opacity-30';
 
   return (
     <nav
@@ -61,7 +61,7 @@ export default function Pagination({
                   className={classNames(
                     btnBase,
                     p === currentPage
-                      ? 'border-accent bg-accent text-white shadow-glow-sm'
+                      ? 'border-accent bg-accent/15 text-accent'
                       : btnEnabled
                   )}
                 >

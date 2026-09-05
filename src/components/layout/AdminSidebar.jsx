@@ -60,9 +60,9 @@ export function NavItem({ item, collapsed }) {
           classNames(
             'group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200',
             FOCUS,
-            isActive
-              ? 'bg-gradient-to-r from-accent/20 via-accent/10 to-transparent text-white shadow-[inset_0_0_0_1px_rgba(255,59,92,0.35)]'
-              : 'text-white/65 hover:bg-white/[0.05] hover:text-white',
+              isActive
+              ? 'bg-accent/[0.12] text-text-primary border border-accent/25'
+              : 'text-white/65 hover:bg-white/[0.04] hover:text-text-primary border border-transparent',
             collapsed && 'justify-center px-2'
           )
         }
@@ -72,7 +72,7 @@ export function NavItem({ item, collapsed }) {
             {isActive && (
               <motion.span
                 layoutId="admin-nav-indicator"
-                className="absolute left-0 top-1/2 h-6 w-[3px] -translate-y-1/2 rounded-r-full bg-accent shadow-[0_0_12px_rgba(255,59,92,0.7)]"
+                className="absolute left-0 top-1/2 h-5 w-[2px] -translate-y-1/2 rounded-r-full bg-accent"
                 transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}

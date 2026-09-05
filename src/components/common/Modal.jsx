@@ -52,9 +52,7 @@ export default function Modal({
 
   useEffect(() => {
     if (!isOpen) return undefined;
-    const onKey = (e) => {
-      if (e.key === 'Escape') onClose?.();
-    };
+    const onKey = (e) => { if (e.key === 'Escape') onClose?.(); };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [isOpen, onClose]);
@@ -66,7 +64,7 @@ export default function Modal({
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
       <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-black/80 backdrop-blur-md animate-fade-in"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -77,23 +75,23 @@ export default function Modal({
         aria-labelledby={title ? titleId : undefined}
         aria-describedby={descId}
         className={classNames(
-          'relative z-10 w-full overflow-hidden rounded-t-2xl border border-border bg-surface shadow-elev-3 animate-slide-up sm:rounded-2xl',
+          'relative z-10 w-full overflow-hidden rounded-t-2xl border border-white/[0.08] bg-[#0c0c0c] shadow-elev-3 animate-slide-up sm:rounded-2xl',
           SIZES[size]
         )}
       >
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-4">
-            <h3 id={titleId} className="truncate font-display text-lg uppercase text-text-primary">
+          <div className="flex items-center justify-between gap-3 border-b border-white/[0.06] px-5 py-4">
+            <h3 id={titleId} className="truncate font-display text-base uppercase tracking-wide text-text-primary">
               {title}
             </h3>
             {showCloseButton && (
               <button
                 type="button"
                 onClick={onClose}
-                className="shrink-0 rounded-full p-1 text-text-muted transition hover:bg-white/5 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="shrink-0 rounded-md p-1.5 text-text-muted transition hover:bg-white/[0.06] hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 aria-label="Cerrar diálogo"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               </button>
             )}
           </div>

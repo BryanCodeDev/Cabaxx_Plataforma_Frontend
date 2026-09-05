@@ -185,6 +185,12 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Divisor editorial de sección: línea con acento central, en editoriales
+     de música separa actos sin romper el flujo */
+  .section-rule {
+    @apply mx-auto h-px w-24 bg-gradient-to-r from-transparent via-accent/60 to-transparent;
+  }
 }
 
 @keyframes fadeIn {

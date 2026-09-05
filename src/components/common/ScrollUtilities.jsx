@@ -29,21 +29,21 @@ export default function ScrollUtilities() {
 
   return (
     <>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-accent transition-transform duration-150 ease-out"
-        style={{ transform: `scaleX(${scroll / 100})` }}
-      />
-      {showTop && (
-        <button
-          type="button"
-          onClick={toTop}
-          aria-label="Volver arriba"
-          className="fixed bottom-6 right-6 z-[55] flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/85 text-white shadow-elev-2 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:text-accent hover:shadow-glow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-        >
-          <ArrowUp className="h-5 w-5" />
-        </button>
-      )}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[1.5px] origin-left bg-accent/80 transition-transform duration-150 ease-out"
+          style={{ transform: `scaleX(${scroll / 100})` }}
+        />
+        {showTop && (
+          <button
+            type="button"
+            onClick={toTop}
+            aria-label="Volver arriba"
+            className="fixed bottom-6 right-6 z-[55] flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.1] bg-black/80 text-white shadow-elev-2 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+          >
+            <ArrowUp className="h-4 w-4" />
+          </button>
+        )}
     </>
   );
 }

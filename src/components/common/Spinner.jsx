@@ -1,6 +1,6 @@
 import { classNames } from '@/utils/classNames';
 
-const SIZES = { sm: 'h-5 w-5', md: 'h-8 w-8', lg: 'h-12 w-12' };
+const SIZES = { sm: 'h-4 w-4', md: 'h-6 w-6', lg: 'h-10 w-10' };
 
 const COLORS = {
   accent: 'text-accent',
@@ -10,15 +10,21 @@ const COLORS = {
 };
 
 /**
- * Spinner CSS puro (sin librerías).
+ * Spinner CSS puro (sin librerías) — círculo con un trazo de 25% que gira.
  * @param {string} size - 'sm'|'md'|'lg'
  * @param {string} color - 'accent'|'primary'|'gold'|'muted'
  */
 export default function Spinner({ size = 'md', color = 'accent' }) {
   return (
-    <svg className={classNames('animate-spin', SIZES[size], COLORS[color])} viewBox="0 0 24 24" fill="none">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-    </svg>
+    <span
+      role="status"
+      aria-label="Cargando"
+      className={classNames('inline-block animate-spin', SIZES[size], COLORS[color])}
+    >
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.18" strokeWidth="2.5" />
+        <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      </svg>
+    </span>
   );
 }
