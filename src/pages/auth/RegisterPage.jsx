@@ -41,9 +41,9 @@ export default function RegisterPage() {
       title="Crear cuenta"
       subtitle="Acceso a preventas, contenido exclusivo y descuentos en la tienda."
       footer={
-        <p className="text-center text-sm text-white/40">
+        <p className="text-center text-sm text-text-secondary">
           ¿Ya tienes cuenta?{' '}
-          <Link to={ROUTES.LOGIN} className="font-semibold text-accent transition hover:text-white">
+          <Link to={ROUTES.LOGIN} className="font-semibold text-accent transition hover:text-text-primary">
             Inicia sesión
           </Link>
         </p>
@@ -107,7 +107,7 @@ export default function RegisterPage() {
           <Button type="submit" fullWidth loading={loading} size="lg">
             Crear mi cuenta
           </Button>
-          <p className="text-center text-[11px] leading-relaxed text-white/30">
+          <p className="text-center text-[11px] leading-relaxed text-text-muted">
             Al registrarte aceptas nuestros Términos y la Política de privacidad.
           </p>
         </form>

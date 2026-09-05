@@ -114,7 +114,7 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }) {
     <aside
       aria-label="Navegación del panel administrativo"
       className={classNames(
-        'sticky top-0 z-30 hidden h-screen shrink-0 flex-col border-r border-white/[0.06] bg-[#080808]/95 backdrop-blur-md transition-[width] duration-300 ease-premium lg:flex',
+        'sticky top-0 z-30 hidden h-screen shrink-0 flex-col border-r border-white/[0.06] bg-app-panel/95 backdrop-blur-md transition-[width] duration-300 ease-premium lg:flex',
         collapsed ? 'w-[72px]' : 'w-[260px]'
       )}
     >
@@ -127,7 +127,7 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }) {
           to={ROUTES.HOME}
           aria-label="Ir al sitio público"
           className={classNames(
-            'flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-[#E0203F] text-sm font-black text-white shadow-[0_4px_18px_rgba(255,59,92,0.35)] transition-transform hover:scale-105',
+            'flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-hover text-sm font-black text-white shadow-[0_4px_18px_rgba(255,59,92,0.35)] transition-transform hover:scale-105',
             FOCUS
           )}
         >

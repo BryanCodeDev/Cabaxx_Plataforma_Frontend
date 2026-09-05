@@ -76,7 +76,7 @@ export default function Footer() {
   const name = artist?.stage_name || artist?.name || 'Cabaxx';
 
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-[#060606]">
+    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-app">
       <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-accent/[0.05] blur-[120px]" aria-hidden="true" />
       <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-accent/[0.04] blur-[120px]" aria-hidden="true" />
       <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent" />

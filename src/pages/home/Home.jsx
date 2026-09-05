@@ -203,7 +203,7 @@ function Hero({ artist }) {
           className="mb-7 flex items-center gap-3"
         >
           <PulseBars count={3} />
-          <p className="text-[11px] font-bold uppercase tracking-mega text-white/70 sm:text-xs">
+          <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-white/65 sm:text-xs">
             {artist?.genre || 'Bogotá D.C., Colombia · Música urbana hecha en la capital'}
           </p>
         </motion.div>
@@ -258,14 +258,15 @@ function Hero({ artist }) {
       <button
         onClick={() => document.getElementById('latest')?.scrollIntoView({ behavior: 'smooth' })}
         aria-label="Ir a la música"
-        className="absolute bottom-8 right-6 z-10 hidden flex-col items-center gap-1.5 text-white/50 transition hover:text-accent sm:flex sm:right-8"
+        className="absolute bottom-8 right-6 z-10 hidden flex-col items-center gap-1.5 text-white/45 transition hover:text-accent sm:flex sm:right-8"
       >
-        <span className="text-[10px] uppercase tracking-[0.3em]">Bajar</span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em]">Bajar</span>
         <svg
           className="animate-bounce"
-          width="16" height="16" viewBox="0 0 24 24"
+          width="14" height="14" viewBox="0 0 24 24"
           fill="none" stroke="currentColor" strokeWidth="1.75"
           strokeLinecap="round" strokeLinejoin="round"
+          aria-hidden="true"
         >
           <path d="M19 9l-7 7-7-7" />
         </svg>
@@ -304,13 +305,13 @@ function Marquee({ artist }) {
   const track = [...words, ...words, ...words, ...words];
 
   return (
-    <div className="overflow-hidden border-y border-white/10 bg-[#0a0a0a] py-4">
+    <div className="overflow-hidden border-y border-white/[0.06] bg-app-deep py-4">
       <div className="flex w-max animate-marquee gap-10 whitespace-nowrap motion-reduce:animate-none">
         {[...track, ...track].map((w, i) => (
           <span
             key={i}
             className={`flex items-center gap-10 font-display text-sm font-bold uppercase tracking-[0.3em] ${
-              w === '·' ? 'text-accent' : 'text-white/30'
+              w === '·' ? 'text-accent' : 'text-white/25'
             }`}
           >
             {w}
@@ -362,7 +363,7 @@ function LatestRelease() {
       />
 
       <div className="container-fluid">
-        <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">Recién salido del estudio</p>
+        <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">Recién salido del estudio</p>
         <h2 className="sr-only">Lo Nuevo de Cabaxx</h2>
       </div>
 
@@ -371,10 +372,9 @@ function LatestRelease() {
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
       >
-        {/* Portada — se desborda hacia el margen izquierdo del viewport */}
         <div className="relative md:col-span-7 md:-ml-[6vw]">
-          <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-3xl md:-inset-10" aria-hidden="true" />
-          <div className="mx-4 overflow-hidden rounded-[1.75rem] border border-white/10 shadow-2xl sm:mx-8 md:mx-0 md:rounded-[2.5rem]">
+          <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/[0.1] blur-3xl md:-inset-10" aria-hidden="true" />
+          <div className="mx-4 overflow-hidden rounded-[1.75rem] border border-white/[0.08] shadow-elev-3 sm:mx-8 md:mx-0 md:rounded-[2.5rem]">
             <img
               src={latest.cover_url}
               alt={`Portada del sencillo "${latest.title}" de Cabaxx`}
@@ -384,17 +384,15 @@ function LatestRelease() {
           </div>
         </div>
 
-        {/* Info — columna angosta, numérica, alineada a la derecha */}
         <div className="relative z-10 mt-10 px-4 sm:px-8 md:col-span-5 md:mt-0 md:pl-14">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/40">
+          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-text-muted">
             Sencillo · {latest.album_title || 'Catálogo 2025'}
           </p>
-          <h3 className="mt-4 font-display font-black uppercase leading-[0.92] text-white text-display-md">
+          <h3 className="mt-4 font-display font-black uppercase leading-[0.92] tracking-tight text-text-primary text-display-md">
             {latest.title}
           </h3>
-          <p className="mt-3 text-sm text-white/40">{latest.release_date || '2025'} · Streaming en todas las plataformas</p>
+          <p className="mt-3 text-sm text-text-muted">{latest.release_date || '2025'} · Streaming en todas las plataformas</p>
 
-          {/* Plataformas */}
           <div className="mt-8 flex flex-wrap gap-2">
             {PLATFORMS.map((p) => (
               <a
@@ -402,21 +400,20 @@ function LatestRelease() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-semibold text-white/60 transition hover:border-accent/50 hover:text-white hover:shadow-glow-sm sm:text-sm"
+                className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-xs font-semibold text-text-secondary transition hover:border-white/20 hover:text-text-primary sm:text-sm"
               >
                 {p.label}
-                <ChevronRight className="h-3 w-3 opacity-60" />
+                <ChevronRight className="h-3 w-3 opacity-60" aria-hidden="true" />
               </a>
             ))}
           </div>
 
-          {/* Reproducciones */}
           {target > 0 && (
-            <div className="mt-10 border-t border-white/10 pt-6">
-              <span className="block font-mono text-4xl font-bold text-accent">
+            <div className="mt-10 border-t border-white/[0.06] pt-6">
+              <span className="block font-mono text-4xl font-bold tabular-nums text-accent">
                 {count.toLocaleString('es-CO')}
               </span>
-              <span className="mt-1 block text-xs uppercase tracking-[0.25em] text-white/40">Reproducciones</span>
+              <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.22em] text-text-muted">Reproducciones</span>
             </div>
           )}
         </div>
@@ -470,7 +467,7 @@ function About() {
   const displayName = artist?.stage_name || artist?.name || 'Cabaxx';
 
   return (
-    <section id="about" ref={ref} className="relative overflow-hidden border-y border-white/10 bg-[#0a0a0a] scroll-mt-20 px-4 py-24 sm:px-8 sm:py-28 lg:py-32">
+    <section id="about" ref={ref} className="relative overflow-hidden border-y border-white/10 bg-app-deep scroll-mt-20 px-4 py-24 sm:px-8 sm:py-28 lg:py-32">
       <div
         className="pointer-events-none absolute -right-32 -top-32 h-[460px] w-[460px] rounded-full bg-accent/[0.08] blur-[160px]"
         aria-hidden="true"
@@ -487,9 +484,9 @@ function About() {
             <SectionHeading eyebrow="Origen" title="La Historia" />
 
             {artist?.bio ? (
-              <p className="mt-6 max-w-lg leading-loose text-white/55">{artist.bio}</p>
+              <p className="mt-6 max-w-lg leading-relaxed text-text-secondary">{artist.bio}</p>
             ) : (
-              <div className="mt-6 max-w-lg space-y-4 leading-loose text-white/55">
+              <div className="mt-6 max-w-lg space-y-4 leading-relaxed text-text-secondary">
                 <p>
                   Nacido y radicado en Bogotá D.C., Cabaxx construyó su sonido lejos de cualquier
                   fórmula. Reggaetón, trap, drill y la calle colombiana conviven en cada tema, sin
@@ -502,7 +499,7 @@ function About() {
               </div>
             )}
 
-            <blockquote className="mt-8 border-l-2 border-accent pl-6 font-display font-bold uppercase leading-snug text-white text-display-sm">
+            <blockquote className="mt-8 border-l-2 border-accent pl-6 font-display font-bold uppercase leading-snug tracking-tight text-text-primary text-display-sm">
               &ldquo;No grabo para llenar un espacio.
               <br />
               Grabo para que se quede.&rdquo;
@@ -513,15 +510,14 @@ function About() {
             </div>
           </div>
 
-          {/* Foto — retrato grande, columna derecha */}
           <div className="order-1 md:order-2 md:col-span-5 md:pt-8">
             <div className="group relative mx-auto max-w-xs md:max-w-none">
-              <div className="absolute -inset-3 -z-10 rounded-3xl bg-accent/20 blur-2xl transition-all duration-700 ease-premium group-hover:blur-3xl" aria-hidden="true" />
+              <div className="absolute -inset-3 -z-10 rounded-3xl bg-accent/[0.15] blur-2xl transition-all duration-700 ease-premium group-hover:blur-3xl" aria-hidden="true" />
               <img
                 src={artist?.avatar_url || artistPortrait}
                 alt={`${displayName}, artista urbano bogotano, retrato de estudio`}
                 loading="lazy"
-                className="aspect-[4/5] w-full rounded-3xl border border-white/10 object-cover shadow-2xl grayscale transition-all duration-500 ease-premium hover:-rotate-1 hover:scale-[1.02] hover:grayscale-0"
+                className="aspect-[4/5] w-full rounded-3xl border border-white/[0.08] object-cover shadow-elev-3 grayscale transition-all duration-500 ease-premium hover:-rotate-1 hover:scale-[1.02] hover:grayscale-0"
               />
             </div>
           </div>
@@ -533,11 +529,11 @@ function About() {
             <div
               key={s.label}
               style={{ transitionDelay: `${i * 80}ms` }}
-              className={`group rounded-2xl border border-white/10 bg-black p-5 text-center transition-all duration-500 ease-premium hover:-translate-y-1 hover:border-accent/30 hover:shadow-glow ${
+              className={`group rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 text-center transition-all duration-500 ease-premium hover:-translate-y-0.5 hover:border-white/20 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               }`}
             >
-              <p className="font-mono text-xl font-bold text-accent sm:text-2xl">
+              <p className="font-mono text-xl font-semibold tabular-nums text-accent sm:text-2xl">
                 {s.value > 0
                   ? (s.value >= 1000
                       ? `${(s.value / 1000).toFixed(s.value >= 10000 ? 0 : 1)}K`
@@ -545,14 +541,13 @@ function About() {
                   : '—'}
                 {s.suffix}
               </p>
-              <p className="mt-1 text-xs text-white/40">{s.label}</p>
+              <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-text-muted">{s.label}</p>
             </div>
           ))}
         </div>
 
-        {/* Timeline — el archivo, no la cronología genérica */}
         <div className="mt-20">
-          <p className="text-center text-xs font-bold uppercase tracking-mega text-accent md:text-left">
+          <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent md:text-left">
             El camino hasta aquí
           </p>
           <div className="relative mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -600,25 +595,23 @@ function FeaturedSongs() {
       <SectionHeading
         eyebrow="Discografía"
         title="Canciones"
+        subtitle="Cuatro capítulos del mismo catálogo. Cada uno se sostiene solo."
         action={
           <Link to="/canciones">
-            <Button variant="ghost" size="sm" className="text-white/60 hover:text-accent">
+            <Button variant="ghost" size="sm">
               Ver todas <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           </Link>
         }
       />
-      <p className="mt-3 max-w-lg text-sm text-white/40">
-        Cuatro capítulos del mismo catálogo. Cada uno se sostiene solo.
-      </p>
 
       {songs.length === 0 ? (
-        <div className="mt-12 rounded-2xl border border-white/10 bg-[#0a0a0a] p-10 text-center">
-          <Music className="mx-auto mb-3 h-8 w-8 text-white/20" />
-          <p className="text-white/40">La música está por caer. Vuelve pronto.</p>
+        <div className="mt-12 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-10 text-center">
+          <Music className="mx-auto mb-3 h-7 w-7 text-text-muted" />
+          <p className="text-sm text-text-muted">La música está por caer. Vuelve pronto.</p>
         </div>
       ) : (
-        <ol className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]">
+        <ol className="mt-10 overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02]">
           {songs.map((song, i) => (
             <li
               key={song.id}
@@ -629,9 +622,9 @@ function FeaturedSongs() {
             >
               <Link
                 to={`/canciones/${song.slug}`}
-                className="group flex items-center gap-4 border-b border-white/5 px-4 py-3.5 transition-colors duration-300 last:border-b-0 hover:bg-white/[0.03] sm:px-6"
+                className="group flex items-center gap-4 border-b border-white/[0.05] px-4 py-3.5 transition-colors duration-200 last:border-b-0 hover:bg-white/[0.03] sm:px-6"
               >
-                <span className="hidden w-5 shrink-0 text-center font-mono text-sm text-white/25 group-hover:text-accent sm:block">
+                <span className="hidden w-5 shrink-0 text-center font-mono text-xs text-text-muted group-hover:text-accent sm:block">
                   {String(i + 1).padStart(2, '0')}
                 </span>
 
@@ -642,8 +635,8 @@ function FeaturedSongs() {
                     className="h-full w-full object-cover transition duration-500 ease-premium group-hover:scale-110"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/50 group-hover:opacity-100">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent shadow-glow-sm">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true">
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
@@ -651,15 +644,15 @@ function FeaturedSongs() {
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-semibold text-white transition-colors group-hover:text-accent">{song.title}</p>
-                  <p className="mt-0.5 truncate text-xs text-white/35">{song.album_title || 'Sencillo'}</p>
+                  <p className="truncate font-medium text-text-primary transition-colors group-hover:text-accent">{song.title}</p>
+                  <p className="mt-0.5 truncate text-xs text-text-muted">{song.album_title || 'Sencillo'}</p>
                 </div>
 
-                <span className="hidden shrink-0 text-xs uppercase tracking-wide text-white/25 sm:block">
+                <span className="hidden shrink-0 font-mono text-xs text-text-muted sm:block tabular-nums">
                   {song.duration || '—:—'}
                 </span>
 
-                <ChevronRight className="h-4 w-4 shrink-0 text-white/20 transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-text-muted transition-transform group-hover:translate-x-1 group-hover:text-accent" />
               </Link>
             </li>
           ))}
@@ -707,79 +700,77 @@ function UpcomingEvents() {
     return (
       <section id="events" className="container-fluid scroll-mt-20 py-20 sm:py-24 lg:py-28">
         <SectionHeading eyebrow="Agenda" title="Próximos Shows" />
-        <div className="mt-8 rounded-2xl border border-white/10 bg-[#0a0a0a] p-10 text-center">
-          <p className="text-white/40">Próximamente, fechas de concierto en tu ciudad. Activa las notificaciones.</p>
+        <div className="mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-10 text-center">
+          <p className="text-sm text-text-muted">Próximamente, fechas de concierto en tu ciudad. Activa las notificaciones.</p>
         </div>
       </section>
     );
   }
 
   return (
-    <section id="events" ref={ref} className="relative overflow-hidden border-y border-white/10 bg-[#0a0a0a] scroll-mt-20 py-20 sm:py-24 lg:py-28">
-      <FilmGrain opacity={0.025} />
+    <section id="events" ref={ref} className="relative overflow-hidden border-y border-white/[0.06] bg-app-deep scroll-mt-20 py-20 sm:py-24 lg:py-28">
+      <FilmGrain opacity={0.02} />
       <div className="container-fluid relative">
         <SectionHeading
           eyebrow="Agenda"
           title="Próximos Shows"
+          subtitle="Un show en vivo no se repite. Consigue tu entrada antes de que se agote la tanda."
           action={
             <Link to="/eventos">
-              <Button variant="ghost" size="sm" className="text-white/60 hover:text-accent">
+              <Button variant="ghost" size="sm">
                 Ver todos <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </Link>
           }
         />
-        <p className="mt-3 max-w-lg text-sm text-white/40">
-          Un show en vivo no se repite. Consigue tu entrada antes de que se agote la tanda.
-        </p>
 
         <div className="relative mt-12">
-          <div className="absolute left-[27px] top-0 bottom-0 hidden w-px bg-white/10 sm:block" aria-hidden="true" />
-          <div className="space-y-5">
+          <div className="absolute left-[27px] top-0 bottom-0 hidden w-px bg-white/[0.08] sm:block" aria-hidden="true" />
+          <div className="space-y-4">
             {events.map((ev, i) => (
               <Link
                 key={ev.id}
                 to={`/eventos/${ev.slug}`}
-                className={`group relative flex flex-col gap-5 rounded-2xl border border-white/10 bg-black p-5 transition-all duration-500 ease-premium hover:border-accent/40 hover:shadow-glow-sm sm:flex-row sm:items-center sm:gap-8 sm:pl-16 ${
+                className={`group relative flex flex-col gap-5 rounded-2xl border border-white/[0.08] bg-black p-5 transition-all duration-300 ease-premium hover:border-white/20 sm:flex-row sm:items-center sm:gap-8 sm:pl-16 ${
                   isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
                 }`}
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                <div className="absolute left-0 top-5 z-10 hidden h-14 w-14 items-center justify-center rounded-full border border-accent/40 bg-black text-center sm:flex">
+                <div className="absolute left-0 top-5 z-10 hidden h-14 w-14 items-center justify-center rounded-full border border-white/[0.08] bg-black text-center sm:flex">
                   <div>
-                    <p className="text-[9px] font-semibold uppercase tracking-wide text-accent/70">
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-text-muted">
                       {new Date(ev.start_datetime).toLocaleString('es-CO', { month: 'short' })}
                     </p>
-                    <p className="font-display text-lg leading-none text-white">
+                    <p className="font-display text-lg leading-none text-text-primary">
                       {new Date(ev.start_datetime).getDate()}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between gap-4 sm:hidden">
-                  <div className="rounded-xl border border-accent/30 bg-accent/5 px-3.5 py-2.5 text-center">
-                    <p className="text-[10px] font-semibold uppercase tracking-wide text-accent/70">
+                  <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-center">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-text-muted">
                       {new Date(ev.start_datetime).toLocaleString('es-CO', { month: 'short' })}
                     </p>
-                    <p className="font-display text-2xl leading-none text-white">
+                    <p className="font-display text-2xl leading-none text-text-primary">
                       {new Date(ev.start_datetime).getDate()}
                     </p>
                   </div>
-                  <span className="rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
+                  <span className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-text-secondary">
                     {ev.is_free ? 'Entrada libre' : 'Boletería'}
                   </span>
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="font-display text-2xl font-bold uppercase text-white transition-colors group-hover:text-accent">
+                  <h3 className="font-display text-2xl uppercase tracking-wide text-text-primary transition-colors group-hover:text-accent">
                     {ev.title}
                   </h3>
-                  <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-white/45">
+                  <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-text-secondary">
                     <span className="flex items-center gap-1.5">
-                      <MapPin className="h-3.5 w-3.5" /> {ev.venue_name}
+                      <MapPin className="h-3.5 w-3.5" aria-hidden="true" /> {ev.venue_name}
                     </span>
                     <span className="flex items-center gap-1.5 text-xs">
-                      <Clock className="h-3 w-3" /> {ev.city}
+                      <Clock className="h-3 w-3" aria-hidden="true" /> {ev.city}
                     </span>
                   </div>
                   <div className="mt-2">
@@ -788,15 +779,15 @@ function UpcomingEvents() {
                 </div>
 
                 <div className="hidden shrink-0 sm:block">
-                  <span className="mb-3 block text-right text-xs font-semibold uppercase tracking-wide text-white/40">
+                  <span className="mb-3 block text-right text-[10px] font-semibold uppercase tracking-[0.16em] text-text-muted">
                     {ev.is_free ? 'Entrada libre' : 'Boletería'}
                   </span>
                   <Button size="sm">
-                    <Ticket className="mr-1.5 h-4 w-4" /> Entradas
+                    <Ticket className="mr-1.5 h-4 w-4" aria-hidden="true" /> Entradas
                   </Button>
                 </div>
                 <Button size="sm" className="w-full sm:hidden">
-                  <Ticket className="mr-1.5 h-4 w-4" /> Asegurar entrada
+                  <Ticket className="mr-1.5 h-4 w-4" aria-hidden="true" /> Asegurar entrada
                 </Button>
               </Link>
             ))}
@@ -816,7 +807,7 @@ function GalleryPreview() {
   const [ref, isVisible] = useScrollReveal();
 
   const tileClass = (i) =>
-    `group relative overflow-hidden rounded-2xl border border-white/10 transition-all duration-500 ease-premium cursor-pointer ${
+    `group relative overflow-hidden rounded-2xl border border-white/[0.08] transition-all duration-500 ease-premium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary ${
       isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
     } ${i === 0 ? 'col-span-2 row-span-2 aspect-[4/3]' : 'aspect-square'}`;
 
@@ -825,17 +816,15 @@ function GalleryPreview() {
       <SectionHeading
         eyebrow="Detrás de cámaras"
         title="Galería"
+        subtitle="Shows en vivo, sesiones de estudio y lo que la cámara sigue grabando cuando ya nadie está mirando."
         action={
           <Link to="/galeria">
-            <Button variant="ghost" size="sm" className="text-white/60 hover:text-accent">
+            <Button variant="ghost" size="sm">
               Ver galería completa <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           </Link>
         }
       />
-      <p className="mt-3 max-w-lg text-sm text-white/40">
-        Shows en vivo, sesiones de estudio y lo que la cámara sigue grabando cuando ya nadie está mirando.
-      </p>
 
       {GALLERY_IMAGES.length > 0 ? (
         <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-4">
@@ -861,8 +850,8 @@ function GalleryPreview() {
                 {GALLERY_CAPTIONS[i % GALLERY_CAPTIONS.length]}
               </p>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <div className="rounded-full border border-accent/50 bg-black/40 p-2.5 backdrop-blur-sm">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <div className="rounded-full border border-white/[0.2] bg-black/40 p-2.5 backdrop-blur-sm">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="#FF3B5C" strokeWidth="2" strokeLinecap="round" fill="none"/>
                   </svg>
                 </div>
@@ -871,19 +860,18 @@ function GalleryPreview() {
           ))}
         </div>
       ) : (
-        <div className="mt-10 rounded-2xl border border-white/10 bg-[#0a0a0a] p-10 text-center">
-          <p className="text-white/40">Las fotos están en camino.</p>
+        <div className="mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-10 text-center">
+          <p className="text-sm text-text-muted">Las fotos están en camino.</p>
         </div>
       )}
 
-      {/* Lightbox */}
       {lightbox && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
           onClick={() => setLightbox(null)}
         >
           <button
-            className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 p-2.5 text-white transition hover:bg-white/20"
+            className="absolute right-4 top-4 rounded-full border border-white/[0.2] bg-white/10 p-2.5 text-text-primary transition hover:bg-white/20"
             onClick={() => setLightbox(null)}
             aria-label="Cerrar"
           >
@@ -892,7 +880,7 @@ function GalleryPreview() {
           <img
             src={lightbox.url}
             alt={lightbox.title}
-            className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain shadow-2xl"
+            className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain shadow-elev-3"
             onClick={(e) => e.stopPropagation()}
           />
         </div>
@@ -911,26 +899,24 @@ function Merchandise() {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <section id="store" ref={ref} className="border-y border-white/10 bg-[#0a0a0a] scroll-mt-20 py-20 sm:py-24 lg:py-28">
+    <section id="store" ref={ref} className="border-y border-white/[0.06] bg-app-deep scroll-mt-20 py-20 sm:py-24 lg:py-28">
       <div className="container-fluid">
         <SectionHeading
           eyebrow="Merch oficial"
           title="Tienda"
+          subtitle="Piezas de edición limitada. Cuando se agotan, no vuelven."
           action={
             <Link to="/tienda">
-              <Button variant="ghost" size="sm" className="text-white/60 hover:text-accent">
+              <Button variant="ghost" size="sm">
                 Ver tienda <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </Link>
           }
         />
-        <p className="mt-3 max-w-lg text-sm text-white/40">
-          Piezas de edición limitada. Cuando se agotan, no vuelven.
-        </p>
 
         {products.length === 0 ? (
-          <div className="mt-10 rounded-2xl border border-white/10 bg-black p-10 text-center">
-            <p className="text-white/40">El próximo drop está en producción. Activa las notificaciones para ser el primero.</p>
+          <div className="mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-10 text-center">
+            <p className="text-sm text-text-muted">El próximo drop está en producción. Activa las notificaciones para ser el primero.</p>
           </div>
         ) : (
           <div className="grid-cards mt-10">
@@ -943,23 +929,22 @@ function Merchandise() {
                 }`}
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className="overflow-hidden rounded-2xl bg-black">
+                <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.015] transition-colors duration-200 group-hover:border-white/20">
                   <div className="relative aspect-square overflow-hidden">
                     <img
                       src={p.cover_url}
                       alt={p.name}
-                      className="h-full w-full object-cover transition-transform duration-700 ease-premium group-hover:scale-110"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.03]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                     {p.stock_quantity === 0 && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/70">
                         <Badge variant="default">Agotado</Badge>
                       </div>
                     )}
                   </div>
-                  <div className="mt-3 px-1 pb-1">
-                    <p className="truncate text-sm font-semibold text-white transition-colors group-hover:text-accent">{p.name}</p>
-                    <p className="mt-1 font-mono text-sm font-bold text-white/70">
+                  <div className="px-1 pb-2 pt-3">
+                    <p className="truncate text-sm font-medium text-text-primary transition-colors group-hover:text-accent">{p.name}</p>
+                    <p className="mt-1 font-mono text-sm font-semibold tabular-nums text-text-secondary">
                       ${p.price?.toLocaleString('es-CO')} COP
                     </p>
                   </div>
@@ -986,21 +971,19 @@ function News() {
       <SectionHeading
         eyebrow="Al día"
         title="Noticias"
+        subtitle="Lo que se mueve alrededor del proyecto, contado directo desde la fuente."
         action={
           <Link to="/noticias">
-            <Button variant="ghost" size="sm" className="text-white/60 hover:text-accent">
+            <Button variant="ghost" size="sm">
               Ver todo <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           </Link>
         }
       />
-      <p className="mt-3 max-w-lg text-sm text-white/40">
-        Lo que se mueve alrededor del proyecto, contado directo desde la fuente.
-      </p>
 
       {posts.length === 0 ? (
-        <div className="mt-10 rounded-2xl border border-white/10 bg-[#0a0a0a] p-10 text-center">
-          <p className="text-white/40">Las noticias llegan pronto.</p>
+        <div className="mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-10 text-center">
+          <p className="text-sm text-text-muted">Las noticias llegan pronto.</p>
         </div>
       ) : (
         <div className="grid-feature mt-10">
@@ -1013,29 +996,29 @@ function News() {
               }`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
-              <div className="group h-full overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] transition-all duration-300 hover:border-accent/40">
+              <article className="group h-full overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.015] transition-colors duration-200 hover:border-white/20">
                 {post.cover_url && (
                   <div className="overflow-hidden">
                     <img
                       src={post.cover_url}
                       alt={post.title ? `Imagen de la noticia: ${post.title}` : ''}
-                      className="h-40 w-full object-cover transition-transform duration-500 ease-premium group-hover:scale-105"
+                      className="h-40 w-full object-cover transition-transform duration-500 ease-premium group-hover:scale-[1.03]"
                     />
                   </div>
                 )}
                 <div className="p-5">
-                  <span className="text-xs font-bold uppercase tracking-wide text-accent">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-accent">
                     {post.category?.name || 'Noticia'}
                   </span>
-                  <h3 className="mt-2 font-display text-2xl font-bold leading-snug text-white">
+                  <h3 className="mt-2 font-display text-2xl uppercase tracking-wide leading-snug text-text-primary">
                     {post.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/45 line-clamp-2">
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
                     {post.excerpt}
                   </p>
-                  <p className="mt-3 text-xs text-white/30">{formatDate(post.published_at)}</p>
+                  <p className="mt-3 text-xs text-text-muted">{formatDate(post.published_at)}</p>
                 </div>
-              </div>
+              </article>
             </Link>
           ))}
         </div>
@@ -1053,15 +1036,16 @@ function Social() {
   const socials = artist?.social_links || [];
 
   return (
-    <section className="border-y border-white/10 bg-[#0a0a0a]">
+    <section className="border-y border-white/[0.06] bg-app-deep">
       <div className="container-fluid py-16 sm:py-20">
-        <p className="text-center text-xs font-bold uppercase tracking-mega text-accent">Conecta</p>
-        <h2 className="mt-2 text-center font-display text-3xl font-black uppercase text-white sm:text-4xl">
-          Sígueme de cerca
-        </h2>
-        <p className="mx-auto mt-2 max-w-sm text-center text-sm text-white/40">
-          Contenido exclusivo, adelantos y lo que no publicamos en ningún otro lado.
-        </p>
+        <div className="mx-auto max-w-xl text-center">
+          <SectionHeading
+            align="center"
+            eyebrow="Conecta"
+            title="Sígueme de cerca"
+            subtitle="Contenido exclusivo, adelantos y lo que no publicamos en ningún otro lado."
+          />
+        </div>
 
         <div className="mt-10 flex flex-wrap justify-center gap-6 sm:gap-10">
           {SOCIAL_PLATFORMS.map((p) => {
@@ -1074,15 +1058,16 @@ function Social() {
                 target="_blank"
                 rel="noreferrer"
                 className="group flex flex-col items-center gap-2.5 transition"
+                aria-label={`${p.label} (${link.follower_count?.toLocaleString('es-CO') || 0} seguidores)`}
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-black text-white transition-all duration-300 ease-premium group-hover:-translate-y-1 group-hover:border-accent group-hover:shadow-glow sm:h-16 sm:w-16">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.02] text-text-primary transition-all duration-200 ease-premium group-hover:-translate-y-0.5 group-hover:border-white/20 sm:h-16 sm:w-16">
                   <span className="font-display text-xl font-bold">{p.label[0]}</span>
                 </div>
-                <span className="text-xs font-medium text-white/50 transition group-hover:text-white">
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-text-secondary transition group-hover:text-text-primary">
                   {p.label}
                 </span>
                 {link.follower_count != null && link.follower_count > 0 && (
-                  <span className="font-mono text-xs text-white/30">
+                  <span className="font-mono text-xs tabular-nums text-text-muted">
                     {link.follower_count >= 1_000_000
                       ? `${(link.follower_count / 1_000_000).toFixed(1)}M`
                       : link.follower_count >= 1_000
@@ -1128,22 +1113,22 @@ function Newsletter() {
 
   return (
     <section className="relative overflow-hidden bg-black py-24 sm:py-32">
-      <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-accent/15 blur-3xl" aria-hidden="true" />
-      <div className="absolute -bottom-24 -right-12 h-80 w-80 rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
-      <FilmGrain opacity={0.035} />
+      <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-accent/[0.12] blur-3xl" aria-hidden="true" />
+      <div className="absolute -bottom-24 -right-12 h-80 w-80 rounded-full bg-accent/[0.08] blur-3xl" aria-hidden="true" />
+      <FilmGrain opacity={0.025} />
 
       <div className="relative mx-auto max-w-2xl px-4 text-center">
-        <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-mega text-accent">
-          <span className="h-px w-6 bg-accent/60" aria-hidden="true" />
+        <div className="mb-5 flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
+          <span className="h-px w-8 bg-accent/50" aria-hidden="true" />
           Lista de acceso
-          <span className="h-px w-6 bg-accent/60" aria-hidden="true" />
-        </p>
-        <h2 className="mt-4 text-balance font-display text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl">
+          <span className="h-px w-8 bg-accent/50" aria-hidden="true" />
+        </div>
+        <h2 className="text-balance font-display text-4xl uppercase tracking-tight leading-[1] text-text-primary sm:text-5xl">
           Sé el primero
           <br />
           en enterarte
         </h2>
-        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/50">
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-text-secondary">
           Lanzamientos exclusivos, fechas de conciertos antes que nadie y contenido que no existe en redes sociales.
         </p>
 
@@ -1153,14 +1138,15 @@ function Newsletter() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="tu@email.com"
-            className="flex-1 border-white/15 bg-white/[0.04] text-white placeholder:text-white/30 focus:border-accent/60"
             required
+            aria-label="Email para suscripción"
+            className="flex-1"
           />
           <Button type="submit" disabled={loading} className="whitespace-nowrap">
             {loading ? 'Enviando…' : 'Suscribirme'}
           </Button>
         </form>
-        <p className="mt-4 text-xs text-white/25">Sin spam. Te puedes dar de baja cuando quieras.</p>
+        <p className="mt-4 text-xs text-text-muted">Sin spam. Te puedes dar de baja cuando quieras.</p>
       </div>
     </section>
   );

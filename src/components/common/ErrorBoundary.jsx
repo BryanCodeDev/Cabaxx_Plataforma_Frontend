@@ -130,7 +130,7 @@ export default class ErrorBoundary extends Component {
         aria-live="assertive"
         className="flex min-h-screen flex-col bg-black text-text-primary"
       >
-        <header className="border-b border-white/10 bg-[#0a0a0a] px-6 py-4">
+        <header className="border-b border-white/10 bg-app-deep px-6 py-4">
           <div className="mx-auto flex max-w-5xl items-center justify-between">
             <Link
               to={ROUTES.HOME}
@@ -217,7 +217,7 @@ export default class ErrorBoundary extends Component {
                   Detalles técnicos
                 </button>
                 {showDetails && (
-                  <pre className="mt-3 max-h-80 overflow-auto rounded-lg border border-white/10 bg-[#0a0a0a] p-4 text-left font-mono text-[11px] leading-relaxed text-red-200">
+                  <pre className="mt-3 max-h-80 overflow-auto rounded-lg border border-white/10 bg-app-deep p-4 text-left font-mono text-[11px] leading-relaxed text-red-200">
 {error?.stack}
 {'\n\n--- Component stack ---\n'}
 {errorInfo?.componentStack}
@@ -228,7 +228,7 @@ export default class ErrorBoundary extends Component {
           </div>
         </main>
 
-        <footer className="border-t border-white/10 bg-[#0a0a0a] px-6 py-3 text-center text-xs text-text-muted">
+        <footer className="border-t border-white/10 bg-app-deep px-6 py-3 text-center text-xs text-text-muted">
           Hecho en Bogotá D.C., Colombia · Cabaxx
         </footer>
       </div>

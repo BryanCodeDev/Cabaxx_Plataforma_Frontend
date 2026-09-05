@@ -1,16 +1,18 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ShoppingCart } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Package } from 'lucide-react';
 import { useFetch } from '@/hooks/useFetch';
 import { useCart } from '@/context/CartContext';
 import { ARTIST_SLUG, ROUTES } from '@/constants';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/common/Button';
 import PageSpinner from '@/components/common/PageSpinner';
-import { EmptyState } from '@/components/common';
-import Card from '@/components/common/Card';
+import { EmptyState, Chip, Card } from '@/components/common';
 import StickyBottomCTA from '@/components/common/StickyBottomCTA';
 import { formatCurrency } from '@/utils/format';
 import SEOHead from '@/components/seo/SEOHead';
+
+const FOCUS =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md';
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -35,44 +37,57 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="container-fluid pb-24 pt-10 sm:py-12 sm:pb-12">
+    <article className="container-fluid pb-24 pt-10 sm:pb-12 sm:pt-14">
       <Link
         to={ROUTES.STORE}
-        className="inline-flex items-center gap-1 text-sm text-text-secondary transition hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-md"
+        className={`inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-text-muted transition hover:text-text-primary ${FOCUS}`}
       >
-        <ArrowLeft className="h-4 w-4" /> Volver a la tienda
+        <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" /> Volver a la tienda
       </Link>
 
-      <div className="mt-6 grid gap-8 lg:grid-cols-2">
-        <Card padding="none" className="overflow-hidden">
+      <div className="mt-6 grid gap-10 lg:grid-cols-2">
+        <Card padding="none" className="overflow-hidden border-white/[0.08]">
           <img
             src={product.cover_url || product.image_url}
             alt={product.name}
-            className="aspect-square w-full rounded-2xl object-cover"
+            className="aspect-square w-full object-cover"
           />
         </Card>
         <div className="min-w-0">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Merch oficial</p>
-          <h1 className="font-display text-display-sm text-text-primary">{product.name}</h1>
-          <p className="mt-3 text-text-secondary">{product.description}</p>
-          <p className="mt-5 font-mono text-3xl text-accent">{formatCurrency(product.price)} COP</p>
+          <Chip variant="accent" icon={<Package className="h-3 w-3" aria-hidden="true" />}>
+            Merch oficial
+          </Chip>
+          <h1 className="mt-4 font-display text-display-sm tracking-tight text-text-primary">
+            {product.name}
+          </h1>
+          {product.description && (
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-text-secondary">{product.description}</p>
+          )}
+          <p className="mt-6 font-mono text-3xl font-semibold tabular-nums text-text-primary">
+            {formatCurrency(product.price)} <span className="text-sm text-text-muted">COP</span>
+          </p>
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            {(product.variants || []).map((v) => (
-              <span
-                key={v.id}
-                className="rounded-lg border border-border px-3 py-1 text-sm text-text-secondary"
-              >
-                {v.name}
-              </span>
-            ))}
-          </div>
+          {product.variants?.length > 0 && (
+            <div className="mt-6">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-text-muted">Variantes</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {product.variants.map((v) => (
+                  <span
+                    key={v.id}
+                    className="rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-1.5 text-xs font-semibold text-text-secondary"
+                  >
+                    {v.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
 
           <Button
             className="mt-8 hidden sm:inline-flex"
             disabled={soldOut}
             onClick={addToCart}
-            icon={<ShoppingCart className="h-4 w-4" />}
+            icon={<ShoppingCart className="h-4 w-4" aria-hidden="true" />}
           >
             {soldOut ? 'Agotado' : 'Añadir al carrito'}
           </Button>
@@ -89,6 +104,6 @@ export default function ProductPage() {
           icon: <ShoppingCart className="h-4 w-4" />,
         }}
       />
-    </div>
+    </article>
   );
 }

@@ -1,18 +1,54 @@
 import { classNames } from '@/utils/classNames';
-import { getInitials } from '@/utils/format';
 
-const AVATAR_SIZES = { sm: 'h-8 w-8 text-sm', md: 'h-10 w-10 text-base', lg: 'h-14 w-14 text-lg' };
+import Avatar from './Avatar';
+import Button from './Button';
+import Card from './Card';
+import Input from './Input';
+import Spinner from './Spinner';
+import Pagination from './Pagination';
+import Modal from './Modal';
+import Table from './Table';
+import ListingPage from './ListingPage';
+import Textarea from './Textarea';
+import Dropdown from './Dropdown';
+import CommentSection from './CommentSection';
+import LikeButton from './LikeButton';
+import FollowButton from './FollowButton';
+import StickyBottomCTA from './StickyBottomCTA';
+import StickyCartSummary from './StickyCartSummary';
+import CenteredContainer from './CenteredContainer';
+import SkipLink from './SkipLink';
+import PageSpinner from './PageSpinner';
+import ScrollUtilities from './ScrollUtilities';
+import ErrorBoundary from './ErrorBoundary';
+import ScrollToTop from './ScrollToTop';
+import ThemeToggle from './ThemeToggle';
 
-export function Avatar({ src, name = '', size = 'md' }) {
-  if (src) {
-    return <img src={src} alt={name} className={`${AVATAR_SIZES[size]} rounded-full object-cover border border-white/[0.08]`} />;
-  }
-  return (
-    <div className={`${AVATAR_SIZES[size]} flex items-center justify-center rounded-full bg-accent/15 font-semibold text-accent border border-accent/20`}>
-      {getInitials(name)}
-    </div>
-  );
-}
+export {
+  Avatar,
+  Button,
+  Card,
+  Input,
+  Spinner,
+  Pagination,
+  Modal,
+  Table,
+  ListingPage,
+  Textarea,
+  Dropdown,
+  CommentSection,
+  LikeButton,
+  FollowButton,
+  StickyBottomCTA,
+  StickyCartSummary,
+  CenteredContainer,
+  SkipLink,
+  PageSpinner,
+  ScrollUtilities,
+  ErrorBoundary,
+  ScrollToTop,
+  ThemeToggle,
+};
 
 const BADGE_VARIANTS = {
   default: 'bg-white/[0.06] text-text-secondary border border-white/[0.08]',
@@ -33,12 +69,6 @@ export function Badge({ variant = 'default', size = 'md', children }) {
   );
 }
 
-/**
- * Chip — etiqueta inline minimalista (eyebrow, meta, tag).
- * @param {string} variant
- * @param {node} icon
- * @param {node} children
- */
 export function Chip({ variant = 'default', icon, children, className = '' }) {
   const styles = {
     default: 'border-white/[0.08] bg-white/[0.03] text-text-secondary',
@@ -118,36 +148,6 @@ export function Tabs({ tabs, active, onChange }) {
           {t.label}
         </button>
       ))}
-    </div>
-  );
-}
-
-export function Textarea({ label, name, error, className, rows = 4, hint, ...props }) {
-  return (
-    <div className="space-y-1.5">
-      {label && (
-        <label htmlFor={name} className="block text-xs font-semibold uppercase tracking-[0.14em] text-text-secondary">
-          {label}
-          {props.required && <span className="ml-0.5 text-accent">*</span>}
-        </label>
-      )}
-      <textarea
-        id={name}
-        name={name}
-        rows={rows}
-        aria-invalid={error ? 'true' : undefined}
-        className={classNames(
-          'w-full rounded-lg border border-white/[0.1] bg-white/[0.03] px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-muted/70 outline-none transition-colors focus:border-accent/70 focus:bg-white/[0.05] focus:ring-1 focus:ring-accent/40 disabled:opacity-50',
-          error && 'border-error/70 focus:border-error focus:ring-error/40',
-          className
-        )}
-        {...props}
-      />
-      {error ? (
-        <p className="text-xs text-error">{error}</p>
-      ) : hint ? (
-        <p className="text-xs text-text-muted">{hint}</p>
-      ) : null}
     </div>
   );
 }

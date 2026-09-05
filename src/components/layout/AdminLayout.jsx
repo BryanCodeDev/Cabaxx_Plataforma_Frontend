@@ -20,12 +20,8 @@ export default function AdminLayout() {
     try { localStorage.setItem(COLLAPSE_KEY, collapsed ? '1' : '0'); } catch (_) { /* noop */ }
   }, [collapsed]);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a] text-white">
+    <div className="flex min-h-screen bg-app-deep text-white">
       <SkipLink />
       <AdminSidebar
         collapsed={collapsed}
@@ -38,7 +34,7 @@ export default function AdminLayout() {
         <main
           id="main-content"
           key={pathname}
-          className="admin-scroll flex-1 overflow-y-auto bg-[#0a0a0a]"
+          className="admin-scroll flex-1 overflow-y-auto bg-app-deep"
         >
           <div className="container-fluid animate-in fade-in slide-in-from-bottom-2 py-6 duration-300 sm:py-8">
             <Outlet />

@@ -75,7 +75,7 @@ export default function Modal({
         aria-labelledby={title ? titleId : undefined}
         aria-describedby={descId}
         className={classNames(
-          'relative z-10 w-full overflow-hidden rounded-t-2xl border border-white/[0.08] bg-[#0c0c0c] shadow-elev-3 animate-slide-up sm:rounded-2xl',
+          'relative z-10 w-full overflow-hidden rounded-t-2xl border border-white/[0.08] bg-app-modal shadow-elev-3 animate-slide-up sm:rounded-2xl',
           SIZES[size]
         )}
       >

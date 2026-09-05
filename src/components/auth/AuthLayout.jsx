@@ -82,15 +82,15 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
           className="w-full max-w-md animate-in fade-in slide-in-from-bottom-3 duration-700"
         >
           {eyebrow && (
-            <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.25em] text-accent drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] lg:text-left lg:drop-shadow-none">
+            <p className="mb-3 text-center text-[11px] font-bold uppercase tracking-[0.28em] text-accent drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] lg:text-left lg:drop-shadow-none">
               {eyebrow}
             </p>
           )}
-          <h1 className="text-center font-display text-display-sm text-text-primary drop-shadow-[0_2px_16px_rgba(0,0,0,0.6)] lg:text-left lg:drop-shadow-none">
+          <h1 className="text-center font-display text-display-sm uppercase tracking-tight text-text-primary drop-shadow-[0_2px_16px_rgba(0,0,0,0.6)] lg:text-left lg:drop-shadow-none">
             {title}
           </h1>
           {subtitle && (
-            <p className="mt-2 text-center text-sm text-text-secondary drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] lg:text-left lg:drop-shadow-none">
+            <p className="mt-3 text-center text-sm leading-relaxed text-text-secondary drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] lg:text-left lg:drop-shadow-none">
               {subtitle}
             </p>
           )}

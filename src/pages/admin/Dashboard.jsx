@@ -27,7 +27,7 @@ const KPIS = [
 
 function Kpi({ icon: Icon, label, value, to }) {
   const inner = (
-    <Card padding="md" className="group flex items-center gap-4 transition hover:border-accent/40 hover:bg-[#111]">
+    <Card padding="md" className="group flex items-center gap-4 transition hover:border-accent/40 hover:bg-app-deep">
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition group-hover:scale-105">
         <Icon className="h-5 w-5" />
       </div>
@@ -38,7 +38,7 @@ function Kpi({ icon: Icon, label, value, to }) {
       {to && <ArrowRight className="h-4 w-4 shrink-0 text-text-muted opacity-0 transition group-hover:translate-x-1 group-hover:opacity-100 group-hover:text-accent" />}
     </Card>
   );
-  return to ? <Link to={to} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] rounded-2xl">{inner}</Link> : inner;
+  return to ? <Link to={to} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-2xl">{inner}</Link> : inner;
 }
 
 export default function AdminDashboard() {

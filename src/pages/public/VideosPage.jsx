@@ -1,13 +1,12 @@
-import { EmptyState, SectionHeading } from '@/components/common'
+import { EmptyState, SectionHeading, Spinner } from '@/components/common';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { videoService } from '@/services/modules';
-import { PAGINATION, ROUTES } from '@/constants';
+import { PAGINATION } from '@/constants';
 import { artistPhotos } from '@/assets';
 import { formatDate, formatNumber } from '@/utils/format';
-import Spinner from '@/components/common/Spinner';
 import Card from '@/components/common/Card';
-import Pagination from '@/components/common/Pagination';
+import PaginationCmp from '@/components/common/Pagination';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Play } from 'lucide-react';
 import SEOHead from '@/components/seo/SEOHead';
@@ -39,57 +38,68 @@ export default function VideosPage() {
   }, [page]);
 
   return (
-    <div className="container-fluid py-12">
-      <SectionHeading eyebrow="Audiovisual" title="Videos" />
+    <section className="container-fluid py-14 sm:py-20">
+      <header className="max-w-3xl">
+        <SectionHeading
+          eyebrow="Audiovisual"
+          title="Videos"
+          subtitle="Clips oficiales, lives y detrás de cámaras. Material que vive en pantalla."
+        />
+      </header>
 
       {loading ? (
-        <div className="flex justify-center py-20">
+        <div className="flex min-h-[40vh] items-center justify-center">
           <Spinner size="lg" color="accent" />
         </div>
       ) : videos.length === 0 ? (
         <EmptyState
-          className="mt-8"
+          className="mt-12"
           title="Sin videos por ahora"
           description="Pronto publicaremos nuevo contenido audiovisual."
         />
       ) : (
-        <div ref={ref} className="grid-cards-tight mt-8">
+        <div ref={ref} className="grid-cards-tight mt-10">
           {videos.map((v, i) => (
-            <Link key={v.id} to={`/videos/${v.slug}`}>
-              <div
-                className={`transition-all duration-500 ${
-                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-                }`}
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <Card hover padding="md" className="overflow-hidden">
-                  <div className="relative aspect-video overflow-hidden rounded-xl">
-                    <img
-                      src={v.thumbnail_url || v.cover_url || artistPhotos[i % artistPhotos.length]}
-                      alt={v.title}
-                      className="h-full w-full object-cover transition group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition duration-200 group-hover:opacity-100">
-                      <Play className="h-10 w-10 text-white drop-shadow" />
-                    </div>
+            <Link
+              key={v.id}
+              to={`/videos/${v.slug}`}
+              className={`group block transition-all duration-500 ${
+                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+              }`}
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <Card hover padding="md" className="overflow-hidden">
+                <div className="relative aspect-video overflow-hidden rounded-xl">
+                  <img
+                    src={v.thumbnail_url || v.cover_url || artistPhotos[i % artistPhotos.length]}
+                    alt={v.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition duration-200 group-hover:opacity-100">
+                    <Play className="h-9 w-9 text-white drop-shadow" aria-hidden="true" />
                   </div>
-                  <div className="mt-3 px-1">
-                    <p className="truncate font-medium text-text-primary">{v.title}</p>
-                    <p className="mt-1 font-mono text-xs text-text-muted">{formatNumber(v.views_count)} vistas · {formatDate(v.published_at, { year: 'numeric', month: 'short', day: 'numeric' })}</p>
-                  </div>
-                </Card>
-              </div>
+                </div>
+                <div className="mt-3 px-1">
+                  <p className="truncate font-medium text-text-primary transition-colors group-hover:text-accent">
+                    {v.title}
+                  </p>
+                  <p className="mt-1 font-mono text-xs text-text-muted tabular-nums">
+                    {formatNumber(v.views_count)} vistas · {formatDate(v.published_at, { year: 'numeric', month: 'short', day: 'numeric' })}
+                  </p>
+                </div>
+              </Card>
             </Link>
           ))}
         </div>
       )}
 
       {!loading && totalPages > 1 && (
-        <div className="mt-10">
-          <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} total={total} limit={PAGINATION.DEFAULT_LIMIT} />
+        <div className="mt-12">
+          <PaginationCmp currentPage={page} totalPages={totalPages} onPageChange={setPage} total={total} limit={PAGINATION.DEFAULT_LIMIT} />
         </div>
       )}
       <SEOHead title="Videos" description={`Videos musicales y detrás de cámaras de ${artist?.stage_name || 'Cabaxx'}.`} />
-    </div>
+    </section>
   );
 }

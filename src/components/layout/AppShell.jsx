@@ -169,7 +169,7 @@ export default function AppShell() {
   return (
     <header
       className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
-        mode === 'admin' ? 'bg-[#0a0a0a]/95 backdrop-blur-xl border-white/10' : headerBg
+        mode === 'admin' ? 'bg-app-deep/95 backdrop-blur-xl border-white/10' : headerBg
       }`}
     >
       <div className="container-fluid flex h-[72px] items-center gap-4">

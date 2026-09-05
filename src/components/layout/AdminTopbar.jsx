@@ -36,7 +36,7 @@ export default function AdminTopbar({ onMobileMenu }) {
   return (
     <header
       role="banner"
-      className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-3 border-b border-white/[0.06] bg-[#0a0a0a]/80 px-4 backdrop-blur-md sm:px-6"
+      className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-3 border-b border-white/[0.06] bg-app-deep/80 px-4 backdrop-blur-md sm:px-6"
     >
       {/* Burger — solo mobile */}
       <button

@@ -42,9 +42,9 @@ export default function LoginPage() {
       title="Entrar"
       subtitle="Vuelve a tu cuenta y sigue toda la actividad, de primera mano."
       footer={
-        <p className="text-center text-sm text-white/40">
+        <p className="text-center text-sm text-text-secondary">
           ¿Todavía no tienes cuenta?{' '}
-          <Link to={ROUTES.REGISTER} className="font-semibold text-accent transition hover:text-white">
+          <Link to={ROUTES.REGISTER} className="font-semibold text-accent transition hover:text-text-primary">
             Regístrate gratis
           </Link>
         </p>
@@ -85,7 +85,7 @@ export default function LoginPage() {
               required
             />
             <div className="mt-2.5 text-right">
-              <Link to={ROUTES.FORGOT_PASSWORD} className="text-xs text-white/40 transition hover:text-accent">
+              <Link to={ROUTES.FORGOT_PASSWORD} className="text-xs text-text-secondary transition hover:text-accent">
                 ¿Olvidaste tu contraseña?
               </Link>
             </div>

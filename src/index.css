@@ -18,6 +18,12 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
 
+  /* Profundidades — admin y chrome oscuro */
+  --color-bg-base: #060606;
+  --color-bg-deep: #0a0a0a;
+  --color-bg-panel: #080808;
+  --color-bg-modal: #0c0c0c;
+
   /* Firma de movimiento — la misma curva en toda la experiencia, como Apple */
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -67,9 +73,7 @@
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #3a3a3a;
-  }
-
-  /* Respeta reduce-motion de forma global, incluso si un componente lo olvida */
+  }  /* Respeta reduce-motion de forma global, incluso si un componente lo olvida */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -94,6 +98,12 @@
   --color-text-secondary: #4b4b4f;
   --color-text-muted: #8a8a8e;
   --color-border: #e2e2e5;
+
+  /* Profundidades claras — admin se mantiene en gris muy claro */
+  --color-bg-base: #f8f8fa;
+  --color-bg-deep: #ffffff;
+  --color-bg-panel: #ffffff;
+  --color-bg-modal: #ffffff;
 }
 
 .light body {
@@ -151,9 +161,7 @@
   /* Glassmorphism */
   .glass {
     @apply bg-surface/70 backdrop-blur-lg border border-border;
-  }
-
-  /* Hover de tarjeta: escala + sombra */
+  }  /* Hover de tarjeta: escala + sombra */
   .card-hover {
     @apply transition duration-300 ease-premium hover:scale-[1.02] hover:shadow-card hover:border-accent/40;
   }
@@ -172,6 +180,29 @@
   .animate-slide-up {
     animation: slideUp 0.35s ease-out;
   }
+
+  /* Fondos profundos — respetan el tema claro via tokens */
+  .bg-app { background: var(--color-bg-base); }
+  .bg-app-deep { background: var(--color-bg-deep); }
+  .bg-app-panel { background: var(--color-bg-panel); }
+  .bg-app-modal { background: var(--color-bg-modal); }
+  .bg-app-panel\/95 { background: color-mix(in srgb, var(--color-bg-panel) 95%, transparent); }
+  .bg-app-deep\/80 { background: color-mix(in srgb, var(--color-bg-deep) 80%, transparent); }
+  .bg-app-deep\/95 { background: color-mix(in srgb, var(--color-bg-deep) 95%, transparent); }
+  .bg-surface\/70 { background: color-mix(in srgb, var(--color-surface) 70%, transparent); }
+  .bg-surface\/40 { background: color-mix(in srgb, var(--color-surface) 40%, transparent); }
+  .text-text-secondary\/80 { color: color-mix(in srgb, var(--color-text-secondary) 80%, transparent); }
+  .placeholder\:text-text-muted\/70::placeholder { color: color-mix(in srgb, var(--color-text-muted) 70%, transparent); }
+  .from-primary\/20 { --tw-gradient-from: color-mix(in srgb, var(--color-primary) 20%, transparent); --tw-gradient-to: color-mix(in srgb, var(--color-primary) 0%, transparent); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .from-primary\/30 { --tw-gradient-from: color-mix(in srgb, var(--color-primary) 30%, transparent); --tw-gradient-to: color-mix(in srgb, var(--color-primary) 0%, transparent); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .from-primary\/45 { --tw-gradient-from: color-mix(in srgb, var(--color-primary) 45%, transparent); --tw-gradient-to: color-mix(in srgb, var(--color-primary) 0%, transparent); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .from-primary\/50 { --tw-gradient-from: color-mix(in srgb, var(--color-primary) 50%, transparent); --tw-gradient-to: color-mix(in srgb, var(--color-primary) 0%, transparent); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .from-primary\/70 { --tw-gradient-from: color-mix(in srgb, var(--color-primary) 70%, transparent); --tw-gradient-to: color-mix(in srgb, var(--color-primary) 0%, transparent); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .from-primary\/80 { --tw-gradient-from: color-mix(in srgb, var(--color-primary) 80%, transparent); --tw-gradient-to: color-mix(in srgb, var(--color-primary) 0%, transparent); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .via-primary\/30 { --tw-gradient-via: color-mix(in srgb, var(--color-primary) 30%, transparent); }
+  .via-primary\/70 { --tw-gradient-via: color-mix(in srgb, var(--color-primary) 70%, transparent); }
+  .to-primary { --tw-gradient-to: var(--color-primary); }
+  .to-primary\/80 { --tw-gradient-to: color-mix(in srgb, var(--color-primary) 80%, transparent); }
 
   /* Mask-reveal — desvanece el borde inferior de una imagen hacia el fondo,
      para que las fotos se sientan integradas en la escena, no "pegadas" */

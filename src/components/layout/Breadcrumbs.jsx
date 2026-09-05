@@ -11,9 +11,9 @@ const ROUTE_LABELS = [
   { pattern: /^\/eventos$/, to: ROUTES.EVENTS, label: 'Eventos' },
   { pattern: /^\/noticias\/[^/]+$/, parent: ROUTES.NEWS, parentLabel: 'Noticias', dynamic: true },
   { pattern: /^\/noticias$/, to: ROUTES.NEWS, label: 'Noticias' },
-  { pattern: /^\/albumes\/[^/]+$/, parent: ROUTES.ALBUMS, parentLabel: 'Álbumes', dynamic: !0 },
+  { pattern: /^\/albumes\/[^/]+$/, parent: ROUTES.ALBUMS, parentLabel: 'Álbumes', dynamic: true },
   { pattern: /^\/albumes$/, to: ROUTES.ALBUMS, label: 'Álbumes' },
-  { pattern: /^\/videos\/[^/]+$/, parent: ROUTES.VIDEOS, parentLabel: 'Videos', dynamic: !0 },
+  { pattern: /^\/videos\/[^/]+$/, parent: ROUTES.VIDEOS, parentLabel: 'Videos', dynamic: true },
   { pattern: /^\/videos$/, to: ROUTES.VIDEOS, label: 'Videos' },
   { pattern: /^\/contacto$/, to: ROUTES.CONTACT, label: 'Contacto' },
   { pattern: /^\/blog\/[^/]+$/, parent: ROUTES.BLOG, parentLabel: 'Blog', dynamic: true },
@@ -50,9 +50,9 @@ export default function Breadcrumbs() {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="container-fluid animate-in fade-in slide-in-from-top-1 pt-6 duration-500"
+      className="container-fluid animate-in fade-in slide-in-from-top-1 pt-6"
     >
-      <ol className="flex flex-nowrap items-center gap-1.5 overflow-x-auto whitespace-nowrap text-xs uppercase tracking-wide text-white/35 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap">
+      <ol className="flex flex-nowrap items-center gap-1.5 overflow-x-auto whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] text-text-muted [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap">
         {crumbs.map((c, i) => {
           const last = i === crumbs.length - 1;
           const isFirst = i === 0;
@@ -61,22 +61,22 @@ export default function Breadcrumbs() {
               {c.to && !last ? (
                 <Link
                   to={c.to}
-                  className="group flex items-center gap-1 rounded transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  className="group flex items-center gap-1 rounded transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                 >
-                  {isFirst && <Home className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />}
+                  {isFirst && <Home className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" aria-hidden="true" />}
                   <span className="relative">
                     {c.label}
                     <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
                   </span>
                 </Link>
               ) : (
-                <span className={`flex items-center gap-1 ${last ? 'font-semibold text-white/70' : ''}`}>
-                  {isFirst && <Home className="h-3.5 w-3.5 shrink-0" />}
+                <span className={`flex items-center gap-1 ${last ? 'text-text-primary' : ''}`}>
+                  {isFirst && <Home className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />}
                   {c.label}
                 </span>
               )}
               {!last && (
-                <ChevronRight className="h-3 w-3 shrink-0 text-white/20" aria-hidden="true" />
+                <ChevronRight className="h-3 w-3 shrink-0 text-text-muted" aria-hidden="true" />
               )}
             </li>
           );

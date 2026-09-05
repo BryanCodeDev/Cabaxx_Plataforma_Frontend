@@ -3,13 +3,13 @@ import { useParams, Link } from 'react-router-dom';
 import { songService } from '@/services/modules';
 import { ROUTES } from '@/constants';
 import PageSpinner from '@/components/common/PageSpinner';
-import { EmptyState } from '@/components/common';
+import { EmptyState, Chip } from '@/components/common';
 import Button from '@/components/common/Button';
 import LikeButton from '@/components/common/LikeButton';
 import CommentSection from '@/components/common/CommentSection';
 import { formatDuration } from '@/utils/format';
 import { toast } from 'react-hot-toast';
-import { ArrowLeft, Play } from 'lucide-react';
+import { ArrowLeft, Play, Music2 } from 'lucide-react';
 import SEOHead from '@/components/seo/SEOHead';
 
 const FOCUS =
@@ -50,71 +50,99 @@ export default function SongPage() {
   const spotifyId = spotify?.url?.match(/track\/([a-zA-Z0-9]+)/)?.[1];
 
   return (
-    <div className="container-fluid py-10 sm:py-12">
-      <Link to={ROUTES.SONGS} className={`inline-flex items-center gap-1 text-sm text-text-secondary transition hover:text-text-primary ${FOCUS}`}>
-        <ArrowLeft className="h-4 w-4" /> Volver a canciones
+    <article className="container-fluid py-10 sm:py-14">
+      <Link
+        to={ROUTES.SONGS}
+        className={`inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-text-muted transition hover:text-text-primary ${FOCUS}`}
+      >
+        <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" /> Volver a canciones
       </Link>
 
-      <div className="mt-6 flex flex-col gap-6 sm:gap-8 md:flex-row md:items-start">
-        <img
-          src={song.cover_url}
-          alt={song.title}
-          className="aspect-square w-full max-w-xs shrink-0 self-start rounded-2xl object-cover shadow-card md:h-80 md:w-80 md:max-w-none"
-        />
-        <div className="flex-1 min-w-0">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">Canción</p>
-          <h1 className="font-display text-display-sm text-text-primary">{song.title}</h1>
-          <p className="mt-3 font-mono text-text-secondary">{formatDuration(song.duration_seconds)}</p>
+      <div className="mt-6 flex flex-col gap-8 md:flex-row md:items-start">
+        <div className="relative shrink-0 self-start">
+          <div className="absolute -inset-3 -z-10 rounded-3xl bg-accent/[0.1] blur-2xl" aria-hidden="true" />
+          <img
+            src={song.cover_url}
+            alt={song.title}
+            className="aspect-square w-full max-w-xs rounded-2xl border border-white/[0.08] object-cover shadow-elev-2 md:h-80 md:w-80 md:max-w-none"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <Chip variant="accent" icon={<Music2 className="h-3 w-3" aria-hidden="true" />}>
+              Canción
+            </Chip>
+            {song.album_title && (
+              <Chip variant="default">
+                {song.album_title}
+              </Chip>
+            )}
+          </div>
+          <h1 className="mt-4 font-display text-display-sm tracking-tight text-text-primary">
+            {song.title}
+          </h1>
+          <p className="mt-2 font-mono text-xs text-text-muted tabular-nums">
+            {formatDuration(song.duration_seconds)} · {song.release_date || ''}
+          </p>
           <SEOHead title={song.title} description={`${song.title} - ${song.album_title || 'Cabaxx'}. Escucha y letra oficial.`} />
-          <p className="mt-4 text-text-secondary">{song.description}</p>
+          {song.description && (
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-text-secondary">{song.description}</p>
+          )}
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Button onClick={play}><Play className="mr-2 h-4 w-4" /> Reproducir</Button>
+            <Button onClick={play} icon={<Play className="h-4 w-4" aria-hidden="true" />}>
+              Reproducir
+            </Button>
             <LikeButton referenceType="song" referenceId={song.id} initialCount={song.likes_count || 0} />
           </div>
-          {song.streaming_links?.length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-sm font-semibold text-text-secondary">Escúchalo en</h3>
-              <div className="mt-3 flex flex-wrap gap-3">
-                {song.streaming_links.map((l) => (
-                  <a
-                    key={l.platform}
-                    href={l.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`text-accent transition hover:text-accent-hover ${FOCUS}`}
-                  >
-                    {l.platform}
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
+      <div className="section-rule my-14" aria-hidden="true" />
+
       {spotifyId && (
-        <div className="mt-10">
-          <h2 className="font-display text-2xl text-text-primary">Reproductor</h2>
+        <section aria-label="Reproductor" className="mt-8">
+          <h2 className="font-display text-2xl uppercase tracking-wide text-text-primary">Reproductor</h2>
           <iframe
             src={`https://open.spotify.com/embed/track/${spotifyId}`}
             title="Spotify"
             height="152"
-            className="mt-3 w-full rounded-xl"
+            className="mt-4 w-full rounded-xl border border-white/[0.06]"
             frameBorder="0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
           />
-        </div>
+        </section>
+      )}
+
+      {song.streaming_links?.length > 0 && (
+        <section aria-label="Plataformas" className="mt-10">
+          <h2 className="text-[11px] font-bold uppercase tracking-[0.22em] text-text-muted">Escúchalo en</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {song.streaming_links.map((l) => (
+              <a
+                key={l.platform}
+                href={l.url}
+                target="_blank"
+                rel="noreferrer"
+                className={`inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-text-secondary transition hover:border-white/20 hover:text-text-primary ${FOCUS}`}
+              >
+                {l.platform}
+              </a>
+            ))}
+          </div>
+        </section>
       )}
 
       {song.lyrics && (
-        <div className="mt-10">
-          <h2 className="font-display text-2xl text-text-primary">Letra</h2>
-          <p className="mt-4 whitespace-pre-line leading-relaxed text-text-secondary">{song.lyrics}</p>
-        </div>
+        <section aria-label="Letra" className="mt-12 max-w-2xl">
+          <h2 className="text-[11px] font-bold uppercase tracking-[0.22em] text-text-muted">Letra</h2>
+          <p className="mt-4 whitespace-pre-line font-display text-xl uppercase leading-snug tracking-tight text-text-primary sm:text-2xl">
+            {song.lyrics}
+          </p>
+        </section>
       )}
 
       <CommentSection referenceType="song" referenceId={song.id} title="Comentarios de la canción" />
-    </div>
+    </article>
   );
 }
